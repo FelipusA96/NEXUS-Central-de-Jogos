@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090f1d">
+  <meta name="description" content="Campo Minado NEXUS: descubra células seguras, sinalize minas e conquiste os rankings por dificuldade.">
+  <title>Campo Minado | NEXUS</title>
+  <link rel="stylesheet" href="../../assets/css/game-bridge.css">
+  <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+  <nav class="portal-nav" aria-label="Navegação da Central NEXUS">
+    <a class="portal-brand" href="../../"><span class="portal-emblem">✧</span> NEXUS // GAMING HUB</a>
+    <div class="portal-links">
+      <a class="portal-back" href="../../">← Central de Jogos</a>
+      <a href="../../#jogos">Biblioteca</a>
+      <a href="../../#ranking?jogo=campo-minado">Hall da Fama</a>
+    </div>
+  </nav>
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="page-head">
+      <div>
+        <p class="eyebrow">NEXUS / LÓGICA / GAME 002</p>
+        <h1>CAMPO <span>MINADO</span><span class="cursor">_</span></h1>
+        <p class="intro">Analise os números, localize as minas e revele cada área segura. Um clique errado pode encerrar a missão.</p>
+      </div>
+      <div class="mission-indicator"><span class="status-dot"></span> <span id="mission-state">MISSÃO PRONTA</span> <small id="round-status">AGUARDANDO PRIMEIRO CLIQUE</small></div>
+    </header>
+
+    <section class="config-panel" aria-label="Configurações da partida">
+      <fieldset class="level-fields">
+        <legend>01 / NÍVEL DE AMEAÇA</legend>
+        <div class="level-options" id="level-options">
+          <button type="button" data-level="facil" class="level-btn">Fácil <small>9×9 / 10</small></button>
+          <button type="button" data-level="medio" class="level-btn selected" aria-pressed="true">Médio <small>12×12 / 24</small></button>
+          <button type="button" data-level="dificil" class="level-btn">Difícil <small>16×16 / 40</small></button>
+          <button type="button" data-level="extremo" class="level-btn">Extremo <small>20×20 / 80</small></button>
+        </div>
+      </fieldset>
+      <div class="clock-config">
+        <span class="control-title">02 / CRONÔMETRO</span>
+        <label class="switch-row" for="clock-enabled">
+          <input type="checkbox" id="clock-enabled" checked>
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-description">Ativado <small>Válido para ranking</small></span>
+        </label>
+      </div>
+      <div class="reset-config">
+        <span class="control-title">03 / CONTROLES</span>
+        <button type="button" class="action-btn restart-btn" id="restart">↻ Nova partida</button>
+      </div>
+    </section>
+
+    <div class="game-layout">
+      <section class="board-panel" aria-labelledby="field-title">
+        <div class="board-heading">
+          <div><p class="eyebrow">PAINEL OPERACIONAL</p><h2 id="field-title">Setor de exploração</h2></div>
+          <span class="field-indicator" id="field-size">12 × 12</span>
+        </div>
+        <div class="stats-row" aria-label="Indicadores da partida">
+          <div class="metric"><span>MINAS RESTANTES</span><strong id="mines-left">024</strong></div>
+          <div class="metric"><span>TEMPO DECORRIDO</span><strong id="elapsed">00:00</strong></div>
+          <div class="metric"><span>CASAS SEGURAS</span><strong id="safe-count">000/120</strong></div>
+        </div>
+        <div class="mode-bar" aria-label="Ferramenta de toque">
+          <span class="mode-title">AÇÃO:</span>
+          <button type="button" class="mode-btn active" data-mode="reveal" aria-pressed="true">◎ Revelar</button>
+          <button type="button" class="mode-btn" data-mode="flag" aria-pressed="false">⚑ Bandeira</button>
+          <span class="mode-help">Mouse: botão direito coloca uma bandeira</span>
+        </div>
+        <div class="board-scroller" tabindex="0" aria-label="Tabuleiro. Em telas pequenas, deslize lateralmente para ver todas as casas.">
+          <div class="board" id="board" role="group" aria-label="Campo Minado"></div>
+        </div>
+        <p class="scroll-hint">↔ Deslize horizontalmente para visualizar todas as colunas.</p>
+        <div class="board-foot">
+          <span id="game-message" role="status" aria-live="polite">Selecione uma casa para iniciar a missão. O primeiro clique sempre será seguro.</span>
+          <button id="help-open" type="button" class="text-button">❔ Como jogar</button>
+        </div>
+      </section>
+
+      <aside class="side-stack">
+        <section class="side-card info-panel">
+          <div class="panel-kicker">SISTEMA // INSTRUÇÕES</div>
+          <h2>Decifre o campo.</h2>
+          <p>Cada número mostra quantas minas existem nas oito posições ao redor.</p>
+          <div class="legend-item"><span class="legend-cell number">2</span><div><strong>Número</strong><small>Duas minas nas casas vizinhas</small></div></div>
+          <div class="legend-item"><span class="legend-cell flag">⚑</span><div><strong>Bandeira</strong><small>Marque uma mina suspeita</small></div></div>
+          <div class="legend-item"><span class="legend-cell clear">✓</span><div><strong>Vitória</strong><small>Revele todas as casas seguras</small></div></div>
+          <p class="side-tip">O cronômetro começa no primeiro clique de revelação. A primeira casa e suas vizinhas não terão minas.</p>
+        </section>
+        <section class="side-card rank-panel" aria-labelledby="rank-heading">
+          <div class="panel-kicker">ARENA // TEMPOS</div>
+          <div class="rank-head"><h2 id="rank-heading">Hall da fama</h2><button type="button" class="text-button" id="rank-refresh" aria-label="Atualizar ranking">↻</button></div>
+          <p class="rank-context">Melhores tempos — <strong id="rank-level">Médio</strong></p>
+          <ol id="rank-list" class="rank-list"></ol>
+          <p class="rank-status" id="rank-status" role="status">Consultando ranking...</p>
+          <div class="rank-nav" id="rank-nav" aria-label="Ranking por dificuldade">
+            <button type="button" data-rank="facil">Fácil</button>
+            <button type="button" data-rank="medio" class="selected" aria-pressed="true">Médio</button>
+            <button type="button" data-rank="dificil">Difícil</button>
+            <button type="button" data-rank="extremo">Extremo</button>
+          </div>
+        </section>
+        <section class="side-card score-panel" id="submit-panel">
+          <div class="panel-kicker">IDENTIDADE // CLASSIFICAÇÃO</div>
+          <h2>Registre seu recorde.</h2>
+          <p>Participação opcional, inclusive sem login tradicional. O apelido será público.</p>
+          <label for="nickname">APELIDO</label>
+          <input id="nickname" autocomplete="nickname" maxlength="24" placeholder="Como quer aparecer?">
+          <button type="button" id="save-score" class="action-btn submit-btn" disabled>◈ Registrar tempo</button>
+          <p id="submit-status" role="status">Conclua uma partida com cronômetro para se classificar.</p>
+        </section>
+      </aside>
+    </div>
+    <footer class="site-footer">NEXUS // CAMPO MINADO <span>HTML + CSS + JAVASCRIPT · FIREBASE SOB DEMANDA</span></footer>
+  </main>
+
+  <dialog id="result-dialog" class="game-dialog" aria-labelledby="result-title">
+    <div class="dialog-illustration" id="result-icon">🏆</div>
+    <p class="eyebrow" id="result-kicker">MISSÃO CONCLUÍDA</p>
+    <h2 id="result-title">Campo liberado!</h2>
+    <p id="result-description"></p>
+    <div class="dialog-actions">
+      <button type="button" id="result-score" class="action-btn primary" hidden>🏅 Registrar no ranking</button>
+      <button type="button" id="result-restart" class="action-btn">↻ Novo desafio</button>
+      <button type="button" id="result-close" class="text-button">Ver tabuleiro</button>
+    </div>
+  </dialog>
+
+  <dialog id="help-dialog" class="game-dialog" aria-labelledby="help-title">
+    <p class="eyebrow">MANUAL // PROTOCOLO 002</p>
+    <h2 id="help-title">Como jogar</h2>
+    <p>Revele todas as casas sem minas. Números indicam quantas minas estão em volta de cada casa (incluindo diagonais).</p>
+    <ul>
+      <li><strong>Mouse:</strong> clique esquerdo para revelar e direito para marcar/desmarcar bandeiras.</li>
+      <li><strong>Celular:</strong> escolha os botões Revelar ou Bandeira acima do tabuleiro.</li>
+      <li><strong>Teclado:</strong> use as setas para navegar, Enter para realizar a ação selecionada e F para marcar bandeira.</li>
+      <li><strong>Abertura rápida:</strong> clique em um número já revelado para abrir vizinhas quando houver a quantidade correta de bandeiras ao redor.</li>
+      <li><strong>Vitória:</strong> abra todas as casas seguras. Bandeiras não precisam estar todas colocadas.</li>
+    </ul>
+    <button type="button" class="action-btn primary" id="help-close">Entendido</button>
+  </dialog>
+
+  <script type="module" src="./jogo.js"></script>
+</body>
+</html>
