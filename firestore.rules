@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function logado() {
+      return request.auth != null;
+    }
+
+    function contaIdentificada() {
+      return logado()
+        && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+
+    function modeloValido() {
+      return contaIdentificada()
+        && request.resource.data.keys().hasAll([
+          'ownerUid','nome','palavras','criadoEm'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'ownerUid','nome','palavras','criadoEm'
+        ])
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.nome is string
+        && request.resource.data.nome.size() > 0
+        && request.resource.data.nome.size() <= 80
+        && request.resource.data.palavras is list
+        && request.resource.data.palavras.size() > 0
+        && request.resource.data.palavras.size() <= 25
+        && request.resource.data.criadoEm is timestamp;
+    }
+
+    match /modelos/{codigo} {
+      // Compartilhar modelos por código sem login.
+      allow get: if true;
+      // Listar somente modelos da própria conta identificada.
+      allow list: if contaIdentificada()
+        && resource.data.ownerUid == request.auth.uid
+        && request.query.limit <= 50;
+      allow create: if modeloValido();
+      allow update: if contaIdentificada()
+        && resource.data.ownerUid == request.auth.uid
+        && modeloValido()
+        && request.resource.data.criadoEm == resource.data.criadoEm;
+      allow delete: if contaIdentificada()
+        && resource.data.ownerUid == request.auth.uid;
+    }
+
+    match /rankings/{nivel}/participantes/{uid} {
+      // Ranking público: qualquer visitante pode consultar.
+      allow get, list: if nivel in [
+        'facil','medio','dificil','extremo'
+      ];
+
+      // Apenas o próprio usuário (inclusive anônimo)
+      // pode registrar seu melhor tempo.
+      function scoreValido() {
+        return logado()
+          && request.auth.uid == uid
+          && nivel in ['facil','medio','dificil','extremo']
+          && request.resource.data.keys().hasAll([
+            'nome','tempoMs','tema','atualizadoEm'
+          ])
+          && request.resource.data.keys().hasOnly([
+            'nome','tempoMs','tema','atualizadoEm'
+          ])
+          && request.resource.data.nome is string
+          && request.resource.data.nome.size() >= 2
+          && request.resource.data.nome.size() <= 24
+          && request.resource.data.tempoMs is int
+          && request.resource.data.tempoMs >= 1
+          && request.resource.data.tempoMs <= 86400000
+          && request.resource.data.tema is string
+          && request.resource.data.tema.size() > 0
+          && request.resource.data.tema.size() <= 160
+          && request.resource.data.atualizadoEm == request.time;
+      }
+
+      allow create: if scoreValido();
+      allow update: if scoreValido()
+        && request.resource.data.tempoMs < resource.data.tempoMs;
+      allow delete: if false;
+    }
+  }
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Central de Jogos Nexus: desafios, raciocínio e rankings. Jogue Caça-Palavras e conheça os próximos jogos.">
+  <title>NEXUS | Central de Jogos</title>
+  <link rel="stylesheet" href="./assets/css/hud.css">
+  <script>
+    // Preserva links antigos de modelos salvos, que antes abriam na raiz.
+    const legacy = new URL(location.href);
+    if (legacy.searchParams.has('modelo')) {
+      const destination = new URL('./jogos/caca-palavras/', legacy);
+      destination.search = legacy.search;
+      destination.hash = legacy.hash;
+      location.replace(destination.href);
+    }
+  </script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="logo" href="#inicio" aria-label="NEXUS, voltar ao início">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M3 17 9 4l4 8 8-6-6 14-6-6-6 3Z"/><path d="M9 4v10M13 12l2 8"/></svg>
+        </span>
+        <span class="logo-copy"><strong>NEXUS</strong><small>GAMING HUB</small></span>
+      </a>
+
+      <div>
+        <div class="side-label">MENU PRINCIPAL</div>
+        <nav class="side-menu" aria-label="Seções da central">
+          <a class="nav-link active" data-page="inicio" href="#inicio" aria-current="page"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-7v-7h-4v7H3Z"/></svg> Início</a>
+          <a class="nav-link" data-page="jogos" href="#jogos"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Jogos</a>
+          <a class="nav-link" data-page="ranking" href="#ranking"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4H4v4a5 5 0 0 0 5 5M17 4h3v4a5 5 0 0 1-5 5M7 3h10v7a5 5 0 0 1-10 0Z"/></svg> Rankings</a>
+          <a class="nav-link" data-page="perfil" href="#perfil"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg> Perfil</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-foot">
+        <div class="online">HUD ATIVA</div>
+        <strong>Seu universo de desafios</strong>
+        <p>Jogos independentes, navegação unificada e recordes para superar.</p>
+      </div>
+    </aside>
+
+    <div class="main-panel">
+      <header class="topbar">
+        <a class="logo mobile-logo" href="#inicio" aria-label="NEXUS, início">
+          <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 17 9 4l4 8 8-6-6 14-6-6-6 3Z"/></svg></span>
+          <span class="logo-copy"><strong>NEXUS</strong><small>GAMING HUB</small></span>
+        </a>
+        <div class="breadcrumb">PLATAFORMA <span aria-hidden="true">/</span> <strong id="current-crumb">INÍCIO</strong></div>
+        <label class="top-search" for="search-games">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+          <input id="search-games" type="search" autocomplete="off" placeholder="Buscar jogos..." aria-label="Buscar jogos no catálogo">
+        </label>
+        <button class="icon-btn" id="theme-toggle" title="Alternar tema" aria-label="Alternar tema claro ou escuro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></svg></button>
+        <a class="user-pill" href="#perfil" title="Ver perfil"><span class="avatar" id="mini-avatar">V</span><span id="mini-username">Visitante</span></a>
+      </header>
+
+      <main id="content">
+        <!-- ===================== INÍCIO ===================== -->
+        <section class="page" id="view-inicio" data-view="inicio" aria-labelledby="start-title">
+          <div class="welcome-top">
+            <div>
+              <div class="eyebrow">BEM-VINDO AO SEU HUB</div>
+              <h1 class="page-title" id="start-title">Escolha seu próximo desafio<span style="color:var(--cyan)">.</span></h1>
+              <p class="page-sub">Explore jogos, teste suas habilidades e construa novos recordes — tudo em um só lugar.</p>
+            </div>
+            <span class="date-chip">CENTRAL NEXUS<br>VERSÃO DE APRESENTAÇÃO 01</span>
+          </div>
+
+          <section class="hero" aria-label="Jogo em destaque">
+            <div class="hero-content">
+              <div class="hero-kicker"><span></span> EXPERIÊNCIA EM DESTAQUE</div>
+              <h2>Jogue. Evolua.<br><em>Supere limites.</em></h2>
+              <p>O Caça-Palavras está esperando. Escolha sua dificuldade, encontre cada palavra e dispute os melhores tempos.</p>
+              <div class="hero-buttons">
+                <a class="btn btn-primary" href="./jogos/caca-palavras/">Jogar Caça-Palavras <span aria-hidden="true">↗</span></a>
+                <a class="btn btn-outline" href="#jogos">Explorar jogos <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+            <div class="hero-scene" aria-hidden="true">
+              <div class="hero-board-wrap">
+                <div class="hero-board" id="hero-board"></div>
+                <div class="board-tag">NÍVEL // 04 <span aria-hidden="true">◆</span></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="stats" aria-label="Números da plataforma">
+            <div class="stat"><span class="stat-ico">◈</span><span><strong>01</strong><small>JOGO DISPONÍVEL</small></span></div>
+            <div class="stat"><span class="stat-ico">⌗</span><span><strong>04</strong><small>NÍVEIS DE DIFICULDADE</small></span></div>
+            <div class="stat"><span class="stat-ico">✧</span><span><strong>12</strong><small>SUBTEMAS PARA JOGAR</small></span></div>
+          </div>
+
+          <div class="section-head">
+            <div><span class="eyebrow">CATÁLOGO NEXUS</span><h2>Biblioteca de jogos</h2></div>
+            <a href="#jogos" class="link-btn">Ver biblioteca completa <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="game-grid" id="home-game-grid"></div>
+
+          <div class="home-lower">
+            <a class="callout" href="#ranking"><div><span class="eyebrow">COMPETIÇÃO</span><h3>Suba no ranking.</h3><p>Os melhores tempos do Caça-Palavras estão organizados por dificuldade. Veja os resultados reais.</p></div><span class="callout-icon" aria-hidden="true">♛</span></a>
+            <a class="callout" href="#perfil"><div><span class="eyebrow">IDENTIDADE</span><h3>Seu espaço.</h3><p>Use seu login para gerenciar modelos ou participe do ranking com um apelido.</p></div><span class="callout-icon" aria-hidden="true">◎</span></a>
+          </div>
+        </section>
+
+        <!-- ===================== BIBLIOTECA ===================== -->
+        <section class="page" id="view-jogos" data-view="jogos" aria-labelledby="games-title" hidden>
+          <span class="eyebrow">CATÁLOGO // 004</span>
+          <h1 class="page-title" id="games-title">Biblioteca de jogos<span style="color:var(--cyan)">.</span></h1>
+          <p class="page-sub">Escolha um jogo disponível ou conheça o que estamos planejando. Cada jogo funciona em seu próprio módulo.</p>
+          <div class="filter-row" id="category-filters" aria-label="Filtrar jogos por categoria"></div>
+          <p id="catalog-count" class="results-note" aria-live="polite"></p>
+          <div class="game-grid" id="catalog-game-grid"></div>
+          <div class="empty-box" id="catalog-empty" hidden>Nenhum jogo corresponde à pesquisa. Experimente outra palavra.</div>
+        </section>
+
+        <!-- ===================== RANKING ===================== -->
+        <section class="page" id="view-ranking" data-view="ranking" aria-labelledby="rank-title" hidden>
+          <span class="eyebrow">COMPETIÇÃO // CAÇA-PALAVRAS</span>
+          <h1 class="page-title" id="rank-title">Hall da fama<span style="color:var(--cyan)">.</span></h1>
+          <p class="page-sub">Consulte os melhores tempos do Caça-Palavras por dificuldade. O placar é consultado no Firebase, sem dados fictícios.</p>
+          <div class="rank-controls" id="rank-controls" aria-label="Dificuldade do ranking">
+            <button type="button" class="rank-tab" data-level="facil">Fácil</button>
+            <button type="button" class="rank-tab active" data-level="medio">Médio</button>
+            <button type="button" class="rank-tab" data-level="dificil">Difícil</button>
+            <button type="button" class="rank-tab" data-level="extremo">Extremo</button>
+          </div>
+          <div class="rank-layout">
+            <div class="rank-table" aria-live="polite">
+              <div class="rank-row head"><span>#</span><span>Participante</span><span style="text-align:right">Tempo</span></div>
+              <div id="rank-body"><p class="feedback">Selecione um nível para consultar os recordes.</p></div>
+            </div>
+            <aside class="rank-note"><span class="eyebrow">COMO PARTICIPAR</span><h3>Seu melhor tempo conta.</h3><p>Entre no Caça-Palavras, escolha um nível, ative o cronômetro e conclua a partida. Depois informe seu apelido para registrar seu melhor resultado.</p><a class="btn btn-primary" href="./jogos/caca-palavras/">Abrir Caça-Palavras ↗</a><button type="button" id="rank-refresh" class="btn" style="margin-left:5px">↻ Atualizar</button><p id="rank-status" class="results-note" role="status"></p></aside>
+          </div>
+        </section>
+
+        <!-- ===================== PERFIL ===================== -->
+        <section class="page" id="view-perfil" data-view="perfil" aria-labelledby="profile-title" hidden>
+          <span class="eyebrow">ACESSO // IDENTIDADE</span>
+          <h1 class="page-title" id="profile-title">Meu perfil<span style="color:var(--cyan)">.</span></h1>
+          <p class="page-sub">A autenticação do Firebase é compartilhada com o Caça-Palavras no mesmo domínio.</p>
+          <div class="profile-panel">
+            <div class="profile-avatar" id="profile-avatar">V</div>
+            <h2 id="profile-name">Visitante</h2>
+            <p id="profile-desc">Você pode jogar livremente sem conta. Para salvar modelos, use seu login no Caça-Palavras; para disputar o ranking, basta informar um apelido após vencer com cronômetro.</p>
+            <div class="profile-actions"><a href="./jogos/caca-palavras/" class="btn btn-primary">Abrir Caça-Palavras ↗</a><button class="btn" id="profile-refresh" type="button">↻ Consultar sessão</button></div>
+            <p class="results-note" id="profile-status" role="status"></p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footerline"><span>© NEXUS // CENTRAL DE JOGOS — Protótipo modular</span><span>GitHub Pages · Firebase compartilhado · Sem frameworks de interface</span></footer>
+    </div>
+  </div>
+
+  <dialog id="game-modal" aria-labelledby="modal-title">
+    <span class="eyebrow" id="modal-kicker">EXPANSÃO NEXUS</span>
+    <h2 id="modal-title">Novo jogo</h2>
+    <p id="modal-description"></p>
+    <p><strong>Este módulo ainda está em planejamento.</strong> O cartão apresenta o conceito, mas não simula um jogo inexistente.</p>
+    <form method="dialog"><button class="btn btn-primary" value="close">Entendido</button></form>
+  </dialog>
+
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>

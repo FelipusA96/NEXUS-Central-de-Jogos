@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fd">
+  <title>Caça-Palavras Interativo</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+      color-scheme: light;
+      --page:#f4f7fd; --card:#fff; --text:#1c2944; --muted:#65748c;
+      --border:#e2e8f3; --soft:#f1f5fc; --primary:#5148df;
+      --primaryText:#fff; --selected:#c7d2fe; --selectedText:#312e81;
+      --found:#bbf7d0; --foundText:#166534; --missed:#fecaca;
+      --missedText:#991b1b; --danger:#dc2626; --shadow:rgba(31,51,94,.08);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --page:#0c1322; --card:#151f31; --text:#e8eefb; --muted:#a0aec4;
+      --border:#2c3a50; --soft:#243148; --primary:#7771f4;
+      --primaryText:#fff; --selected:#655fd5; --selectedText:#fff;
+      --found:#166534; --foundText:#dcfce7; --missed:#991b1b;
+      --missedText:#fee2e2; --danger:#fb7185; --shadow:rgba(0,0,0,.27);
+    }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; min-height:100vh; background:var(--page); color:var(--text); transition:background .2s,color .2s; }
+    button,input,textarea,select { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { opacity:.55; cursor:not-allowed; }
+    button:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px solid #a5b4fc; outline-offset:2px; }
+    .topbar { background:var(--card); border-bottom:1px solid var(--border); padding:17px max(16px,calc((100vw - 1200px)/2)); display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:1.15rem; font-weight:850; letter-spacing:-.03em; }
+    .brand-icon { width:38px;height:38px;display:grid;place-items:center;border-radius:12px;color:white;background:var(--primary);font-size:1.4rem; }
+    .actions { display:flex;gap:9px;align-items:center;flex-wrap:wrap; }
+    .btn { border:0;border-radius:11px;padding:11px 14px;font-weight:730;background:var(--soft);color:var(--text);transition:filter .15s,transform .15s; }
+    .btn:hover:not(:disabled) { filter:brightness(.95); }
+    .btn:active:not(:disabled) { transform:scale(.97); }
+    html[data-theme="dark"] .btn:hover:not(:disabled) { filter:brightness(1.16); }
+    .btn.primary { background:var(--primary);color:var(--primaryText); }
+    .btn.danger { background:var(--danger);color:#fff; }
+    .btn.danger-outline { background:var(--soft);color:var(--danger); }
+    .btn.small { padding:8px 10px;font-size:.79rem; }
+    .layout { max-width:1200px;margin:29px auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) 325px;gap:20px;align-items:start; }
+    .card { background:var(--card);border:1px solid var(--border);border-radius:19px;padding:23px;box-shadow:0 9px 29px var(--shadow); }
+    h1 { margin:0 0 7px;font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.045em; }
+    h2 { margin:0 0 13px;font-size:1.04rem; }
+    p { line-height:1.48; }
+    .muted,.helper { color:var(--muted); }
+    .muted { margin:0;font-size:.9rem; }
+    .helper { font-size:.77rem;line-height:1.45;margin:7px 0 0; }
+    .score { display:flex;justify-content:space-between;gap:10px;margin:23px 0 9px;font-size:.9rem;font-weight:700; }
+    .progress { height:9px;border-radius:20px;background:var(--soft);overflow:hidden; }
+    .progress-fill { height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,#6660e8,#19b67b);transition:width .2s; }
+    .timer-display { display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 13px;border:1px solid var(--border);border-radius:12px;background:var(--soft);font-variant-numeric:tabular-nums;font-weight:800; }
+    .timer-display strong { font-size:1.12rem;letter-spacing:.025em; }
+    .timer-choice-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px; }
+    .timer-choice-grid .btn { min-height:56px; }
+    .login-form { display:grid;gap:13px;margin-top:17px; }
+    .login-form label { margin-bottom:5px; }
+    .login-form .suffix { font-size:.78rem;color:var(--muted);margin-top:4px; }
+    .login-footer { display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap; }
+    .win-time { font-weight:800;color:var(--primary);font-variant-numeric:tabular-nums; }
+
+    .board-wrap { margin:24px auto 0;max-width:660px;overflow-x:auto; }
+    .board { --size:14;display:grid;grid-template-columns:repeat(var(--size),minmax(0,1fr));gap:3px;width:100%;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair; }
+    .cell { display:flex;align-items:center;justify-content:center;aspect-ratio:1;min-width:0;background:var(--soft);border-radius:5px;color:var(--text);font-size:clamp(8px,1.5vw,17px);font-weight:800; }
+    .cell.selected { background:var(--selected);color:var(--selectedText); }
+    .cell.found { background:var(--found);color:var(--foundText); }
+    .cell.missed { background:var(--missed);color:var(--missedText); }
+    .cell.found.missed { background:linear-gradient(135deg,var(--found) 50%,var(--missed) 50%);color:var(--text); }
+    .cell.selected { outline:2px solid var(--primary);outline-offset:-2px; }
+    .board.locked { cursor:default; }
+    .feedback { min-height:23px;margin:18px 0 0;text-align:center;color:var(--muted);font-size:.89rem;font-weight:650; }
+    .feedback.success { color:#16a34a; }
+    .feedback.alert { color:var(--danger); }
+    .legend { display:flex;justify-content:center;gap:20px;font-size:.8rem;color:var(--muted);margin-top:13px; }
+    .dot { display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:4px; }
+    .dot.found { background:var(--found); } .dot.missed { background:var(--missed); }
+    .section-head { display:flex;justify-content:space-between;align-items:center;gap:8px; }
+    .pill { display:inline-block;background:var(--soft);padding:5px 9px;border-radius:20px;color:var(--muted);font-size:.74rem;font-weight:750; }
+    .words { list-style:none;padding:0;margin:12px 0 20px;display:grid;gap:8px; }
+    .word { display:flex;align-items:center;gap:10px;background:var(--soft);padding:9px 11px;border-radius:9px;font-size:.85rem;font-weight:720;overflow-wrap:anywhere; }
+    .mark { width:18px;height:18px;flex:0 0 18px;border:2px solid var(--muted);border-radius:50%;display:grid;place-items:center;font-size:.74rem; }
+    .word.found { color:var(--foundText);background:var(--found); }
+    .word.missed { color:var(--missedText);background:var(--missed); }
+    .word.found .mark,.word.missed .mark { border-color:currentColor; }
+    .word.found .word-label { text-decoration:line-through;text-decoration-thickness:2px; }
+    .panel-section { border-top:1px solid var(--border);padding-top:18px;margin-top:18px; }
+    label { display:block;font-size:.86rem;font-weight:750;margin-bottom:7px; }
+    input,textarea { width:100%;border:1px solid var(--border);border-radius:10px;background:var(--soft);padding:11px;color:var(--text); }
+    textarea { min-height:110px;resize:vertical;line-height:1.5; }
+    .full { width:100%; }
+    .row { display:flex;align-items:center;gap:8px; }
+    .row > input { min-width:0;flex:1; }
+    .row > .btn { flex-shrink:0; }
+    .status { font-size:.8rem;min-height:19px;line-height:1.4;margin:9px 0 0;color:var(--muted);overflow-wrap:anywhere; }
+    .status.error { color:var(--danger); }
+    .status.ok { color:#16a34a; }
+    .user-details { font-size:.79rem;color:var(--muted);overflow-wrap:anywhere;max-width:180px; }
+    .model-list { list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px; }
+    .model-item { border:1px solid var(--border);border-radius:10px;padding:10px;display:grid;gap:7px; }
+    .model-name { font-weight:750;font-size:.86rem;overflow-wrap:anywhere; }
+    .model-code { font-family:ui-monospace,monospace;font-size:.78rem;color:var(--muted);overflow-wrap:anywhere; }
+    .model-buttons { display:flex;gap:6px;flex-wrap:wrap; }
+    dialog { background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:18px;padding:25px;width:min(430px,calc(100vw - 28px));box-shadow:0 24px 80px rgba(0,0,0,.2); }
+    dialog::backdrop { background:rgba(0,0,0,.64);backdrop-filter:blur(3px); }
+    dialog h2 { margin-bottom:7px;font-size:1.3rem; }
+    dialog p { font-size:.91rem;color:var(--muted); }
+    .dialog-actions { display:flex;justify-content:flex-end;gap:10px;margin-top:20px;flex-wrap:wrap; }
+    .win-overlay { position:fixed;inset:0;z-index:30;background:rgba(6,13,32,.68);display:grid;place-items:center;padding:18px; }
+    .win-card { background:var(--card);border:1px solid var(--border);padding:31px 24px;border-radius:24px;max-width:440px;width:100%;text-align:center;box-shadow:0 25px 90px rgba(0,0,0,.28);animation:pop .4s ease both; }
+    .win-icon { font-size:3.5rem;display:block;margin-bottom:5px; }
+    .win-card h2 { font-size:1.9rem;margin:0 0 9px; }
+    .win-card p { color:var(--muted); }
+    @keyframes pop { from { transform:scale(.75);opacity:0; } to { transform:scale(1);opacity:1; } }
+    .confetti-layer { position:fixed;inset:0;z-index:31;pointer-events:none;overflow:hidden; }
+    .confetti { position:absolute;top:-25px;left:var(--x);width:9px;height:14px;border-radius:2px;background:var(--color);opacity:0;animation:confetti-fall var(--duration) linear var(--delay) forwards; }
+    @keyframes confetti-fall { 0% { transform:translate3d(0,-5vh,0) rotate(0);opacity:1; } 100% { transform:translate3d(var(--drift),110vh,0) rotate(850deg);opacity:0; } }
+    footer { padding:10px 20px 30px;text-align:center;color:var(--muted);font-size:.77rem; }
+    /* Níveis de dificuldade: destaque do nível escolhido */
+    .difficulty-fieldset { border:0; margin:17px 0 0; padding:0; min-width:0; }
+    .difficulty-fieldset legend { font-weight:750; font-size:.91rem; margin-bottom:10px; }
+    .difficulty-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+    .difficulty-card {
+      position:relative; padding:12px; border:2px solid var(--border);
+      background:var(--soft); border-radius:12px; cursor:pointer;
+      display:flex; flex-direction:column; gap:5px; margin:0;
+      transition:border-color .16s,background .16s;
+    }
+    .difficulty-card input { position:absolute; opacity:0; width:1px; height:1px; padding:0; }
+    .difficulty-card:has(input:checked) { border-color:var(--primary); background:var(--card); }
+    .difficulty-card:has(input:focus-visible) { outline:3px solid #a5b4fc; outline-offset:2px; }
+    .difficulty-name { font-size:.9rem; font-weight:800; }
+    .difficulty-subtitle { font-size:.75rem; color:var(--muted); font-weight:500; }
+    .difficulty-info { font-size:.79rem; line-height:1.4; color:var(--muted); margin:9px 0 0; }
+    /* Escolha de tema e subtema */
+    #theme-dialog { width:min(555px,calc(100vw - 28px)); max-height:min(90vh,820px); overflow-y:auto; }
+    .theme-fields { display:grid;gap:11px;margin-top:18px; }
+    .theme-fields select { width:100%;padding:11px;border-radius:10px;background:var(--soft);color:var(--text);border:1px solid var(--border);font:inherit; }
+    .current-theme { display:inline-block;margin:10px 0 0;color:var(--primary);font-weight:750;font-size:.85rem; }
+    .next-theme { margin:16px auto 0;display:block; }
+    .theme-choice-actions { display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px; }
+    .theme-choice-actions .btn { min-height:50px; }
+    /* ========================================
+       RANKING PÚBLICO POR DIFICULDADE
+    ======================================== */
+    .ranking-section { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
+    .ranking-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .ranking-heading h2 { margin:0; font-size:1.12rem; }
+    .ranking-tabs { display:flex; flex-wrap:wrap; gap:7px; margin:17px 0 12px; }
+    .ranking-tab { font-size:.82rem; padding:9px 12px; border:1px solid var(--border); }
+    .ranking-tab[aria-pressed="true"] { color:var(--primaryText); background:var(--primary); border-color:var(--primary); }
+    .ranking-list { list-style:none; padding:0; margin:10px 0; display:grid; gap:7px; }
+    .ranking-item { display:grid; grid-template-columns:44px minmax(0,1fr) auto; align-items:center; gap:9px; padding:11px; border:1px solid var(--border); background:var(--soft); border-radius:11px; }
+    .ranking-position { font-weight:850; text-align:center; color:var(--primary); font-variant-numeric:tabular-nums; }
+    .ranking-identity { min-width:0; }
+    .ranking-name { display:block; font-weight:750; font-size:.88rem; overflow-wrap:anywhere; }
+    .ranking-theme { display:block; font-size:.73rem; color:var(--muted); margin-top:3px; overflow-wrap:anywhere; }
+    .ranking-time { font-size:.99rem; font-weight:850; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .ranking-item.is-me { border-color:var(--primary); }
+    .ranking-entry { margin-top:16px; padding:15px; border-radius:13px; border:1px solid var(--border); }
+    .ranking-entry h3 { margin:0 0 6px; font-size:.94rem; }
+    .ranking-entry .row { margin-top:10px; }
+    .ranking-entry input { min-width:0; }
+    .ranking-entry .btn { white-space:nowrap; }
+    @media(max-width:530px) {
+      .ranking-entry .row { flex-direction:column; align-items:stretch; }
+      .ranking-entry .row > .btn { width:100%; }
+    }
+    @media(max-width:440px) { .theme-choice-actions { grid-template-columns:1fr; } }
+    @media(max-width:900px) { .layout { grid-template-columns:1fr;max-width:740px; } .words { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:530px) { .topbar { padding:12px; } .brand { font-size:1rem; } .brand-icon { width:31px;height:31px; } .actions { gap:5px; } .btn { padding:9px 10px;font-size:.8rem; } .theme-label { display:none; } .layout { padding:0 9px;margin:16px auto;gap:14px; } .card { padding:14px;border-radius:15px; } .board { gap:2px; } .cell { border-radius:3px;font-size:clamp(8px,2.5vw,12px); } .word { font-size:.78rem;padding:8px; } .dialog-actions { flex-direction:column; } .dialog-actions .btn { width:100%; } }
+    @media(max-width:380px) { .timer-choice-grid { grid-template-columns:1fr; } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important;transition-duration:.01ms!important; } }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/game-bridge.css">
+</head>
+<body>
+  <!-- Navegação compartilhada com a Central. O jogo abaixo permanece íntegro. -->
+  <nav class="portal-nav" aria-label="Navegação da Central NEXUS">
+    <a class="portal-brand" href="../../index.html"><span class="portal-emblem" aria-hidden="true">⌁</span> NEXUS / JOGOS</a>
+    <div class="portal-links">
+      <a class="portal-back" href="../../index.html">← Voltar à Central</a>
+      <a href="../../index.html#jogos">Biblioteca</a>
+      <a href="../../index.html#ranking">Rankings</a>
+    </div>
+  </nav>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">✦</span> Caça-Palavras</div>
+    <div class="actions">
+      <button type="button" class="btn" id="theme-toggle" aria-label="Alternar tema">☾ <span class="theme-label" id="theme-label">Escuro</span></button>
+      <button type="button" class="btn" id="shuffle">↻ Embaralhar</button>
+      <button type="button" class="btn danger-outline" id="giveup">⚑ Desistir</button>
+    </div>
+    <div class="actions">
+      <span class="user-details" id="user-details">Modo visitante</span>
+      <button type="button" class="btn primary" id="login" disabled>Entrar</button>
+      <button type="button" class="btn" id="logout" hidden>Sair</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card" aria-labelledby="game-title">
+      <h1 id="game-title">Encontre as palavras</h1>
+      <p class="muted">Arraste pelas letras na horizontal, vertical ou diagonal. As direções dependem da dificuldade.</p>
+      <div class="score"><span>Seu progresso</span><span id="score">0 / 0 encontradas</span></div>
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+      <p id="current-theme" class="current-theme" hidden></p>
+      <div id="timer-display" class="timer-display" role="timer" aria-label="Tempo decorrido" hidden>
+        ⏱ <strong id="timer-value">00:00</strong>
+      </div>
+      <div class="board-wrap"><div class="board" id="board" role="grid" aria-label="Tabuleiro de caça-palavras"></div></div>
+      <p class="feedback" id="feedback" role="status" aria-live="polite">Encontre a primeira palavra!</p>
+      <div class="legend" id="legend" hidden><span><i class="dot found"></i> Encontrada</span><span><i class="dot missed"></i> Revelada</span></div>
+      <button id="next-theme" type="button" class="btn primary next-theme" hidden>🎲 Escolher próximo tema</button>
+
+      <!-- RANKING PÚBLICO: não exige login com e-mail e senha. -->
+      <section class="ranking-section" id="ranking-section" aria-labelledby="ranking-title">
+        <div class="ranking-heading">
+          <h2 id="ranking-title">🏅 Ranking de melhores tempos</h2>
+          <span class="pill" id="ranking-level-title">Médio</span>
+        </div>
+        <p class="helper">Apenas partidas concluídas com cronômetro. Cada participante aparece com seu melhor tempo por dificuldade.</p>
+
+        <nav class="ranking-tabs" aria-label="Visualizar ranking por dificuldade">
+          <button type="button" class="btn ranking-tab" data-ranking-level="facil" aria-pressed="false">Fácil</button>
+          <button type="button" class="btn ranking-tab" data-ranking-level="medio" aria-pressed="true">Médio</button>
+          <button type="button" class="btn ranking-tab" data-ranking-level="dificil" aria-pressed="false">Difícil</button>
+          <button type="button" class="btn ranking-tab" data-ranking-level="extremo" aria-pressed="false">Extremo</button>
+        </nav>
+
+        <ol id="ranking-list" class="ranking-list" aria-live="polite"></ol>
+        <p id="ranking-list-status" class="status" role="status">Carregando ranking...</p>
+        <button type="button" class="btn small" id="ranking-refresh">↻ Atualizar ranking</button>
+
+        <div class="ranking-entry">
+          <h3>Quero participar do ranking</h3>
+          <p class="helper">Participação opcional. Você pode informar um apelido sem criar conta. O apelido e o tempo ficarão públicos.</p>
+          <label for="ranking-nickname" style="margin-top:12px">Seu apelido no ranking</label>
+          <div class="row">
+            <input id="ranking-nickname" maxlength="24" autocomplete="nickname" placeholder="Como quer aparecer?">
+            <button type="button" class="btn primary" id="ranking-submit" disabled>Registrar meu tempo</button>
+          </div>
+          <p id="ranking-entry-status" class="status" role="status">Conclua uma partida com cronômetro para registrar seu tempo.</p>
+        </div>
+      </section>
+    </section>
+
+    <aside class="card">
+      <div class="section-head"><h2>Palavras para encontrar</h2><span id="badge" class="pill">0 restantes</span></div>
+      <ul class="words" id="word-list"></ul>
+
+      <section class="panel-section">
+        <h2>Personalizar o desafio</h2>
+        <label for="words-input">Palavras (uma por linha ou separadas por vírgula)</label>
+        <textarea id="words-input" spellcheck="false"></textarea>
+        <p class="helper">Cadastre até 25 palavras (2 a 20 letras). O nível seleciona quantas entram na partida. Os acentos não aparecem no tabuleiro.</p>
+        <button type="button" class="btn primary full" id="apply" style="margin-top:10px">Criar novo jogo</button>
+        <p id="local-status" class="status" role="status"></p>
+      </section>
+
+      <section class="panel-section">
+        <h2>Carregar modelo da nuvem</h2>
+        <label for="preset-code">Código do modelo (sem login)</label>
+        <div class="row"><input id="preset-code" placeholder="CP-XXXX-XXXX-XXXX" autocomplete="off"><button type="button" class="btn primary" id="load-preset" disabled>Carregar</button></div>
+        <p id="preset-status" class="status" role="status"></p>
+      </section>
+
+      <section class="panel-section" id="cloud-save-section" hidden>
+        <h2>Salvar na nuvem <span aria-label="Requer login">☁</span></h2>
+        <label for="model-name">Nome do modelo</label>
+        <input id="model-name" maxlength="80" placeholder="Ex.: Treinamento de qualidade">
+        <button type="button" class="btn primary full" id="save-preset" disabled style="margin-top:10px">Salvar modelo na nuvem</button>
+        <p class="helper" id="save-hint">Serão salvas as palavras usadas nesta partida. Visitantes não podem salvar.</p>
+        <p id="save-status" class="status" role="status"></p>
+        <div id="saved-share" hidden>
+          <label for="saved-code">Código do modelo salvo</label>
+          <div class="row"><input id="saved-code" readonly><button type="button" class="btn" id="copy-code">Copiar</button></div>
+          <button type="button" class="btn full" id="copy-link" style="margin-top:8px">Copiar link para jogar</button>
+        </div>
+      </section>
+
+      <section class="panel-section" id="my-models-section" hidden>
+        <div class="section-head"><h2>Meus modelos</h2><button type="button" class="btn small" id="refresh-models">Atualizar</button></div>
+        <p class="helper">Você pode carregar ou excluir modelos da sua conta.</p>
+        <ul class="model-list" id="my-models"></ul>
+        <p id="models-status" class="status" role="status"></p>
+      </section>
+    </aside>
+  </main>
+
+  <!-- Escolher tema e cronômetro antes de cada nova partida -->
+  <dialog id="theme-dialog" aria-labelledby="theme-title" aria-describedby="theme-explanation">
+    <h2 id="theme-title">🎲 Escolha o próximo desafio</h2>
+    <p id="theme-explanation">Escolha o tema, a dificuldade e se deseja usar cronômetro.</p>
+    <div class="theme-fields">
+      <div>
+        <label for="category-select">Categoria</label>
+        <select id="category-select"></select>
+      </div>
+      <div id="subtheme-field">
+        <label for="subtheme-select">Subtema</label>
+        <select id="subtheme-select"></select>
+      </div>
+    </div>
+    <fieldset class="difficulty-fieldset">
+      <legend>Dificuldade</legend>
+      <div class="difficulty-grid">
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="facil">
+          <span class="difficulty-name">🌱 Fácil</span>
+          <span class="difficulty-subtitle">5 palavras · 2 direções</span>
+        </label>
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="medio" checked>
+          <span class="difficulty-name">🧩 Médio</span>
+          <span class="difficulty-subtitle">7 palavras · 4 direções</span>
+        </label>
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="dificil">
+          <span class="difficulty-name">🔥 Difícil</span>
+          <span class="difficulty-subtitle">9 palavras · 6 direções</span>
+        </label>
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="extremo">
+          <span class="difficulty-name">👑 Extremo</span>
+          <span class="difficulty-subtitle">10 palavras · 8 direções</span>
+        </label>
+      </div>
+      <p class="difficulty-info" id="difficulty-info" aria-live="polite"></p>
+    </fieldset>
+    <p id="theme-error" class="status error" role="alert" hidden></p>
+    <p style="margin:17px 0 0"><strong>Deseja jogar com cronômetro?</strong></p>
+    <div class="theme-choice-actions">
+      <button type="button" class="btn primary" id="timer-yes">⏱ Com cronômetro</button>
+      <button type="button" class="btn" id="timer-no">Sem cronômetro</button>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="btn small" id="theme-cancel" hidden>Cancelar e continuar</button>
+    </div>
+  </dialog>
+
+  <!-- Login com usuário abreviado, sem o domínio de e-mail -->
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <h2 id="login-title">Acesso à nuvem</h2>
+    <p>Entre com o login e a senha cadastrados no Firebase. Não é necessário entrar para jogar.</p>
+    <form id="login-form" class="login-form">
+      <div>
+        <label for="login-username">Login</label>
+        <input id="login-username" name="username" type="text" placeholder="felipe.valente" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        <p class="suffix">Usaremos automaticamente @painel.com.br</p>
+      </div>
+      <div>
+        <label for="login-password">Senha</label>
+        <input id="login-password" type="password" name="password" placeholder="Digite sua senha" autocomplete="current-password" required>
+      </div>
+      <p id="login-status" class="status" role="alert"></p>
+      <div class="login-footer">
+        <button type="button" class="btn" id="cancel-login">Cancelar</button>
+        <button type="submit" class="btn primary" id="submit-login">Entrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="giveup-dialog" aria-labelledby="giveup-title">
+    <h2 id="giveup-title">⚠ Deseja desistir?</h2>
+    <p>Se confirmar, a partida será encerrada e as palavras que faltam serão reveladas em vermelho.</p>
+    <div class="dialog-actions">
+      <button type="button" class="btn" id="keep-playing">Continuar jogando</button>
+      <button type="button" class="btn danger" id="confirm-giveup">Sim, desistir</button>
+    </div>
+  </dialog>
+
+  <div class="win-overlay" id="win-overlay" role="dialog" aria-modal="true" aria-labelledby="win-title" hidden>
+    <div class="win-card">
+      <span class="win-icon" aria-hidden="true">🏆🎉</span>
+      <h2 id="win-title">Parabéns!</h2>
+      <p id="win-message">Você encontrou todas as palavras!</p>
+      <p id="win-time" class="win-time" hidden></p>
+      <button type="button" class="btn primary" id="win-view-ranking" hidden>🏅 Registrar meu tempo no ranking</button>
+      <button type="button" class="btn primary" id="play-again">🎲 Escolher próximo tema</button>
+      <button type="button" class="btn" id="close-win">Ver meu tabuleiro</button>
+    </div>
+  </div>
+  <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+
+  <footer>Escolha entre 12 subtemas ou use suas próprias palavras. Salvar na nuvem exige login e senha cadastrados no Firebase.</footer>
+
+  <!-- JOGO: independente do Firebase -->
+  <script>
+    (() => {
+      'use strict';
+
+      // As 120 palavras estão divididas nos 12 subtemas abaixo.
+      const THEMES = {
+  "Cultura Pop e Entretenimento": {
+    "Videogames Clássicos e RPGs": [
+      "Switch Axe",
+      "Dragon Slayer",
+      "Masmorra",
+      "Inventário",
+      "Manancial",
+      "Cavaleiro",
+      "Habilidade",
+      "Missão",
+      "Tesouro",
+      "Poção"
+    ],
+    "Universos de Fantasia e Sci-Fi": [
+      "Imperador",
+      "Galáxia",
+      "Tripulação",
+      "Fortaleza",
+      "Profecia",
+      "Tecnologia",
+      "Mutação",
+      "Dimensão",
+      "Apocalipse",
+      "Guardião"
+    ],
+    "Música e Bandas (Nu Metal e Rock Alternativo)": [
+      "Distorção",
+      "Bateria",
+      "Acorde",
+      "Melodia",
+      "Microfone",
+      "Amplificador",
+      "Harmonia",
+      "Grave",
+      "Frequência",
+      "Composição"
+    ],
+    "Animes e Mangás": [
+      "Protagonista",
+      "Espadachim",
+      "Poder",
+      "Vingança",
+      "Torneio",
+      "Dimensão",
+      "Lenda",
+      "Aliança",
+      "Segredo",
+      "Destino"
+    ]
+  },
+  "Ciências e Exatas": {
+    "Termos de Física e Matemática": [
+      "Termodinâmica",
+      "Aceleração",
+      "Gravidade",
+      "Velocidade",
+      "Dinâmica",
+      "Mecânica",
+      "Energia",
+      "Resistência",
+      "Trajetória",
+      "Potência"
+    ],
+    "Estatística e Análise de Dados": [
+      "Regressão",
+      "Variância",
+      "Correlação",
+      "Amostragem",
+      "Mediana",
+      "Probabilidade",
+      "Tendência",
+      "Hipótese",
+      "Distribuição",
+      "Frequência"
+    ],
+    "Astronomia e Espaço": [
+      "Constelação",
+      "Supernova",
+      "Gravidade",
+      "Atmosfera",
+      "Satélite",
+      "Eclipse",
+      "Nebulosa",
+      "Órbita",
+      "Meteorito",
+      "Infinito"
+    ]
+  },
+  "Cotidiano e Profissional": {
+    "Tecnologia e Programação": [
+      "Algoritmo",
+      "Variável",
+      "Função",
+      "Compilador",
+      "Interface",
+      "Estrutura",
+      "Repositório",
+      "Sistema",
+      "Servidor",
+      "Desenvolvedor"
+    ],
+    "Produtividade e Escritório": [
+      "Automação",
+      "Relatório",
+      "Processo",
+      "Planejamento",
+      "Demanda",
+      "Cronograma",
+      "Estratégia",
+      "Indicador",
+      "Eficiência",
+      "Desempenho"
+    ],
+    "Gastronomia e Cafés": [
+      "Espresso",
+      "Coador",
+      "Caramelo",
+      "Infusão",
+      "Aroma",
+      "Torrefação",
+      "Paladar",
+      "Extrato",
+      "Harmonização",
+      "Temperatura"
+    ]
+  },
+  "Temas Gerais e Universais": {
+    "Natureza e Geografia": [
+      "Ecossistema",
+      "Biodiversidade",
+      "Montanha",
+      "Nascente",
+      "Vegetação",
+      "Continente",
+      "Arquipélago",
+      "Atmosfera",
+      "Península",
+      "Preservação"
+    ],
+    "Viagens e Lugares": [
+      "Passaporte",
+      "Aeroporto",
+      "Hospedagem",
+      "Itinerário",
+      "Aventura",
+      "Destino",
+      "Excursão",
+      "Turismo",
+      "Bagagem",
+      "Horizonte"
+    ]
+  }
+};
+      const DEFAULT_WORDS = THEMES['Cultura Pop e Entretenimento']['Videogames Clássicos e RPGs'];
+      const WORDS_KEY = 'caca-palavras-lista-v1';
+      const THEME_KEY = 'caca-palavras-tema-v1';
+      const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      // Os níveis alteram quantidade de palavras, grade e orientações.
+      // [linha, coluna]: positivo desce/direita; negativo sobe/esquerda.
+      const LEVELS = {
+        facil: {
+          label:'Fácil', count:5, min:12, max:15,
+          directions:[[0,1],[1,0]],
+          summary:'Grade 12–15 · horizontal e vertical, sem invertidas.'
+        },
+        medio: {
+          label:'Médio', count:7, min:15, max:18,
+          directions:[[0,1],[1,0],[1,1],[1,-1]],
+          summary:'Grade 15–18 · horizontais, verticais e diagonais não invertidas.'
+        },
+        dificil: {
+          label:'Difícil', count:9, min:18, max:21,
+          directions:[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0]],
+          summary:'Grade 18–21 · inclui palavras horizontais e verticais invertidas.'
+        },
+        extremo: {
+          label:'Extremo', count:10, min:22, max:24,
+          directions:[[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]],
+          summary:'Grade 22–24 · todas as 8 direções, incluindo diagonais invertidas.'
+        }
+      };
+      const DIRS = LEVELS.extremo.directions;
+      const LEVEL_KEY = 'caca-palavras-dificuldade-v1';
+      const $ = id => document.getElementById(id);
+      const board = $('board');
+      const picker = $('theme-dialog');
+
+      let words = [], customWords = [], customName = 'Minhas palavras';
+      let grid = [], size = 0, placements = new Map();
+      let found = new Set(), drag = null, gameOver = false, hasStarted = false;
+      let themeName = '', selectedTheme = 'light', currentLevel = LEVELS.medio;
+      let timerEnabled = false, elapsedMs = 0, clockStartedAt = 0, clockHandle = null;
+      // Resultado elegível existe somente depois de vencer com cronômetro.
+      let currentLevelId = 'medio';
+      let rankingResult = null;
+
+
+      function normalize(value) {
+        return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .toUpperCase().replace(/[^A-Z]/g, '');
+      }
+      function parseWords(value) {
+        const entries = (Array.isArray(value) ? value : String(value).split(/[,;\n]+/))
+          .map(v => String(v).trim()).filter(Boolean);
+        if (!entries.length || entries.length > 25) {
+          throw new Error('Informe entre 1 e 25 palavras.');
+        }
+        const unique = new Map();
+        for (const label of entries) {
+          const clean = normalize(label);
+          if (clean.length < 2 || clean.length > 20) {
+            throw new Error('Cada palavra precisa ter entre 2 e 20 letras: ' + label);
+          }
+          if (!unique.has(clean)) unique.set(clean, { clean, label: label.toUpperCase() });
+        }
+        return [...unique.values()];
+      }
+
+      // ----- Escolher categoria, subtema e cronômetro -----
+      function fillCategories() {
+        const select = $('category-select');
+        select.replaceChildren();
+        const categories = [
+          ['aleatorio', '🎲 Surpreenda-me (tema aleatório)'],
+          ...Object.keys(THEMES).map(name => [name, name]),
+          ['personalizado', '📝 Minhas palavras / modelo salvo']
+        ];
+        for (const [value, label] of categories) {
+          const option = new Option(label, value);
+          select.add(option);
+        }
+        select.value = 'aleatorio';
+        updateSubthemes();
+      }
+      function updateSubthemes() {
+        const category = $('category-select').value;
+        const select = $('subtheme-select');
+        select.replaceChildren();
+        const isTheme = !!THEMES[category];
+        $('subtheme-field').hidden = !isTheme;
+        if (isTheme) {
+          Object.keys(THEMES[category]).forEach(title => select.add(new Option(title, title)));
+        }
+        updateDifficultyInfo();
+      }
+      // A janela informa o nível escolhido, mas não revela as palavras.
+      function selectedLevel() {
+        const choice = document.querySelector('input[name="difficulty"]:checked');
+        return LEVELS[choice?.value] || LEVELS.medio;
+      }
+      function updateDifficultyInfo() {
+        const level = selectedLevel();
+        const isCustom = $('category-select').value === 'personalizado';
+        const available = isCustom ? customWords.length : 10;
+        const number = Math.min(level.count, available);
+        const detail = available < level.count
+          ? `Esta lista tem apenas ${available} palavra(s), portanto serão usadas todas. `
+          : `${number} palavras sorteadas. `;
+        $('difficulty-info').textContent = detail + level.summary +
+          ' A grade pode aumentar para acomodar palavras maiores.';
+      }
+      $('category-select').addEventListener('change', updateSubthemes);
+      document.querySelectorAll('input[name="difficulty"]').forEach(input => {
+        input.addEventListener('change', () => {
+          try { localStorage.setItem(LEVEL_KEY,input.value); } catch(_) {}
+          updateDifficultyInfo();
+        });
+      });
+
+      function openThemePicker(preferCustom = false) {
+        pauseClock();
+        hideWin();
+        if (preferCustom) $('category-select').value = 'personalizado';
+        $('theme-cancel').hidden = !hasStarted;
+        updateSubthemes();
+        $('theme-error').hidden = true;
+        if (!picker.open) picker.showModal();
+        $('category-select').focus();
+      }
+      function challengeForSelection() {
+        let category = $('category-select').value;
+        if (category === 'personalizado') {
+          return { label: customName, list: customWords.map(w => w.label) };
+        }
+        if (category === 'aleatorio') {
+          const categories = Object.keys(THEMES);
+          category = categories[Math.floor(Math.random() * categories.length)];
+          const subthemes = Object.keys(THEMES[category]);
+          const sub = subthemes[Math.floor(Math.random() * subthemes.length)];
+          return { label: category + ' • ' + sub, list: THEMES[category][sub] };
+        }
+        const sub = $('subtheme-select').value;
+        return { label: category + ' • ' + sub, list: THEMES[category][sub] };
+      }
+      // Sorteio sem repetição: cada dificuldade usa até 5, 7, 9 ou 10 palavras.
+      function chooseWords(list, count) {
+        const available = parseWords(list);
+        const mixed = [...available];
+        for (let i = mixed.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [mixed[i],mixed[j]] = [mixed[j],mixed[i]];
+        }
+        return mixed.slice(0,Math.min(count,mixed.length));
+      }
+      function startChosenGame(enabled) {
+        const choice = challengeForSelection();
+        const previousWords = words;
+        const previousTheme = themeName;
+        const previousTimer = timerEnabled;
+        const previousLevel = currentLevel;
+        const previousLevelId = currentLevelId;
+        try {
+          currentLevelId = document.querySelector('input[name="difficulty"]:checked')?.value || 'medio';
+          currentLevel = selectedLevel();
+          words = chooseWords(choice.list,currentLevel.count);
+          themeName = choice.label;
+          timerEnabled = enabled;
+          startGame();
+          $('words-input').value = words.map(w => w.label).join('\n');
+          picker.close();
+        } catch (error) {
+          words = previousWords;
+          themeName = previousTheme;
+          timerEnabled = previousTimer;
+          currentLevel = previousLevel;
+          currentLevelId = previousLevelId;
+          $('theme-error').textContent = error.message;
+          $('theme-error').hidden = false;
+        }
+      }
+      $('timer-yes').addEventListener('click', () => startChosenGame(true));
+      $('timer-no').addEventListener('click', () => startChosenGame(false));
+      $('theme-cancel').addEventListener('click', () => { picker.close(); resumeClock(); });
+      picker.addEventListener('cancel', e => {
+        if (!hasStarted) e.preventDefault();
+        else resumeClock();
+      });
+
+      // ----- Relógio -----
+      function formatTime(ms) {
+        const s = Math.floor(ms / 1000), h = Math.floor(s / 3600);
+        const m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+        const sec = String(s % 60).padStart(2, '0');
+        return h ? `${h}:${m}:${sec}` : `${m}:${sec}`;
+      }
+      function getElapsed() {
+        return elapsedMs + (clockHandle !== null ? Date.now() - clockStartedAt : 0);
+      }
+      function updateClock() { $('timer-value').textContent = formatTime(getElapsed()); }
+      function pauseClock() {
+        if (clockHandle !== null) {
+          elapsedMs += Date.now() - clockStartedAt;
+          clearInterval(clockHandle);
+          clockHandle = null;
+        }
+        updateClock();
+      }
+      function resumeClock() {
+        if (!hasStarted || !timerEnabled || gameOver || clockHandle !== null) return;
+        clockStartedAt = Date.now();
+        clockHandle = setInterval(updateClock, 250);
+        updateClock();
+      }
+
+      // ----- Posicionamento em 8 direções -----
+      const random = n => Math.floor(Math.random() * n);
+      function canPlace(matrix, word, r, c, dr, dc) {
+        for (let i = 0; i < word.length; i++) {
+          const y = r + i * dr, x = c + i * dc;
+          if (y < 0 || x < 0 || y >= matrix.length || x >= matrix.length) return false;
+          if (matrix[y][x] && matrix[y][x] !== word[i]) return false;
+        }
+        return true;
+      }
+      function place(matrix, word) {
+        const n = matrix.length;
+        for (let tries = 0; tries < 900; tries++) {
+          const directions = currentLevel.directions;
+          const [dr, dc] = directions[random(directions.length)];
+          const minR = dr < 0 ? word.length - 1 : 0;
+          const maxR = dr > 0 ? n - word.length : n - 1;
+          const minC = dc < 0 ? word.length - 1 : 0;
+          const maxC = dc > 0 ? n - word.length : n - 1;
+          if (minR > maxR || minC > maxC) continue;
+          const r = minR + random(maxR - minR + 1);
+          const c = minC + random(maxC - minC + 1);
+          if (!canPlace(matrix, word, r, c, dr, dc)) continue;
+          const path = [];
+          for (let i = 0; i < word.length; i++) {
+            const y = r + dr * i, x = c + dc * i;
+            matrix[y][x] = word[i];
+            path.push([y,x]);
+          }
+          return path;
+        }
+        return null;
+      }
+      function generate() {
+        const longest = Math.max(...words.map(w => w.clean.length));
+        // Sorteia o tamanho dentro da faixa do nível.
+        // Para palavras personalizadas muito longas, aumenta até 24.
+        const smallest = Math.max(currentLevel.min,longest);
+        const largest = Math.max(smallest,currentLevel.max);
+        const initial = smallest + random(largest - smallest + 1);
+        for (let n = initial; n <= 24; n++) {
+          for (let attempt = 0; attempt < 75; attempt++) {
+            const matrix = Array.from({length:n}, () => Array(n).fill(''));
+            const paths = new Map();
+            const sorted = [...words].sort((a,b) => b.clean.length - a.clean.length);
+            let success = true;
+            for (const word of sorted) {
+              const path = place(matrix, word.clean);
+              if (!path) { success = false; break; }
+              paths.set(word.clean, path);
+            }
+            if (!success) continue;
+            for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+              if (!matrix[r][c]) matrix[r][c] = LETTERS[random(LETTERS.length)];
+            }
+            return { matrix, n, paths };
+          }
+        }
+        throw new Error('Não foi possível encaixar as palavras. Experimente uma lista menor.');
+      }
+
+      // ----- Exibição -----
+      const cellAt = (r,c) => board.children[r * size + c];
+      function renderBoard() {
+        board.style.setProperty('--size', size);
+        const fragment = document.createDocumentFragment();
+        grid.forEach((row,r) => row.forEach((letter,c) => {
+          const el = document.createElement('div');
+          el.className = 'cell'; el.textContent = letter;
+          el.dataset.r = r; el.dataset.c = c;
+          el.setAttribute('role', 'gridcell');
+          fragment.appendChild(el);
+        }));
+        board.replaceChildren(fragment);
+      }
+      function renderWords() {
+        const fragment = document.createDocumentFragment();
+        words.forEach(word => {
+          const yes = found.has(word.clean), no = gameOver && !yes;
+          const li = document.createElement('li');
+          li.className = 'word' + (yes ? ' found' : no ? ' missed' : '');
+          const mark = document.createElement('span');
+          mark.className = 'mark'; mark.textContent = yes ? '✓' : no ? '×' : '';
+          const label = document.createElement('span');
+          label.className = 'word-label'; label.textContent = word.label;
+          li.append(mark,label); fragment.appendChild(li);
+        });
+        $('word-list').replaceChildren(fragment);
+        $('score').textContent = `${found.size} / ${words.length} encontradas`;
+        $('badge').textContent = gameOver ? 'Encerrado' : `${words.length - found.size} restantes`;
+        $('progress-fill').style.width = `${words.length ? 100 * found.size / words.length : 0}%`;
+      }
+      function hideWin() { $('win-overlay').hidden = true; $('confetti-layer').replaceChildren(); }
+      function startGame() {
+        const generated = generate();
+        pauseClock(); elapsedMs = 0; updateClock();
+        $('timer-display').hidden = !timerEnabled;
+        grid = generated.matrix; size = generated.n; placements = generated.paths;
+        found = new Set(); drag = null; gameOver = false; hasStarted = true;
+        rankingResult = null;
+        $('ranking-submit').disabled = true;
+        $('ranking-entry-status').textContent = timerEnabled
+          ? 'Ao encontrar todas as palavras, você poderá registrar seu tempo.'
+          : 'Esta partida está sem cronômetro e não concorre ao ranking.';
+        window.dispatchEvent(new CustomEvent('wordgame:start', { detail:{ level:currentLevelId } }));
+        renderBoard(); renderWords();
+        $('current-theme').textContent = `${themeName} • ${currentLevel.label} • ${size}×${size}`;
+        $('current-theme').hidden = false;
+        $('next-theme').hidden = true;
+        board.classList.remove('locked'); $('legend').hidden = true;
+        $('giveup').disabled = false; $('giveup').textContent = '⚑ Desistir';
+        $('feedback').className = 'feedback';
+        $('feedback').textContent = 'Encontre a primeira palavra!';
+        if ($('giveup-dialog').open) $('giveup-dialog').close();
+        hideWin(); resumeClock();
+      }
+      function setCustomWords(list, label = 'Minhas palavras') {
+        const parsed = parseWords(list);
+        customWords = parsed;
+        customName = label;
+        $('words-input').value = parsed.map(w => w.label).join('\n');
+        try {
+          localStorage.setItem(WORDS_KEY, $('words-input').value);
+        } catch (_) {}
+        openThemePicker(true);
+      }
+
+      // ----- Seleção por mouse e toque -----
+      function coords(el) { return [Number(el.dataset.r), Number(el.dataset.c)]; }
+      function hover(e) {
+        const el = document.elementFromPoint(e.clientX, e.clientY)?.closest('.cell');
+        return el && board.contains(el) ? el : null;
+      }
+      function pathBetween(a,b) {
+        const dy = b[0]-a[0], dx = b[1]-a[1];
+        if (!dy && !dx) return [a];
+        let best = DIRS[0], score = -Infinity;
+        for (const dir of DIRS) {
+          const dot = (dy*dir[0] + dx*dir[1]) / Math.hypot(...dir);
+          if (dot > score) { score = dot; best = dir; }
+        }
+        const [dr,dc] = best;
+        const steps = Math.max(0, Math.round((dy*dr + dx*dc) / (dr*dr + dc*dc)));
+        const path = [];
+        for (let i = 0; i <= steps; i++) {
+          const r = a[0] + i*dr, c = a[1] + i*dc;
+          if (r < 0 || c < 0 || r >= size || c >= size) break;
+          path.push([r,c]);
+        }
+        return path;
+      }
+      function highlight() {
+        board.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+        if (drag && !gameOver) drag.path.forEach(([r,c]) => cellAt(r,c).classList.add('selected'));
+      }
+      function samePath(selected, actual) {
+        if (!actual || selected.length !== actual.length) return false;
+        return selected.every(([r,c],i) => r === actual[i][0] && c === actual[i][1]) ||
+          selected.every(([r,c],i) => {
+            const p = actual[actual.length - i - 1];
+            return r === p[0] && c === p[1];
+          });
+      }
+      board.addEventListener('pointerdown', e => {
+        if (!hasStarted || gameOver || drag || (e.pointerType === 'mouse' && e.button !== 0)) return;
+        const cell = e.target.closest('.cell');
+        if (!cell) return;
+        e.preventDefault();
+        const start = coords(cell);
+        drag = { pointerId:e.pointerId, start, path:[start] };
+        board.setPointerCapture(e.pointerId);
+        highlight();
+      });
+      board.addEventListener('pointermove', e => {
+        if (!drag || e.pointerId !== drag.pointerId) return;
+        const cell = hover(e);
+        if (cell) { drag.path = pathBetween(drag.start,coords(cell)); highlight(); }
+      });
+      board.addEventListener('pointercancel', e => {
+        if (drag && e.pointerId === drag.pointerId) { drag = null; highlight(); }
+      });
+      board.addEventListener('pointerup', e => {
+        if (!drag || e.pointerId !== drag.pointerId) return;
+        const cell = hover(e);
+        if (cell) drag.path = pathBetween(drag.start,coords(cell));
+        const path = drag.path;
+        drag = null; highlight();
+        if (gameOver || path.length < 2) return;
+        const match = words.find(w => !found.has(w.clean) && samePath(path, placements.get(w.clean)));
+        if (!match) {
+          $('feedback').className = 'feedback';
+          $('feedback').textContent = 'Sequência incorreta. Tente novamente!';
+          return;
+        }
+        found.add(match.clean);
+        placements.get(match.clean).forEach(([r,c]) => cellAt(r,c).classList.add('found'));
+        if (found.size === words.length) {
+          pauseClock(); gameOver = true; board.classList.add('locked');
+          $('giveup').disabled = true; $('next-theme').hidden = false;
+          $('feedback').textContent = '🎉 Você encontrou todas as palavras!';
+          $('feedback').className = 'feedback success';
+          if (timerEnabled) {
+            rankingResult = {
+              id: crypto.randomUUID(),
+              level: currentLevelId,
+              tempoMs: Math.max(1, Math.round(getElapsed())),
+              tema: themeName
+            };
+            $('ranking-submit').disabled = false;
+            $('ranking-entry-status').textContent =
+              `Parabéns! Seu tempo foi ${formatTime(rankingResult.tempoMs)}. Informe seu apelido para participar.`;
+          }
+          renderWords(); congratulate(); return;
+        }
+        renderWords();
+        $('feedback').className = 'feedback success';
+        $('feedback').textContent = `✓ Palavra encontrada: ${match.label}`;
+      });
+
+      // ----- Vitória e efeitos -----
+      function confetti() {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const layer = $('confetti-layer'); layer.replaceChildren();
+        const colors = ['#f472b6','#34d399','#60a5fa','#facc15','#a78bfa','#fb923c'];
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 110; i++) {
+          const el = document.createElement('span'); el.className = 'confetti';
+          el.style.setProperty('--x', `${Math.random()*100}%`);
+          el.style.setProperty('--color', colors[i%colors.length]);
+          el.style.setProperty('--duration', `${2.8+Math.random()*2.2}s`);
+          el.style.setProperty('--delay', `${Math.random()*.8}s`);
+          el.style.setProperty('--drift', `${(Math.random()-.5)*240}px`);
+          fragment.appendChild(el);
+        }
+        layer.appendChild(fragment);
+        setTimeout(() => layer.replaceChildren(), 6500);
+      }
+      function congratulate() {
+        $('win-message').textContent = `Você encontrou as ${words.length} palavras! Nível: ${currentLevel.label}. Excelente trabalho!`;
+        $('win-time').hidden = !timerEnabled;
+        $('win-time').textContent = timerEnabled ? `Seu tempo: ${formatTime(getElapsed())}` : '';
+        $('win-overlay').hidden = false;
+        $('win-view-ranking').hidden = !rankingResult;
+        confetti(); $('play-again').focus();
+      }
+      $('win-view-ranking').addEventListener('click', () => {
+        hideWin();
+        $('ranking-section').scrollIntoView({ behavior:'smooth', block:'start' });
+        $('ranking-nickname').focus({ preventScroll:true });
+      });
+      $('play-again').addEventListener('click', () => openThemePicker());
+      $('close-win').addEventListener('click', hideWin);
+      $('next-theme').addEventListener('click', () => openThemePicker());
+      $('shuffle').addEventListener('click', () => openThemePicker());
+
+      // ----- Desistência: revela o que faltou -----
+      $('giveup').disabled = true;
+      $('giveup').addEventListener('click', () => {
+        if (!gameOver && hasStarted) { pauseClock(); $('giveup-dialog').showModal(); }
+      });
+      $('keep-playing').addEventListener('click', () => {
+        $('giveup-dialog').close(); resumeClock();
+      });
+      $('giveup-dialog').addEventListener('cancel', () => resumeClock());
+      $('confirm-giveup').addEventListener('click', () => {
+        $('giveup-dialog').close();
+        if (gameOver) return;
+        pauseClock(); gameOver = true; drag = null; highlight();
+        board.classList.add('locked');
+        $('giveup').disabled = true; $('giveup').textContent = '⚑ Desistiu';
+        $('legend').hidden = false; $('next-theme').hidden = false;
+        for (const word of words) {
+          if (!found.has(word.clean)) {
+            placements.get(word.clean).forEach(([r,c]) => cellAt(r,c).classList.add('missed'));
+          }
+        }
+        renderWords();
+        $('feedback').className = 'feedback alert';
+        $('feedback').textContent = `Partida encerrada: ${words.length-found.size} palavra(s) revelada(s) em vermelho. Escolha outro tema quando quiser.`;
+      });
+
+      // ----- Personalização e tema visual -----
+      $('apply').addEventListener('click', () => {
+        try {
+          setCustomWords($('words-input').value);
+          const u = new URL(location.href);
+          u.searchParams.delete('modelo'); history.replaceState(null,'',u);
+          $('local-status').textContent = 'Lista preparada! Escolha a dificuldade e o cronômetro para jogar.';
+          $('local-status').className = 'status ok';
+        } catch (error) {
+          $('local-status').textContent = error.message;
+          $('local-status').className = 'status error';
+        }
+      });
+      function applyTheme(theme) {
+        selectedTheme = theme;
+        const dark = theme === 'dark';
+        document.documentElement.dataset.theme = theme;
+        $('theme-toggle').firstChild.textContent = dark ? '☀ ' : '☾ ';
+        $('theme-label').textContent = dark ? 'Claro' : 'Escuro';
+        $('theme-toggle').setAttribute('aria-label', dark ? 'Ativar modo claro' : 'Ativar modo escuro');
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#0c1322' : '#f4f7fd';
+      }
+      $('theme-toggle').addEventListener('click', () => {
+        applyTheme(selectedTheme === 'light' ? 'dark' : 'light');
+        try { localStorage.setItem(THEME_KEY, selectedTheme); } catch (_) {}
+      });
+
+      // ----- Início: pedir tema + cronômetro antes de começar -----
+      let initialTheme;
+      try { initialTheme = localStorage.getItem(THEME_KEY); } catch (_) {}
+      applyTheme(['light','dark'].includes(initialTheme) ? initialTheme :
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+      let saved;
+      try { saved = localStorage.getItem(WORDS_KEY); } catch (_) {}
+      try { customWords = parseWords(saved || DEFAULT_WORDS); }
+      catch (_) { customWords = parseWords(DEFAULT_WORDS); }
+      words = customWords;
+      $('words-input').value = customWords.map(w => w.label).join('\n');
+      fillCategories();
+      try {
+        const lastLevel = localStorage.getItem(LEVEL_KEY);
+        const control = document.querySelector(`input[name="difficulty"][value="${lastLevel}"]`);
+        if (control) control.checked = true;
+      } catch (_) {}
+      updateDifficultyInfo();
+      openThemePicker();
+
+      // API pública para o carregamento por código do Firebase.
+      window.WordGame = {
+        getWords: () => words.map(w => w.label),
+        getRankingResult: () => rankingResult && { ...rankingResult },
+        getLevel: () => currentLevelId,
+
+        loadWords: (list, name = 'Modelo compartilhado') => setCustomWords(list, name),
+        showLocalError: text => {
+          $('local-status').textContent = text;
+          $('local-status').className = 'status error';
+        }
+      };
+    })();
+
+  </script>
+
+  <!-- NUVEM: separado da lógica do jogo, usando o SDK oficial pela CDN. -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, signInAnonymously, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
+    import { getFirestore, collection, doc, getDoc, getDocs, query, where, orderBy, limit, deleteDoc, runTransaction, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBt5PxI4qIfc23Vr2ytTd9VYFIGvSwv2fE',
+      authDomain: 'cacapalavrasinterativo.firebaseapp.com',
+      projectId: 'cacapalavrasinterativo',
+      storageBucket: 'cacapalavrasinterativo.firebasestorage.app',
+      messagingSenderId: '167586064732',
+      appId: '1:167586064732:web:4b7450d7cbbbcf09717999'
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const $ = id => document.getElementById(id);
+    const CODE_REGEX = /^CP-[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/;
+    const CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let currentUser = null;
+
+    function status(id,text,type='') {
+      $(id).textContent=text;
+      $(id).className='status'+(type?' '+type:'');
+    }
+    function friendlyError(error) {
+      if (error.code === 'permission-denied') return 'Permissão negada. Confira as regras do Firestore.';
+      if (error.code === 'auth/unauthorized-domain') return 'Adicione o domínio do GitHub Pages aos domínios autorizados do Authentication.';
+      if (['auth/invalid-credential','auth/wrong-password','auth/user-not-found','auth/invalid-email'].includes(error.code)) return 'Login ou senha incorretos, ou conta inexistente.';
+      if (error.code === 'unavailable') return 'Firebase indisponível. Verifique a conexão e tente novamente.';
+      return error.message || 'Ocorreu um erro ao acessar o Firebase.';
+    }
+    function canonicalCode(value) { return String(value).trim().toUpperCase(); }
+    function newCode() {
+      const bytes = crypto.getRandomValues(new Uint8Array(12));
+      const raw = [...bytes].map(b => CHARS[b % CHARS.length]).join('');
+      return `CP-${raw.slice(0,4)}-${raw.slice(4,8)}-${raw.slice(8,12)}`;
+    }
+    function linkFor(code) {
+      const u = new URL(location.href);
+      u.searchParams.set('modelo',code);
+      return u.href;
+    }
+    async function copyText(text) {
+      await navigator.clipboard.writeText(text);
+    }
+
+    // O usuário informa somente o prefixo: felipe.valente
+    // O Firebase recebe: felipe.valente@painel.com.br
+    const LOGIN_DOMAIN = '@painel.com.br';
+
+    $('login').addEventListener('click', () => {
+      status('login-status','');
+      $('login-dialog').showModal();
+      $('login-username').focus();
+    });
+
+    $('cancel-login').addEventListener('click', () => {
+      $('login-dialog').close();
+      $('login-password').value = '';
+    });
+
+    $('login-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const username = $('login-username').value.trim().toLowerCase();
+      const password = $('login-password').value;
+
+      if (!/^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$/.test(username)) {
+        status('login-status','Digite apenas o login, por exemplo: felipe.valente','error');
+        return;
+      }
+      $('submit-login').disabled = true;
+      status('login-status','Verificando suas credenciais...');
+      try {
+        await signInWithEmailAndPassword(auth, username + LOGIN_DOMAIN, password);
+        $('login-password').value = '';
+        $('login-dialog').close();
+        status('save-status','Acesso à nuvem liberado.','ok');
+      } catch(error) {
+        status('login-status',friendlyError(error),'error');
+      } finally {
+        $('submit-login').disabled = false;
+      }
+    });
+    $('logout').addEventListener('click',async () => {
+      try { await signOut(auth);status('save-status','Você saiu da sua conta.'); }
+      catch(e) { status('save-status',friendlyError(e),'error'); }
+    });
+
+    onAuthStateChanged(auth, user => {
+      currentUser = user;
+      // Autenticação anônima permite ranking, NÃO habilita modelos privados.
+      const hasAccount = !!user && !user.isAnonymous;
+      $('cloud-save-section').hidden = !hasAccount;
+      $('my-models-section').hidden = !hasAccount;
+      $('login').hidden = hasAccount;
+      $('logout').hidden = !hasAccount;
+      $('user-details').textContent = hasAccount
+        ? (user.email?.split('@')[0] || 'Conectado') : 'Modo visitante';
+      $('save-preset').disabled = !hasAccount;
+      $('save-hint').textContent = 'Salve as palavras da partida atual; um código exclusivo será gerado.';
+      if (!hasAccount) {
+        $('saved-share').hidden = true;
+        $('my-models').replaceChildren();
+        status('models-status','');
+      } else {
+        refreshModels();
+      }
+    });
+
+    async function loadPreset(code) {
+      code=canonicalCode(code);
+      if (!CODE_REGEX.test(code)) { status('preset-status','Código inválido. Use o formato CP-XXXX-XXXX-XXXX.','error');return; }
+      $('load-preset').disabled=true;
+      status('preset-status','Consultando o Firebase...');
+      try {
+        const snapshot=await getDoc(doc(db,'modelos',code));
+        if (!snapshot.exists()) { status('preset-status','Modelo não encontrado. Verifique o código.','error');return; }
+        const data=snapshot.data();
+        if (!Array.isArray(data.palavras)) throw new Error('O modelo armazenado não possui uma lista válida.');
+        window.WordGame.loadWords(data.palavras, data.nome || code);
+        $('preset-code').value=code;
+        $('model-name').value=typeof data.nome==='string'?data.nome:'';
+        const u=new URL(location.href); u.searchParams.set('modelo',code);
+        history.replaceState(null,'',u);
+        status('preset-status',`Modelo "${data.nome||code}" carregado! Escolha a dificuldade e o cronômetro para começar.`,'ok');
+      } catch(e) { status('preset-status',friendlyError(e),'error'); }
+      finally { $('load-preset').disabled=false; }
+    }
+    $('load-preset').addEventListener('click',()=>loadPreset($('preset-code').value));
+    $('preset-code').addEventListener('keydown',e=>{if(e.key==='Enter')loadPreset($('preset-code').value);});
+
+    $('save-preset').addEventListener('click',async () => {
+      if (!currentUser || currentUser.isAnonymous) { status('save-status','Faça login para salvar.','error');return; }
+      const name=$('model-name').value.trim();
+      if (!name || name.length>80) { status('save-status','Informe um nome de até 80 caracteres.','error');return; }
+      const creator=currentUser;
+      const model={
+        ownerUid:creator.uid, nome:name, palavras:window.WordGame.getWords(),
+        criadoEm:serverTimestamp()
+      };
+      $('save-preset').disabled=true;
+      status('save-status','Salvando modelo na nuvem...');
+      try {
+        let code=null;
+        for (let tries=0;tries<4;tries++) {
+          const candidate=newCode();
+          const ref=doc(db,'modelos',candidate);
+          try {
+            await runTransaction(db,async transaction => {
+              const snapshot=await transaction.get(ref);
+              if(snapshot.exists())throw new Error('COLISAO');
+              transaction.set(ref,model);
+            });
+            code=candidate;
+            break;
+          } catch(e) { if(e.message==='COLISAO')continue; throw e; }
+        }
+        if (!code) throw new Error('Não foi possível gerar um código exclusivo. Tente novamente.');
+        $('saved-share').hidden=false; $('saved-code').value=code;
+        status('save-status','Modelo salvo! Compartilhe o código ou o link abaixo.','ok');
+        if (auth.currentUser?.uid===creator.uid) await refreshModels();
+      } catch(e) { status('save-status',friendlyError(e),'error'); }
+      finally { $('save-preset').disabled=!auth.currentUser || auth.currentUser.isAnonymous; }
+    });
+
+    $('copy-code').addEventListener('click',async()=>{
+      try { await copyText($('saved-code').value);status('save-status','Código copiado!','ok'); }
+      catch(_) { status('save-status','Não foi possível copiar automaticamente. Selecione o código e copie.','error'); }
+    });
+    $('copy-link').addEventListener('click',async()=>{
+      try { await copyText(linkFor($('saved-code').value));status('save-status','Link copiado!','ok'); }
+      catch(_) { status('save-status','Não foi possível copiar o link automaticamente.','error'); }
+    });
+
+    async function refreshModels() {
+      const user=currentUser;
+      if (!user || user.isAnonymous) return;
+      status('models-status','Carregando seus modelos...');
+      try {
+        // Necessário para as regras: ownerUid igual ao usuário e limit <= 50.
+        const q=query(collection(db,'modelos'),where('ownerUid','==',user.uid),limit(50));
+        const snapshots=await getDocs(q);
+        if (currentUser?.uid!==user.uid) return;
+        const frag=document.createDocumentFragment();
+        const entries=snapshots.docs.sort((a,b)=>{
+          const left=a.data().criadoEm?.toMillis?.()||0;
+          const right=b.data().criadoEm?.toMillis?.()||0;
+          return right-left;
+        });
+        for(const snapshot of entries) {
+          const data=snapshot.data(), code=snapshot.id;
+          const li=document.createElement('li');li.className='model-item';
+          const name=document.createElement('div');name.className='model-name';name.textContent=data.nome||'Sem nome';
+          const codeText=document.createElement('div');codeText.className='model-code';codeText.textContent=code;
+          const actions=document.createElement('div');actions.className='model-buttons';
+          const open=document.createElement('button');open.type='button';open.className='btn small';open.textContent='Carregar';
+          open.addEventListener('click',()=>loadPreset(code));
+          const copy=document.createElement('button');copy.type='button';copy.className='btn small';copy.textContent='Copiar link';
+          copy.addEventListener('click',async()=>{
+            try {await copyText(linkFor(code));status('models-status','Link copiado!','ok');}
+            catch(e){status('models-status','Não foi possível copiar o link.','error');}
+          });
+          const remove=document.createElement('button');remove.type='button';remove.className='btn small danger-outline';remove.textContent='Excluir';
+          remove.addEventListener('click',async()=>{
+            if(!confirm(`Excluir permanentemente o modelo "${data.nome}" (${code})?`))return;
+            try {
+              await deleteDoc(doc(db,'modelos',code));
+              status('models-status','Modelo excluído.','ok');
+              await refreshModels();
+            } catch(e){status('models-status',friendlyError(e),'error');}
+          });
+          actions.append(open,copy,remove);li.append(name,codeText,actions);frag.appendChild(li);
+        }
+        $('my-models').replaceChildren(frag);
+        status('models-status',entries.length?`${entries.length} modelo(s) exibido(s).`:'Você ainda não salvou nenhum modelo.');
+      } catch(e){status('models-status',friendlyError(e),'error');}
+    }
+    $('refresh-models').addEventListener('click',refreshModels);
+    $('login').disabled=false;
+    $('load-preset').disabled=false;
+    /* ==========================================
+       RANKING PÚBLICO E PARTICIPAÇÃO OPT-IN
+       rankings/{nivel}/participantes/{uid}
+       O mesmo usuário conserva o melhor tempo
+       em cada dificuldade.
+    ========================================== */
+    const RANK_LEVELS = {
+      facil:'Fácil', medio:'Médio', dificil:'Difícil', extremo:'Extremo'
+    };
+    const NICK_KEY = 'caca-palavras-apelido-ranking-v1';
+    let rankingView = 'medio';
+    let rankingRequest = 0;
+    let submittedRound = null;
+
+    function formatRankingTime(ms) {
+      const seconds = Math.floor(ms / 1000);
+      const h = Math.floor(seconds / 3600);
+      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2,'0');
+      const s = String(seconds % 60).padStart(2,'0');
+      return h ? `${h}:${m}:${s}` : `${m}:${s}`;
+    }
+
+    function selectRanking(level) {
+      if (!(level in RANK_LEVELS)) return;
+      rankingView = level;
+      $('ranking-level-title').textContent = RANK_LEVELS[level];
+      document.querySelectorAll('[data-ranking-level]').forEach(button => {
+        const active = button.dataset.rankingLevel === level;
+        button.setAttribute('aria-pressed', String(active));
+      });
+      refreshRanking();
+    }
+
+    async function refreshRanking() {
+      const requestId = ++rankingRequest;
+      const level = rankingView;
+      status('ranking-list-status','Carregando melhores tempos...');
+      try {
+        // Uma subcoleção por dificuldade dispensa índice composto.
+        const q = query(
+          collection(db,'rankings',level,'participantes'),
+          orderBy('tempoMs','asc'),
+          limit(50)
+        );
+        const snapshot = await getDocs(q);
+        if (requestId !== rankingRequest) return;
+        const fragment = document.createDocumentFragment();
+        snapshot.docs.forEach((entry,index) => {
+          const data = entry.data();
+          const li = document.createElement('li');
+          li.className = 'ranking-item';
+          if (auth.currentUser?.uid === entry.id) li.classList.add('is-me');
+          const position = document.createElement('span');
+          position.className = 'ranking-position';
+          position.textContent = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index+1}`;
+          const who = document.createElement('div');
+          who.className = 'ranking-identity';
+          const nickname = document.createElement('span');
+          nickname.className = 'ranking-name';
+          nickname.textContent = typeof data.nome === 'string' ? data.nome : 'Participante';
+          const subtitle = document.createElement('span');
+          subtitle.className = 'ranking-theme';
+          subtitle.textContent = typeof data.tema === 'string' ? data.tema : '';
+          who.append(nickname,subtitle);
+          const time = document.createElement('strong');
+          time.className = 'ranking-time';
+          time.textContent = formatRankingTime(Number(data.tempoMs) || 0);
+          li.append(position,who,time);
+          fragment.appendChild(li);
+        });
+        $('ranking-list').replaceChildren(fragment);
+        status(
+          'ranking-list-status',
+          snapshot.empty ? 'Ainda não há tempos registrados neste nível. Seja o primeiro!' :
+          `Exibindo ${snapshot.size} melhor(es) tempo(s).`
+        );
+      } catch(error) {
+        if (requestId !== rankingRequest) return;
+        $('ranking-list').replaceChildren();
+        status('ranking-list-status',friendlyError(error),'error');
+      }
+    }
+
+    document.querySelectorAll('[data-ranking-level]').forEach(button => {
+      button.addEventListener('click',() => selectRanking(button.dataset.rankingLevel));
+    });
+    $('ranking-refresh').addEventListener('click',refreshRanking);
+    window.addEventListener('wordgame:start',event => {
+      // Ao começar uma nova partida, o ranking mostra o nível atual.
+      submittedRound = null;
+      selectRanking(event.detail.level);
+    });
+    try { $('ranking-nickname').value = localStorage.getItem(NICK_KEY) || ''; } catch (_) {}
+
+    $('ranking-submit').addEventListener('click',async () => {
+      const result = window.WordGame.getRankingResult();
+      if (!result || submittedRound === result.id) {
+        status('ranking-entry-status','Só é possível registrar uma vitória com cronômetro ainda não enviada.','error');
+        return;
+      }
+      const nickname = $('ranking-nickname').value.trim().replace(/\s+/g,' ');
+      if (nickname.length < 2 || nickname.length > 24 || !/^[\p{L}\p{N} ._\-]+$/u.test(nickname)) {
+        status('ranking-entry-status','Digite um apelido de 2 a 24 caracteres, sem símbolos especiais.','error');
+        return;
+      }
+      $('ranking-submit').disabled = true;
+      status('ranking-entry-status','Registrando seu tempo...');
+      try {
+        // O convidado recebe uma sessão anônima apenas ao optar por participar.
+        if (!auth.currentUser) await signInAnonymously(auth);
+        const user = auth.currentUser;
+        if (!user) throw new Error('Não foi possível iniciar a sessão anônima.');
+        if (window.WordGame.getRankingResult()?.id !== result.id) {
+          throw new Error('A partida mudou. Conclua a nova partida antes de registrar.');
+        }
+        const ref = doc(db,'rankings',result.level,'participantes',user.uid);
+        let previousBest = null;
+        let saved = false;
+        await runTransaction(db,async transaction => {
+          const previous = await transaction.get(ref);
+          saved = false; // transações podem ser reexecutadas.
+          previousBest = previous.exists() ? Number(previous.data().tempoMs) : null;
+          if (previousBest !== null && previousBest <= result.tempoMs) return;
+          transaction.set(ref,{
+            nome:nickname,
+            tempoMs:result.tempoMs,
+            tema:result.tema.slice(0,160),
+            atualizadoEm:serverTimestamp()
+          });
+          saved = true;
+        });
+        submittedRound = result.id;
+        try { localStorage.setItem(NICK_KEY,nickname); } catch (_) {}
+        if (saved) {
+          status('ranking-entry-status',`Tempo de ${formatRankingTime(result.tempoMs)} registrado! Você entrou no ranking de ${RANK_LEVELS[result.level]}.`,'ok');
+        } else {
+          status('ranking-entry-status',`Seu recorde anterior (${formatRankingTime(previousBest)}) continua melhor. Novo tempo não substituído.`,'ok');
+        }
+        selectRanking(result.level);
+      } catch(error) {
+        status('ranking-entry-status',friendlyError(error),'error');
+      } finally {
+        const current = window.WordGame.getRankingResult();
+        $('ranking-submit').disabled = !current || submittedRound === current.id;
+      }
+    });
+
+    // A visualização pública funciona inclusive sem autenticação.
+    selectRanking(window.WordGame.getLevel());
+
+    const initialCode=new URLSearchParams(location.search).get('modelo');
+    if(initialCode){ $('preset-code').value=initialCode;loadPreset(initialCode); }
+  </script>
+</body>
+</html>
