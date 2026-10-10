@@ -1,60 +1,67 @@
-# NEXUS — Central de Jogos + Campo Minado
+# NEXUS — Central de Jogos | Atualização Jogo da Memória
 
-Projeto estático e modular pronto para **GitHub Pages**, sem frameworks ou build. O repositório original do Caça-Palavras não precisa ser alterado.
+Esta versão incorpora o **Jogo da Memória** à HUD NEXUS, preservando o Caça-Palavras, Campo Minado e Sudoku do pacote anterior.
 
-## Jogos disponíveis
+## Novidades
 
-- **Caça-Palavras** (`jogos/caca-palavras/`): preservado da versão anterior, com seus quatro níveis, modelos salvos e ranking.
-- **Campo Minado** (`jogos/campo-minado/`): novo jogo com quatro dificuldades, tabuleiro aleatório, primeiro clique e vizinhança seguros, expansão de casas vazias, bandeiras, abertura rápida de números, vitória/derrota, cronômetro opcional e ranking por apelido.
-- Jogos da Memória, Sudoku e Quiz continuam com seus cartões de prévia e não estão implementados.
+- **Jogo da Memória**: cartas futuristas, interação por mouse, toque e teclado, pares certos permanecem abertos.
+- **Fechamento automático das cartas erradas após 1 segundo**, sem botão adicional; o tabuleiro bloqueia outros cliques durante o intervalo.
+- Quatro níveis: Fácil (6 pares/12 cartas), Médio (8 pares/16), Difícil (10 pares/20) e Extremo (12 pares/24).
+- Treino livre com embaralhamento variável e desafio diário com disposição reprodutível por data de Brasília e dificuldade.
+- Cronômetro opcional, tentativas, progresso, vitória e reinício.
+- Ranking diário opcional por apelido: **menos tentativas vence; tempo é o desempate**.
+- Apenas partidas diárias com cronômetro permitem registrar um resultado por UID, dia e dificuldade.
+- HUD: catálogo, pesquisa e Hall da Fama incluem o quarto jogo.
 
-## Estrutura
+## Como instalar no GitHub Pages
 
-```text
-index.html                            HUD da Central NEXUS
-assets/css/hud.css                    Estilo da Central
-assets/css/game-bridge.css            Barra de navegação dos jogos
-assets/js/app.js                      Navegação, catálogo e ranking geral
-assets/js/catalog.js                  Registro dos jogos
-assets/js/firebase.js                 Firebase compartilhado, carregado sob demanda
-jogos/caca-palavras/index.html        Caça-Palavras original
-jogos/campo-minado/index.html         Interface do Campo Minado
-jogos/campo-minado/estilo.css         Visual futurista do novo jogo
-jogos/campo-minado/engine.js          Regras puras e criação do tabuleiro
-jogos/campo-minado/jogo.js            Interação e estado da partida
-jogos/campo-minado/ranking.js         Classificação no Firebase
-firestore.rules                       Regras completas para ambos os jogos
+### Instalação completa
+
+1. Faça backup do repositório **NEXUS** atual.
+2. Extraia o arquivo **NEXUS-Central-de-Jogos-Memoria.zip**.
+3. Envie **o conteúdo extraído** para a raiz do repositório NEXUS (não inclua uma pasta externa adicional).
+4. Preserve os subdiretórios `assets/` e `jogos/` e confirme os arquivos modificados.
+5. Certifique-se de que o GitHub Pages publica a branch `main` e a pasta raiz `/`.
+
+### Atualizar o projeto já publicado
+
+Extraia **NEXUS-Atualizacao-Memoria.zip** e envie os arquivos preservando as pastas. O pacote contém o novo módulo `jogos/memoria/` e somente os arquivos compartilhados modificados (`index.html`, catálogo, HUD, Firebase e `firestore.rules`).
+
+### URLs
+
+- Central: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/`
+- Memória: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/jogos/memoria/`
+
+## Ativar o ranking no Firebase
+
+O projeto usa a configuração Firebase existente da NEXUS.
+
+1. Confirme em **Firebase Authentication → Método de login** que **Anônimo** está ativado. Mantenha **E-mail/Senha** para o Caça-Palavras.
+2. No Console Firebase, vá a **Firestore Database → Regras**, faça uma cópia de segurança das regras atuais, depois publique as regras completas do arquivo `firestore.rules`.
+3. As regras acrescentam o caminho: `rankings_memoria/{nivel}/dias/{AAAA-MM-DD}/participantes/{uid}`.
+4. Ao registrar o primeiro tempo, o Firestore cria a subcoleção automaticamente; **não precisa criar coleções nem índices compostos manualmente** (consulta ordenada por `ordem`, um único campo).
+5. Teste uma partida diária com cronômetro, informe um apelido e confira o resultado no Hall da Fama da Central.
+
+**Atenção:** enviar `firestore.rules` ao GitHub não publica as regras no Firebase. Use a aba Regras do console Firebase.
+
+## Arquivos novos
+
+```
+jogos/memoria/
+├── index.html     # interface e navegação
+├── estilo.css     # visual responsivo futurista
+├── engine.js      # motor puro e embaralhamento determinístico
+├── jogo.js        # lógica e interações de partida
+└── ranking.js     # leitura e registro opcional no Firestore
 ```
 
-## Publicação no repositório NEXUS
+## Como funciona o ranking
 
-1. Extraia o ZIP.
-2. Copie **o conteúdo extraído** para a raiz do repositório NEXUS no GitHub, preservando as pastas.
-3. Em **Settings → Pages** escolha **Deploy from a branch**, `main`, `/ (root)`.
-4. A Central abrirá em `https://USUARIO.github.io/NOME-DO-REPOSITORIO/`.
-5. O Campo Minado abrirá em `.../jogos/campo-minado/` e o Caça-Palavras em `.../jogos/caca-palavras/`.
+O ranking é limitado aos desafios diários com cronômetro. Os resultados são ordenados por `ordem = tentativas * 100000000 + tempoMs`. Portanto, nenhuma diferença de segundos supera uma diferença de uma tentativa. Apenas um registro **por conta do Firebase/UID, dificuldade e dia** pode ser enviado; não é um bloqueio por pessoa física. A pontuação é calculada no navegador: **não é uma classificação antifraude**. Para premiações, seria necessário verificar jogadas em backend confiável.
 
-Nenhuma URL está codificada com um repositório fixo; os links são **relativos**, inclusive a volta para a Central.
+## Testes e observações
 
-## Ativar ranking do Campo Minado
-
-1. O projeto usa o mesmo Firebase `cacapalavrasinterativo` já configurado no Caça-Palavras. A autenticação **Anônima** e **E-mail/Senha** devem permanecer ativadas.
-2. No Firebase Console, abra **Firestore Database → Regras**. Faça backup das regras atuais e publique o arquivo `firestore.rules` desta versão; ele **mantém** os modelos e o ranking anterior e **acrescenta** a coleção `rankings_campo_minado/{nivel}/participantes/{uid}`.
-3. A coleção surge automaticamente após o primeiro resultado válido.
-4. O ranking pode ser visualizado sem login; para registrar tempo, o usuário escolhe um apelido e o app realiza login anônimo somente se não houver uma sessão existente.
-5. Uma conta participa com o **melhor tempo em cada dificuldade**, sem se misturar com o Caça-Palavras.
-
-**Segurança:** as regras impedem gravações por outros UIDs, mas não comprovam que o tempo corresponde a uma partida legítima: o jogo calcula o resultado no navegador. Para campeonatos com prêmios, é necessária validação confiável no servidor.
-
-## Como jogar
-
-- Selecione dificuldade, relógio e clique em uma casa.
-- **Fácil:** 9×9 / 10 minas; **Médio:** 12×12 / 24; **Difícil:** 16×16 / 40; **Extremo:** 20×20 / 80.
-- Mouse: botão esquerdo revela; direito coloca bandeira.
-- Celular: alterne os botões **Revelar** e **Bandeira**; deslize o tabuleiro horizontalmente.
-- Teclado: setas navegam, Enter aciona e `F` marca bandeira.
-- Revele todas as casas seguras para vencer. Partidas sem cronômetro e desistências/derrotas não entram no ranking.
-
-## Testes locais
-
-A lógica foi verificada automaticamente em 320 partidas geradas (80 por dificuldade): distribuição correta de minas, primeiro clique seguro, números adjacentes, vitória e derrota. A interação da página também foi testada em prévia do navegador com Firebase simulado. A conexão real do Firebase deve ser conferida após publicar o site e as regras.
+- 600 layouts gerados e conferidos (150 para cada dificuldade), incluindo pares únicos e reprodutibilidade diária.
+- Teste de navegador em versão desktop e celular: viradas, bloqueio, fechamento automático, vitória, desafio diário e navegação da HUD.
+- A leitura/gravação REAL do ranking depende da conexão e das regras Firestore publicadas. Não foi validada contra a instância Firebase ativa do usuário.
+- Arquivos do Caça-Palavras, Campo Minado e Sudoku preservados byte a byte em relação ao pacote anterior.

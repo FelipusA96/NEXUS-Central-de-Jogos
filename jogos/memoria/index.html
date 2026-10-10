@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080e1a">
+  <meta name="description" content="Jogo da Memória NEXUS: quatro dificuldades, pares holográficos e desafio diário.">
+  <title>Memória | NEXUS</title>
+  <link rel="stylesheet" href="../../assets/css/game-bridge.css">
+  <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+  <nav class="portal-nav" aria-label="Navegação NEXUS">
+    <a class="portal-brand" href="../../"><span class="portal-emblem">✧</span> NEXUS // GAMING HUB</a>
+    <div class="portal-links">
+      <a class="portal-back" href="../../">← Central de Jogos</a>
+      <a href="../../#jogos">Biblioteca</a>
+      <a href="../../#ranking?jogo=memoria">Hall da Fama</a>
+    </div>
+  </nav>
+
+  <div class="ambient" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">NEXUS / COGNIÇÃO / GAME 004</div>
+        <h1>MEM<span>ÓRIA</span><i>_</i></h1>
+        <p class="intro">Olhe com atenção. Revele dois símbolos, encontre pares e desafie sua memória em uma arena holográfica.</p>
+      </div>
+      <div class="game-status" aria-live="polite">
+        <span class="status-light"></span>
+        <strong id="mission-state">ARENA PRONTA</strong>
+        <small id="mission-caption">AGUARDANDO PRIMEIRA CARTA</small>
+      </div>
+    </header>
+
+    <section class="config" aria-label="Configurações da partida">
+      <fieldset class="config-group">
+        <legend>01 // DIFICULDADE</legend>
+        <div class="choices" id="level-options">
+          <button type="button" data-level="facil" aria-pressed="false">Fácil <small>6 pares · 12 cartas</small></button>
+          <button type="button" data-level="medio" class="active" aria-pressed="true">Médio <small>8 pares · 16 cartas</small></button>
+          <button type="button" data-level="dificil" aria-pressed="false">Difícil <small>10 pares · 20 cartas</small></button>
+          <button type="button" data-level="extremo" aria-pressed="false">Extremo <small>12 pares · 24 cartas</small></button>
+        </div>
+      </fieldset>
+      <fieldset class="config-group">
+        <legend>02 // FORMATO</legend>
+        <div class="choices" id="mode-options">
+          <button type="button" data-play-mode="livre" class="active" aria-pressed="true">Treino livre <small>Cartas variadas</small></button>
+          <button type="button" data-play-mode="diario" aria-pressed="false">Desafio diário <small>Mesmo tabuleiro para todos</small></button>
+        </div>
+      </fieldset>
+      <div class="config-group config-actions">
+        <label class="clock-option"><input id="clock-enabled" type="checkbox" checked> Cronômetro ativado</label>
+        <button type="button" id="new-round" class="primary-btn">↻ Nova partida</button>
+      </div>
+    </section>
+
+    <div class="game-layout">
+      <section class="board-panel" aria-labelledby="board-title">
+        <div class="board-heading">
+          <div>
+            <div class="eyebrow">SISTEMA // MEMÓRIA VISUAL</div>
+            <h2 id="board-title">Matriz de reconhecimento</h2>
+          </div>
+          <span class="mode-stamp" id="game-mode-label">MODO LIVRE</span>
+        </div>
+
+        <div class="metrics">
+          <div><small>PARES ENCONTRADOS</small><strong id="matched">0/8</strong></div>
+          <div><small>TENTATIVAS</small><strong id="attempts">0</strong></div>
+          <div><small>TEMPO</small><strong id="elapsed">00:00</strong></div>
+        </div>
+
+        <div class="memory-board" id="board" role="group" aria-label="Cartas do jogo da memória"></div>
+
+        <div class="progress-track" role="progressbar" aria-label="Pares encontrados" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress">
+          <span id="progress-fill"></span>
+        </div>
+        <p class="notice" id="game-message" aria-live="polite" role="status">Vire duas cartas e tente encontrar pares correspondentes.</p>
+
+        <div class="board-footer">
+          <span><b>Controles:</b> clique ou toque nas cartas · Tab e Enter no teclado · pares diferentes fecham automaticamente após 1 segundo.</span>
+          <button type="button" class="link-btn" id="help-open">? Como jogar</button>
+        </div>
+      </section>
+
+      <aside class="side-stack">
+        <section class="info-card">
+          <div class="eyebrow">PROTOCOLO // RECONHECIMENTO</div>
+          <h2>Observe. Memorize. Combine.</h2>
+          <p>As cartas são ocultadas no início. Revele duas por vez e encontre seus símbolos correspondentes.</p>
+          <div class="instruction"><b>01</b><div><strong>Revelar</strong><small>Escolha a primeira e a segunda carta.</small></div></div>
+          <div class="instruction"><b>02</b><div><strong>Memorizar</strong><small>Cartas diferentes voltam após 1 segundo, sem botão extra.</small></div></div>
+          <div class="instruction"><b>03</b><div><strong>Concluir</strong><small>Encontre todos os pares com poucas tentativas.</small></div></div>
+          <div class="side-tip" id="daily-explanation">No treino livre, as cartas são embaralhadas em cada partida. O desafio diário oferece as mesmas posições para todos.</div>
+        </section>
+
+        <section class="info-card leaderboard" aria-labelledby="leaderboard-title">
+          <div class="rank-title">
+            <div><div class="eyebrow">ARENA // DESAFIO COMPARTILHADO</div><h2 id="leaderboard-title">Ranking diário</h2></div>
+            <button type="button" id="rank-refresh" class="icon-action" aria-label="Atualizar ranking">↻</button>
+          </div>
+          <p class="rank-day" id="rank-date"></p>
+          <div class="rank-tabs" id="rank-tabs" role="group" aria-label="Dificuldade do ranking">
+            <button type="button" data-rank="facil">Fácil</button>
+            <button type="button" data-rank="medio" class="active" aria-pressed="true">Médio</button>
+            <button type="button" data-rank="dificil">Difícil</button>
+            <button type="button" data-rank="extremo">Extremo</button>
+          </div>
+          <div class="rank-head"><span># / JOGADOR</span><span>TENTATIVAS · TEMPO</span></div>
+          <ol id="rank-list" class="rank-list"></ol>
+          <p class="rank-feedback" id="rank-status" role="status">Aguardando consulta ao Firebase.</p>
+        </section>
+
+        <section class="info-card registration">
+          <div class="eyebrow">IDENTIDADE // PARTICIPAÇÃO OPCIONAL</div>
+          <h2>Seu nome no ranking.</h2>
+          <p>Não é necessário fazer login tradicional. Uma vitória com cronômetro no <b>desafio diário</b> pode ser registrada por dificuldade e por dia.</p>
+          <label for="nickname">APELIDO PÚBLICO</label>
+          <input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Como deseja aparecer?">
+          <button type="button" id="submit-score" class="primary-btn" disabled>✦ Registrar resultado</button>
+          <p id="submit-status" class="rank-feedback" role="status">Conclua o desafio diário com cronômetro para habilitar o registro.</p>
+        </section>
+      </aside>
+    </div>
+    <footer>NEXUS // MEMÓRIA <span>HTML · CSS · JAVASCRIPT · FIREBASE SOB DEMANDA</span></footer>
+  </main>
+
+  <dialog id="result-dialog" aria-labelledby="result-title">
+    <div class="result-icon">🏆</div>
+    <div class="eyebrow">ARENA // PARTIDA CONCLUÍDA</div>
+    <h2 id="result-title">Todos os pares encontrados!</h2>
+    <p id="result-description"></p>
+    <div class="dialog-actions">
+      <button type="button" id="result-rank" class="primary-btn" hidden>🏅 Registrar no ranking</button>
+      <button type="button" id="result-next" class="primary-btn">↻ Nova partida</button>
+      <button type="button" id="result-close">Ver tabuleiro</button>
+    </div>
+  </dialog>
+
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <div class="eyebrow">NEXUS // MANUAL</div>
+    <h2 id="help-title">Como jogar Memória</h2>
+    <p>Encontre todos os pares de símbolos. Revele apenas duas cartas por vez. Se forem diferentes, elas se fecham automaticamente após <b>1 segundo</b>, sem precisar clicar em qualquer botão.</p>
+    <p>As cartas iguais permanecem reveladas. Cada dupla de cartas diferentes ou iguais representa uma tentativa. As novas cartas só podem ser selecionadas depois que as anteriores são verificadas.</p>
+    <p>Na modalidade <b>Desafio diário</b>, todos recebem a mesma disposição das cartas para a mesma dificuldade no dia de Brasília. Apenas vitórias com cronômetro entram no ranking: ganha quem usar menos tentativas e, em caso de empate, quem terminar em menor tempo.</p>
+    <p>O modo livre não entra no ranking. Os resultados são calculados no navegador; o Firebase guarda os registros, mas não certifica a integridade das partidas.</p>
+    <button type="button" id="help-close" class="primary-btn">Entendido</button>
+  </dialog>
+
+  <script type="module" src="./jogo.js"></script>
+</body>
+</html>

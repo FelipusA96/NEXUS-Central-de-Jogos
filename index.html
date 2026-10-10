@@ -127,6 +127,8 @@
           <div class="rank-game-controls" id="rank-game-controls" aria-label="Selecione o jogo do ranking">
             <button type="button" class="rank-game-btn active" data-rank-game="caca-palavras" aria-pressed="true">⌗ Caça-Palavras</button>
             <button type="button" class="rank-game-btn" data-rank-game="campo-minado" aria-pressed="false">✹ Campo Minado</button>
+            <button type="button" class="rank-game-btn" data-rank-game="sudoku" aria-pressed="false">▦ Sudoku diário</button>
+            <button type="button" class="rank-game-btn" data-rank-game="memoria" aria-pressed="false">◈ Memória diário</button>
           </div>
           <div class="rank-controls" id="rank-controls" aria-label="Dificuldade do ranking">
             <button type="button" class="rank-tab" data-level="facil">Fácil</button>
@@ -136,10 +138,10 @@
           </div>
           <div class="rank-layout">
             <div class="rank-table" aria-live="polite">
-              <div class="rank-row head"><span>#</span><span>Participante</span><span style="text-align:right">Tempo</span></div>
+              <div class="rank-row head"><span>#</span><span>Participante</span><span id="rank-score-label" style="text-align:right">Tempo</span></div>
               <div id="rank-body"><p class="feedback">Selecione um nível para consultar os recordes.</p></div>
             </div>
-            <aside class="rank-note"><span class="eyebrow">COMO PARTICIPAR</span><h3>Seu melhor tempo conta.</h3><p>Escolha um dos jogos, ative o cronômetro e vença uma partida. Depois informe um apelido para registrar seu melhor resultado.</p><a class="btn btn-primary" id="rank-game-link" href="./jogos/caca-palavras/">Abrir Caça-Palavras ↗</a><button type="button" id="rank-refresh" class="btn" style="margin-left:5px">↻ Atualizar</button><p id="rank-status" class="results-note" role="status"></p></aside>
+            <aside class="rank-note"><span class="eyebrow">COMO PARTICIPAR</span><h3 id="rank-help-title">Seu melhor tempo conta.</h3><p id="rank-help-text">Escolha um jogo e conclua a partida com cronômetro. No Sudoku, apenas o desafio diário sem dicas ou conferências entra no ranking, com um registro por dia e dificuldade.</p><a class="btn btn-primary" id="rank-game-link" href="./jogos/caca-palavras/">Abrir Caça-Palavras ↗</a><button type="button" id="rank-refresh" class="btn" style="margin-left:5px">↻ Atualizar</button><p id="rank-status" class="results-note" role="status"></p></aside>
           </div>
         </section>
 

@@ -59,7 +59,7 @@ function filterCatalog() {
 function navigate(forcePage = null) {
   const route = forcePage || location.hash.slice(1).split('?')[0];
   const query = location.hash.split('?')[1] || '';
-  if (route==='ranking' && new URLSearchParams(query).get('jogo')==='campo-minado') setRankGame('campo-minado',false);
+  if (route==='ranking' && ['campo-minado','sudoku','caca-palavras','memoria'].includes(new URLSearchParams(query).get('jogo'))) setRankGame(new URLSearchParams(query).get('jogo'),false);
   const page = pageNames[route] ? route : 'inicio';
   document.querySelectorAll('[data-view]').forEach(view => {
     view.hidden = view.dataset.view!==page;
@@ -111,7 +111,7 @@ async function loadRanking() {
     if (id!==rankRequest) return;
     body.replaceChildren();
     if (!rows.length) {
-      const p=document.createElement('p');p.className='feedback';p.textContent='Ainda não existem tempos registrados nesta dificuldade.';body.appendChild(p);
+      const p=document.createElement('p');p.className='feedback';p.textContent='Ainda não existem resultados registrados nesta dificuldade.';body.appendChild(p);
       return;
     }
     for(const row of rows){
@@ -121,10 +121,10 @@ async function loadRanking() {
       const strong=document.createElement('strong');strong.textContent=row.name;
       const sub=document.createElement('small');sub.textContent=row.theme;
       person.append(strong,sub);
-      const time=document.createElement('span');time.className='time';time.textContent=formatTime(row.time);
+      const time=document.createElement('span');time.className='time';time.textContent=currentRankGame==='memoria' ? `${row.attempts} jogadas · ${formatTime(row.time)}` : formatTime(row.time);
       article.append(place,person,time);body.appendChild(article);
     }
-    $('rank-status').textContent=`${rows.length} tempo(s) exibido(s) · ${levelNames[currentLevel]} · ${currentRankGame==='campo-minado'?'Campo Minado':'Caça-Palavras'}`;
+    $('rank-status').textContent=`${rows.length} resultado(s) exibido(s) · ${levelNames[currentLevel]} · ${({'campo-minado':'Campo Minado','sudoku':'Sudoku diário','caca-palavras':'Caça-Palavras','memoria':'Memória diário'})[currentRankGame]}`;
   } catch(e) {
     if(id!==rankRequest)return;
     body.replaceChildren();
@@ -224,16 +224,19 @@ $('rank-controls').addEventListener('click',event=>{
   loadRanking();
 });
 function setRankGame(game,refresh=true){
-  if (!['caca-palavras','campo-minado'].includes(game)) return;
+  if (!['caca-palavras','campo-minado','sudoku','memoria'].includes(game)) return;
   currentRankGame=game;
   document.querySelectorAll('[data-rank-game]').forEach(button=>{
     const selected=button.dataset.rankGame===currentRankGame;
     button.classList.toggle('active',selected);
     button.setAttribute('aria-pressed',String(selected));
   });
-  const mines=currentRankGame==='campo-minado';
-  $('rank-game-link').href=mines?'./jogos/campo-minado/':'./jogos/caca-palavras/';
-  $('rank-game-link').textContent=mines?'Abrir Campo Minado ↗':'Abrir Caça-Palavras ↗';
+  const gameNames={'caca-palavras':'Caça-Palavras','campo-minado':'Campo Minado','sudoku':'Sudoku','memoria':'Memória'};
+  $('rank-game-link').href=`./jogos/${currentRankGame}/`;
+  $('rank-score-label').textContent=currentRankGame==='memoria'?'Tentativas · tempo':'Tempo';
+  $('rank-help-title').textContent=currentRankGame==='memoria'?'Menos tentativas vence.':'Seu melhor tempo conta.';
+  $('rank-help-text').textContent=currentRankGame==='memoria'?'No Jogo da Memória, apenas os desafios diários com cronômetro contam. Menos tentativas fica à frente; em empate, vence o menor tempo. Cada participante registra um resultado por dia e dificuldade.':'Escolha um jogo e conclua a partida com cronômetro. No Sudoku, apenas o desafio diário sem dicas ou conferências entra no ranking, com um registro por dia e dificuldade.';
+  $('rank-game-link').textContent=`Abrir ${gameNames[currentRankGame]} ↗`;
   if(refresh) loadRanking();
 }
 $('rank-game-controls').addEventListener('click',event=>{

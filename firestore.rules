@@ -114,5 +114,80 @@ service cloud.firestore {
         && request.resource.data.tempoMs < resource.data.tempoMs;
       allow delete: if false;
     }
+
+    // SUDOKU: ranking para o desafio diário compartilhado por nível.
+    // Uma única conclusão pode ser registrada por UID, nível e data.
+    // A verificação da partida continua sendo feita no navegador.
+    match /rankings_sudoku/{nivel}/dias/{dia}/participantes/{uid} {
+      allow get, list: if nivel in ['facil','medio','dificil','extremo'];
+
+      function sudokuValido() {
+        return logado()
+          && request.auth.uid == uid
+          && nivel in ['facil','medio','dificil','extremo']
+          && dia.matches('\\d{4}-\\d{2}-\\d{2}')
+          && request.resource.data.keys().hasAll([
+            'nome','tempoMs','tema','atualizadoEm'
+          ])
+          && request.resource.data.keys().hasOnly([
+            'nome','tempoMs','tema','atualizadoEm'
+          ])
+          && request.resource.data.nome is string
+          && request.resource.data.nome.size() >= 2
+          && request.resource.data.nome.size() <= 24
+          && request.resource.data.tempoMs is int
+          && request.resource.data.tempoMs >= 1
+          && request.resource.data.tempoMs <= 86400000
+          && request.resource.data.tema is string
+          && request.resource.data.tema.size() > 0
+          && request.resource.data.tema.size() <= 160
+          && request.resource.data.atualizadoEm == request.time;
+      }
+
+      allow create: if sudokuValido();
+      allow update, delete: if false;
+    }
+
+
+    // MEMÓRIA: desafio diário com mesmas posições por nível e data.
+    // Menos tentativas vence; o menor tempo desempata.
+    // Um único registro por UID/dia/nível, sem atualização pelo navegador.
+    match /rankings_memoria/{nivel}/dias/{dia}/participantes/{uid} {
+      allow get: if nivel in ['facil','medio','dificil','extremo'];
+      allow list: if nivel in ['facil','medio','dificil','extremo']
+        && request.query.limit <= 30;
+
+      function memoriaValida() {
+        return logado()
+          && request.auth.uid == uid
+          && nivel in ['facil','medio','dificil','extremo']
+          && dia.matches('\\d{4}-\\d{2}-\\d{2}')
+          && request.resource.data.keys().hasAll([
+            'nome','tentativas','tempoMs','ordem','tema','atualizadoEm'
+          ])
+          && request.resource.data.keys().hasOnly([
+            'nome','tentativas','tempoMs','ordem','tema','atualizadoEm'
+          ])
+          && request.resource.data.nome is string
+          && request.resource.data.nome.size() >= 2
+          && request.resource.data.nome.size() <= 24
+          && request.resource.data.tentativas is int
+          && request.resource.data.tentativas >= 6
+          && request.resource.data.tentativas <= 10000
+          && request.resource.data.tempoMs is int
+          && request.resource.data.tempoMs >= 1
+          && request.resource.data.tempoMs <= 86400000
+          && request.resource.data.ordem is int
+          && request.resource.data.ordem ==
+            request.resource.data.tentativas * 100000000 +
+            request.resource.data.tempoMs
+          && request.resource.data.tema is string
+          && request.resource.data.tema.size() > 0
+          && request.resource.data.tema.size() <= 160
+          && request.resource.data.atualizadoEm == request.time;
+      }
+      allow create: if memoriaValida();
+      allow update, delete: if false;
+    }
   }
 }
