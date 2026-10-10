@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080d19">
-  <meta name="description" content="Central de Jogos Nexus: desafios, raciocínio e rankings. Jogue Caça-Palavras e conheça os próximos jogos.">
+  <meta name="description" content="Central de Jogos Nexus: desafios, raciocínio e rankings. Jogue Caça-Palavras e Campo Minado e conheça os próximos jogos.">
   <title>NEXUS | Central de Jogos</title>
   <link rel="stylesheet" href="./assets/css/hud.css">
   <script>
@@ -91,7 +91,7 @@
           </section>
 
           <div class="stats" aria-label="Números da plataforma">
-            <div class="stat"><span class="stat-ico">◈</span><span><strong>01</strong><small>JOGO DISPONÍVEL</small></span></div>
+            <div class="stat"><span class="stat-ico">◈</span><span><strong>02</strong><small>JOGOS DISPONÍVEIS</small></span></div>
             <div class="stat"><span class="stat-ico">⌗</span><span><strong>04</strong><small>NÍVEIS DE DIFICULDADE</small></span></div>
             <div class="stat"><span class="stat-ico">✧</span><span><strong>12</strong><small>SUBTEMAS PARA JOGAR</small></span></div>
           </div>
@@ -110,7 +110,7 @@
 
         <!-- ===================== BIBLIOTECA ===================== -->
         <section class="page" id="view-jogos" data-view="jogos" aria-labelledby="games-title" hidden>
-          <span class="eyebrow">CATÁLOGO // 004</span>
+          <span class="eyebrow">CATÁLOGO // 005</span>
           <h1 class="page-title" id="games-title">Biblioteca de jogos<span style="color:var(--cyan)">.</span></h1>
           <p class="page-sub">Escolha um jogo disponível ou conheça o que estamos planejando. Cada jogo funciona em seu próprio módulo.</p>
           <div class="filter-row" id="category-filters" aria-label="Filtrar jogos por categoria"></div>
@@ -121,9 +121,13 @@
 
         <!-- ===================== RANKING ===================== -->
         <section class="page" id="view-ranking" data-view="ranking" aria-labelledby="rank-title" hidden>
-          <span class="eyebrow">COMPETIÇÃO // CAÇA-PALAVRAS</span>
+          <span class="eyebrow">COMPETIÇÃO // MULTIJOGOS</span>
           <h1 class="page-title" id="rank-title">Hall da fama<span style="color:var(--cyan)">.</span></h1>
-          <p class="page-sub">Consulte os melhores tempos do Caça-Palavras por dificuldade. O placar é consultado no Firebase, sem dados fictícios.</p>
+          <p class="page-sub">Consulte os recordes do Caça-Palavras e Campo Minado. Cada jogo possui sua própria classificação no Firebase.</p>
+          <div class="rank-game-controls" id="rank-game-controls" aria-label="Selecione o jogo do ranking">
+            <button type="button" class="rank-game-btn active" data-rank-game="caca-palavras" aria-pressed="true">⌗ Caça-Palavras</button>
+            <button type="button" class="rank-game-btn" data-rank-game="campo-minado" aria-pressed="false">✹ Campo Minado</button>
+          </div>
           <div class="rank-controls" id="rank-controls" aria-label="Dificuldade do ranking">
             <button type="button" class="rank-tab" data-level="facil">Fácil</button>
             <button type="button" class="rank-tab active" data-level="medio">Médio</button>
@@ -135,7 +139,7 @@
               <div class="rank-row head"><span>#</span><span>Participante</span><span style="text-align:right">Tempo</span></div>
               <div id="rank-body"><p class="feedback">Selecione um nível para consultar os recordes.</p></div>
             </div>
-            <aside class="rank-note"><span class="eyebrow">COMO PARTICIPAR</span><h3>Seu melhor tempo conta.</h3><p>Entre no Caça-Palavras, escolha um nível, ative o cronômetro e conclua a partida. Depois informe seu apelido para registrar seu melhor resultado.</p><a class="btn btn-primary" href="./jogos/caca-palavras/">Abrir Caça-Palavras ↗</a><button type="button" id="rank-refresh" class="btn" style="margin-left:5px">↻ Atualizar</button><p id="rank-status" class="results-note" role="status"></p></aside>
+            <aside class="rank-note"><span class="eyebrow">COMO PARTICIPAR</span><h3>Seu melhor tempo conta.</h3><p>Escolha um dos jogos, ative o cronômetro e vença uma partida. Depois informe um apelido para registrar seu melhor resultado.</p><a class="btn btn-primary" id="rank-game-link" href="./jogos/caca-palavras/">Abrir Caça-Palavras ↗</a><button type="button" id="rank-refresh" class="btn" style="margin-left:5px">↻ Atualizar</button><p id="rank-status" class="results-note" role="status"></p></aside>
           </div>
         </section>
 

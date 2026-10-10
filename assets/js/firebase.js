@@ -13,15 +13,16 @@ const firebaseConfig = {
   appId: '1:167586064732:web:4b7450d7cbbbcf09717999',
 };
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
 
-export async function readRanking(level, count = 20) {
+export async function readRanking(level, count = 20, game = 'caca-palavras') {
   if (!['facil','medio','dificil','extremo'].includes(level)) {
     throw new Error('Nível inválido');
   }
+  const root = game === 'campo-minado' ? 'rankings_campo_minado' : 'rankings';
   const q = query(
-    collection(db,'rankings',level,'participantes'),
+    collection(db,root,level,'participantes'),
     orderBy('tempoMs','asc'),
     limit(count),
   );

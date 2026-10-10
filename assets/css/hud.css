@@ -241,3 +241,8 @@ dialog .btn {margin-top:14px}
 }
 @keyframes float {50% {transform:translateY(-12px) rotate(-11deg) skew(1deg,1deg)}}
 @media(prefers-reduced-motion:reduce) {*,*::before,*::after {scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Alternância de jogos no Hall da Fama */
+.rank-game-controls{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 12px}
+.rank-game-btn{background:rgba(17,35,56,.9);border:1px solid var(--line,#2e465e);color:var(--muted,#a0b5ca);border-radius:10px;padding:11px 17px;font:800 13px system-ui,sans-serif;cursor:pointer}
+.rank-game-btn:hover,.rank-game-btn.active{border-color:var(--cyan,#57eee2);color:var(--cyan,#57eee2);background:rgba(76,238,230,.08)}

@@ -5,6 +5,7 @@ const pageNames = { inicio:'INÍCIO', jogos:'JOGOS', ranking:'RANKINGS', perfil:
 const levelNames = { facil:'Fácil', medio:'Médio', dificil:'Difícil', extremo:'Extremo' };
 let activeFilter = 'todos';
 let currentLevel = 'medio';
+let currentRankGame = 'caca-palavras';
 let rankRequest = 0;
 
 function escapeHTML(text) {
@@ -57,6 +58,8 @@ function filterCatalog() {
 
 function navigate(forcePage = null) {
   const route = forcePage || location.hash.slice(1).split('?')[0];
+  const query = location.hash.split('?')[1] || '';
+  if (route==='ranking' && new URLSearchParams(query).get('jogo')==='campo-minado') setRankGame('campo-minado',false);
   const page = pageNames[route] ? route : 'inicio';
   document.querySelectorAll('[data-view]').forEach(view => {
     view.hidden = view.dataset.view!==page;
@@ -104,7 +107,7 @@ async function loadRanking() {
   try {
     // Firebase SDK carregado APENAS quando a página de ranking é aberta.
     const { readRanking } = await import('./firebase.js');
-    const rows = await readRanking(currentLevel,20);
+    const rows = await readRanking(currentLevel,20,currentRankGame);
     if (id!==rankRequest) return;
     body.replaceChildren();
     if (!rows.length) {
@@ -121,7 +124,7 @@ async function loadRanking() {
       const time=document.createElement('span');time.className='time';time.textContent=formatTime(row.time);
       article.append(place,person,time);body.appendChild(article);
     }
-    $('rank-status').textContent=`${rows.length} tempo(s) exibido(s) · ${levelNames[currentLevel]}`;
+    $('rank-status').textContent=`${rows.length} tempo(s) exibido(s) · ${levelNames[currentLevel]} · ${currentRankGame==='campo-minado'?'Campo Minado':'Caça-Palavras'}`;
   } catch(e) {
     if(id!==rankRequest)return;
     body.replaceChildren();
@@ -219,6 +222,23 @@ $('rank-controls').addEventListener('click',event=>{
   currentLevel=btn.dataset.level;
   document.querySelectorAll('[data-level]').forEach(button=>button.classList.toggle('active',button.dataset.level===currentLevel));
   loadRanking();
+});
+function setRankGame(game,refresh=true){
+  if (!['caca-palavras','campo-minado'].includes(game)) return;
+  currentRankGame=game;
+  document.querySelectorAll('[data-rank-game]').forEach(button=>{
+    const selected=button.dataset.rankGame===currentRankGame;
+    button.classList.toggle('active',selected);
+    button.setAttribute('aria-pressed',String(selected));
+  });
+  const mines=currentRankGame==='campo-minado';
+  $('rank-game-link').href=mines?'./jogos/campo-minado/':'./jogos/caca-palavras/';
+  $('rank-game-link').textContent=mines?'Abrir Campo Minado ↗':'Abrir Caça-Palavras ↗';
+  if(refresh) loadRanking();
+}
+$('rank-game-controls').addEventListener('click',event=>{
+  const btn=event.target.closest('[data-rank-game]');
+  if(btn) setRankGame(btn.dataset.rankGame);
 });
 $('rank-refresh').addEventListener('click',loadRanking);
 $('profile-refresh').addEventListener('click',readProfile);

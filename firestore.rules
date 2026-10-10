@@ -80,5 +80,39 @@ service cloud.firestore {
         && request.resource.data.tempoMs < resource.data.tempoMs;
       allow delete: if false;
     }
+
+    // CAMPO MINADO: coleção separada do Caça-Palavras.
+    // Os recordes são enviados pelo navegador. Para competições com
+    // prêmios, validar as partidas também em um backend confiável.
+    match /rankings_campo_minado/{nivel}/participantes/{uid} {
+      allow get, list: if nivel in ['facil','medio','dificil','extremo'];
+
+      function scoreCampoMinadoValido() {
+        return logado()
+          && request.auth.uid == uid
+          && nivel in ['facil','medio','dificil','extremo']
+          && request.resource.data.keys().hasAll([
+            'nome','tempoMs','tema','atualizadoEm'
+          ])
+          && request.resource.data.keys().hasOnly([
+            'nome','tempoMs','tema','atualizadoEm'
+          ])
+          && request.resource.data.nome is string
+          && request.resource.data.nome.size() >= 2
+          && request.resource.data.nome.size() <= 24
+          && request.resource.data.tempoMs is int
+          && request.resource.data.tempoMs >= 1
+          && request.resource.data.tempoMs <= 86400000
+          && request.resource.data.tema is string
+          && request.resource.data.tema.size() > 0
+          && request.resource.data.tema.size() <= 160
+          && request.resource.data.atualizadoEm == request.time;
+      }
+
+      allow create: if scoreCampoMinadoValido();
+      allow update: if scoreCampoMinadoValido()
+        && request.resource.data.tempoMs < resource.data.tempoMs;
+      allow delete: if false;
+    }
   }
 }
