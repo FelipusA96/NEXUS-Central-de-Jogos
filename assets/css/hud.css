@@ -246,3 +246,6 @@ dialog .btn {margin-top:14px}
 .rank-game-controls{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 12px}
 .rank-game-btn{background:rgba(17,35,56,.9);border:1px solid var(--line,#2e465e);color:var(--muted,#a0b5ca);border-radius:10px;padding:11px 17px;font:800 13px system-ui,sans-serif;cursor:pointer}
 .rank-game-btn:hover,.rank-game-btn.active{border-color:var(--cyan,#57eee2);color:var(--cyan,#57eee2);background:rgba(76,238,230,.08)}
+
+/* Identidade própria do Spider: neon esmeralda. */
+.game-cover.green{background:radial-gradient(circle at 50% 52%,#1e806a,#174747 63%,#172c35)}

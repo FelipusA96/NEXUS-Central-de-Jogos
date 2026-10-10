@@ -189,5 +189,45 @@ service cloud.firestore {
       allow create: if memoriaValida();
       allow update, delete: if false;
     }
+    // SPIDER: desafio diário com mesmo baralho inicial por nível e data.
+    // Menos movimentos vence; o menor tempo desempata.
+    // Um único registro por UID/dia/nível, sem atualização pelo navegador.
+    match /rankings_spider/{nivel}/dias/{dia}/participantes/{uid} {
+      allow get: if nivel in ['facil','medio','dificil','extremo'];
+      allow list: if nivel in ['facil','medio','dificil','extremo']
+        && request.query.limit <= 30;
+
+      function spiderValido() {
+        return logado()
+          && request.auth.uid == uid
+          && nivel in ['facil','medio','dificil','extremo']
+          && dia.matches('\\d{4}-\\d{2}-\\d{2}')
+          && request.resource.data.keys().hasAll([
+            'nome','movimentos','tempoMs','ordem','tema','atualizadoEm'
+          ])
+          && request.resource.data.keys().hasOnly([
+            'nome','movimentos','tempoMs','ordem','tema','atualizadoEm'
+          ])
+          && request.resource.data.nome is string
+          && request.resource.data.nome.size() >= 2
+          && request.resource.data.nome.size() <= 24
+          && request.resource.data.movimentos is int
+          && request.resource.data.movimentos >= 1
+          && request.resource.data.movimentos <= 10000
+          && request.resource.data.tempoMs is int
+          && request.resource.data.tempoMs >= 1
+          && request.resource.data.tempoMs <= 86400000
+          && request.resource.data.ordem is int
+          && request.resource.data.ordem ==
+            request.resource.data.movimentos * 100000000 +
+            request.resource.data.tempoMs
+          && request.resource.data.tema is string
+          && request.resource.data.tema.size() > 0
+          && request.resource.data.tema.size() <= 160
+          && request.resource.data.atualizadoEm == request.time;
+      }
+      allow create: if spiderValido();
+      allow update, delete: if false;
+    }
   }
 }

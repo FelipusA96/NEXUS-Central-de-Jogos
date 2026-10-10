@@ -22,17 +22,17 @@ export async function readRanking(level, count = 20, game = 'caca-palavras') {
   }
   const root = game === 'campo-minado' ? 'rankings_campo_minado' : 'rankings';
   let ref;
-  if (game === 'sudoku' || game === 'memoria') {
+  if (game === 'sudoku' || game === 'memoria' || game === 'paciencia-spider') {
     const parts = new Intl.DateTimeFormat('en-US',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
     const date = Object.fromEntries(parts.map(p=>[p.type,p.value]));
     const day = `${date.year}-${date.month}-${date.day}`;
-    ref=collection(db,game==='memoria'?'rankings_memoria':'rankings_sudoku',level,'dias',day,'participantes');
+    ref=collection(db,game==='memoria'?'rankings_memoria':game==='paciencia-spider'?'rankings_spider':'rankings_sudoku',level,'dias',day,'participantes');
   } else {
     ref=collection(db,root,level,'participantes');
   }
   const q = query(
     ref,
-    orderBy(game==='memoria'?'ordem':'tempoMs','asc'),
+    orderBy(game==='memoria'||game==='paciencia-spider'?'ordem':'tempoMs','asc'),
     limit(count),
   );
   const snapshot = await getDocs(q);
@@ -42,6 +42,7 @@ export async function readRanking(level, count = 20, game = 'caca-palavras') {
     name: typeof entry.data().nome === 'string' ? entry.data().nome : 'Participante',
     time: Number(entry.data().tempoMs) || 0,
     attempts: Number(entry.data().tentativas) || 0,
+    moves: Number(entry.data().movimentos) || 0,
     theme: typeof entry.data().tema === 'string' ? entry.data().tema : '',
   }));
 }

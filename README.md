@@ -1,67 +1,88 @@
-# NEXUS — Central de Jogos | Atualização Jogo da Memória
+# NEXUS — Central de Jogos | Paciência Spider + catálogo organizado
 
-Esta versão incorpora o **Jogo da Memória** à HUD NEXUS, preservando o Caça-Palavras, Campo Minado e Sudoku do pacote anterior.
+Este pacote adiciona o **Paciência Spider** como quinto jogo jogável à NEXUS, mantendo Caça-Palavras, Campo Minado, Sudoku e Jogo da Memória. O **Quiz** continua como **Em breve**.
 
-## Novidades
+## Ordem definitiva do catálogo
 
-- **Jogo da Memória**: cartas futuristas, interação por mouse, toque e teclado, pares certos permanecem abertos.
-- **Fechamento automático das cartas erradas após 1 segundo**, sem botão adicional; o tabuleiro bloqueia outros cliques durante o intervalo.
-- Quatro níveis: Fácil (6 pares/12 cartas), Médio (8 pares/16), Difícil (10 pares/20) e Extremo (12 pares/24).
-- Treino livre com embaralhamento variável e desafio diário com disposição reprodutível por data de Brasília e dificuldade.
-- Cronômetro opcional, tentativas, progresso, vitória e reinício.
-- Ranking diário opcional por apelido: **menos tentativas vence; tempo é o desempate**.
-- Apenas partidas diárias com cronômetro permitem registrar um resultado por UID, dia e dificuldade.
-- HUD: catálogo, pesquisa e Hall da Fama incluem o quarto jogo.
+| Número | Jogo | Estado |
+| --- | --- | --- |
+| 001 | Caça-Palavras | Disponível |
+| 002 | Campo Minado | Disponível |
+| 003 | Sudoku | Disponível |
+| 004 | Jogo da Memória | Disponível |
+| 005 | Paciência Spider | Disponível |
+| 006 | Quiz | Em breve |
 
-## Como instalar no GitHub Pages
+A ordem foi corrigida em `assets/js/catalog.js` e agora coincide com os códigos e com o Hall da Fama. O filtro **Cartas** foi incluído.
 
-### Instalação completa
+## Spider: funcionalidades
 
-1. Faça backup do repositório **NEXUS** atual.
-2. Extraia o arquivo **NEXUS-Central-de-Jogos-Memoria.zip**.
-3. Envie **o conteúdo extraído** para a raiz do repositório NEXUS (não inclua uma pasta externa adicional).
-4. Preserve os subdiretórios `assets/` e `jogos/` e confirme os arquivos modificados.
-5. Certifique-se de que o GitHub Pages publica a branch `main` e a pasta raiz `/`.
+- 104 cartas, 10 colunas e 50 cartas de reserva, distribuídas em cinco grupos de dez.
+- Nível Fácil: 1 naipe (com sugestões disponíveis); Médio: 1 naipe; Difícil: 2 naipes; Extremo: 4 naipes.
+- Cartas inicialmente ocultas e abertas automaticamente à medida que ficam expostas.
+- Movimentação por **arrastar e soltar (computador)** ou **selecionar a origem e tocar a coluna de destino (celular/teclado)**.
+- Grupos móveis somente quando formados por sequência decrescente de cartas do mesmo naipe.
+- Ao completar uma sequência de Rei ao Ás do mesmo naipe, ela sai automaticamente do tabuleiro. Vitória após 8 sequências.
+- Distribuição permitida somente se todas as dez colunas possuírem cartas.
+- **Desfazer**, **Dica**, modo livre, desafio diário e cronômetro opcional.
+- Tabuleiro horizontalmente rolável no celular, sem quebrar o layout geral da página.
+- **Ranking diário** opcional por apelido: *menos movimentos* primeiro; *tempo* para desempate. Apenas partidas diárias com cronômetro e sem uso de dica/desfazer podem registrar resultado.
+- Cada conta Firebase/UID pode enviar um resultado por dificuldade e data. A classificação continua calculada no navegador e não é antifraude.
 
-### Atualizar o projeto já publicado
+## Publicar no GitHub Pages
 
-Extraia **NEXUS-Atualizacao-Memoria.zip** e envie os arquivos preservando as pastas. O pacote contém o novo módulo `jogos/memoria/` e somente os arquivos compartilhados modificados (`index.html`, catálogo, HUD, Firebase e `firestore.rules`).
+### Pacote completo
 
-### URLs
+1. Faça backup do repositório NEXUS antes de atualizar.
+2. Extraia `NEXUS-Central-de-Jogos-Spider.zip`.
+3. Envie **os arquivos e diretórios extraídos**, não a pasta externa, à **raiz do repositório NEXUS**.
+4. Preserve os caminhos `assets/` e `jogos/`. Substitua os arquivos compartilhados alterados quando solicitado.
+5. Aguarde a publicação da branch configurada em **Settings → Pages**.
+
+### Atualização incremental
+
+Se já utiliza a versão da NEXUS com os quatro jogos, extraia `NEXUS-Atualizacao-Spider.zip`. Essa atualização contém:
+
+```
+index.html
+assets/css/hud.css
+assets/js/catalog.js
+assets/js/app.js
+assets/js/firebase.js
+jogos/paciencia-spider/index.html
+jogos/paciencia-spider/estilo.css
+jogos/paciencia-spider/engine.js
+jogos/paciencia-spider/jogo.js
+jogos/paciencia-spider/ranking.js
+firestore.rules
+README.md
+```
+
+Os códigos dos quatro jogos anteriores não precisaram ser modificados.
+
+### Endereços
 
 - Central: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/`
-- Memória: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/jogos/memoria/`
+- Spider: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/jogos/paciencia-spider/`
+- Ranking da Central: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/#ranking?jogo=paciencia-spider`
 
-## Ativar o ranking no Firebase
+## Configuração do Firebase
 
-O projeto usa a configuração Firebase existente da NEXUS.
+O Spider utiliza o mesmo Firebase do projeto NEXUS. Ele depende de:
 
-1. Confirme em **Firebase Authentication → Método de login** que **Anônimo** está ativado. Mantenha **E-mail/Senha** para o Caça-Palavras.
-2. No Console Firebase, vá a **Firestore Database → Regras**, faça uma cópia de segurança das regras atuais, depois publique as regras completas do arquivo `firestore.rules`.
-3. As regras acrescentam o caminho: `rankings_memoria/{nivel}/dias/{AAAA-MM-DD}/participantes/{uid}`.
-4. Ao registrar o primeiro tempo, o Firestore cria a subcoleção automaticamente; **não precisa criar coleções nem índices compostos manualmente** (consulta ordenada por `ordem`, um único campo).
-5. Teste uma partida diária com cronômetro, informe um apelido e confira o resultado no Hall da Fama da Central.
+1. **Authentication**: provedores E-mail/Senha e Anônimo ativados.
+2. **Firestore Database → Regras**: publicar as **regras completas atualizadas** do arquivo `firestore.rules` após fazer backup das regras atuais.
+3. O caminho novo será `rankings_spider/{nivel}/dias/{AAAA-MM-DD}/participantes/{uid}`. O Firestore cria os documentos na primeira inscrição; não é necessário criar a coleção manualmente.
+4. O ranking usa `orderBy('ordem')`, com `ordem = movimentos * 100000000 + tempoMs`, sem necessidade de índice composto.
 
-**Atenção:** enviar `firestore.rules` ao GitHub não publica as regras no Firebase. Use a aba Regras do console Firebase.
+**Importante:** fazer upload de `firestore.rules` no GitHub não publica as permissões no Firebase. É obrigatório publicar também no Firebase Console.
 
-## Arquivos novos
+## Verificações realizadas
 
-```
-jogos/memoria/
-├── index.html     # interface e navegação
-├── estilo.css     # visual responsivo futurista
-├── engine.js      # motor puro e embaralhamento determinístico
-├── jogo.js        # lógica e interações de partida
-└── ranking.js     # leitura e registro opcional no Firestore
-```
+- 600 embaralhamentos de teste (150 por nível), verificando 104 cartas únicas, 10 colunas, 50 cartas de reserva e reprodutibilidade com a mesma semente.
+- Testes da remoção automática de sequências completas, da movimentação e da distribuição.
+- Teste visual no Chromium (desktop e celular) com clique, movimento válido, desfazer, distribuição, dica, troca de dificuldade e reinício diário idêntico.
+- Busca, filtro Cartas e ordem 001–006 do catálogo conferidos no navegador.
+- Os arquivos dos quatro jogos anteriores foram comparados com a versão anterior: nenhum foi modificado.
 
-## Como funciona o ranking
-
-O ranking é limitado aos desafios diários com cronômetro. Os resultados são ordenados por `ordem = tentativas * 100000000 + tempoMs`. Portanto, nenhuma diferença de segundos supera uma diferença de uma tentativa. Apenas um registro **por conta do Firebase/UID, dificuldade e dia** pode ser enviado; não é um bloqueio por pessoa física. A pontuação é calculada no navegador: **não é uma classificação antifraude**. Para premiações, seria necessário verificar jogadas em backend confiável.
-
-## Testes e observações
-
-- 600 layouts gerados e conferidos (150 para cada dificuldade), incluindo pares únicos e reprodutibilidade diária.
-- Teste de navegador em versão desktop e celular: viradas, bloqueio, fechamento automático, vitória, desafio diário e navegação da HUD.
-- A leitura/gravação REAL do ranking depende da conexão e das regras Firestore publicadas. Não foi validada contra a instância Firebase ativa do usuário.
-- Arquivos do Caça-Palavras, Campo Minado e Sudoku preservados byte a byte em relação ao pacote anterior.
+**Ainda precisa de validação real:** registro e consulta no Firestore do seu projeto após publicar as regras. Como os tempos e movimentos são enviados pelo navegador, para premiações é recomendável verificar as partidas em backend confiável.

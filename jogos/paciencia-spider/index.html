@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-mode="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d19">
+<meta name="description" content="Paciência Spider NEXUS: 104 cartas, quatro dificuldades e desafios diários.">
+<title>Paciência Spider | NEXUS</title>
+<link rel="stylesheet" href="../../assets/css/game-bridge.css">
+<link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+<nav class="portal-nav" aria-label="Navegação NEXUS">
+  <a class="portal-brand" href="../../"><span class="portal-emblem">✧</span> NEXUS // GAMING HUB</a>
+  <div class="portal-links">
+    <a class="portal-back" href="../../">← Central de Jogos</a>
+    <a href="../../#jogos">Biblioteca</a>
+    <a href="../../#ranking?jogo=paciencia-spider">Hall da Fama</a>
+  </div>
+</nav>
+<div class="ambient" aria-hidden="true"></div>
+<main class="shell">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">NEXUS / ESTRATÉGIA / GAME 005</div>
+      <h1>SPIDER<span>_SOLITAIRE</span></h1>
+      <p class="intro">Oito sequências. Dois baralhos. Uma mesa de decisões. Organize do Rei ao Ás e conquiste a arena.</p>
+    </div>
+    <div class="game-status" aria-live="polite"><span class="status-light"></span><strong id="mission-state">MESA PRONTA</strong><small id="mission-caption">ESCOLHA UMA COLUNA PARA COMEÇAR</small></div>
+  </header>
+
+  <section class="config" aria-label="Configurar partida">
+    <fieldset class="config-group">
+      <legend>01 // DIFICULDADE</legend>
+      <div id="level-options" class="choices">
+        <button data-level="facil" type="button">Fácil <small>1 naipe · dicas visuais</small></button>
+        <button data-level="medio" type="button" class="active" aria-pressed="true">Médio <small>1 naipe · clássico</small></button>
+        <button data-level="dificil" type="button">Difícil <small>2 naipes</small></button>
+        <button data-level="extremo" type="button">Extremo <small>4 naipes</small></button>
+      </div>
+    </fieldset>
+    <fieldset class="config-group">
+      <legend>02 // MODALIDADE</legend>
+      <div id="mode-options" class="choices">
+        <button data-play-mode="livre" type="button" class="active" aria-pressed="true">Partida livre <small>Embaralhamento aleatório</small></button>
+        <button data-play-mode="diario" type="button">Desafio diário <small>Mesma distribuição para todos</small></button>
+      </div>
+    </fieldset>
+    <div class="config-group config-actions">
+      <label class="clock-option"><input id="clock-enabled" type="checkbox" checked> Cronômetro ativado</label>
+      <button id="new-round" type="button" class="primary-btn">↻ Nova partida</button>
+    </div>
+  </section>
+
+  <section class="board-panel" aria-labelledby="board-title">
+    <div class="board-heading">
+      <div><div class="eyebrow">NEXUS // SISTEMA DE CARTAS</div><h2 id="board-title">Arena Spider</h2></div>
+      <span class="mode-stamp" id="game-mode-label">PARTIDA LIVRE</span>
+    </div>
+    <div class="metrics">
+      <div><small>SEQUÊNCIAS COMPLETAS</small><strong id="completed">0 / 8</strong></div>
+      <div><small>MOVIMENTOS</small><strong id="moves">0</strong></div>
+      <div><small>TEMPO</small><strong id="elapsed">00:00</strong></div>
+      <div><small>RESERVA</small><strong id="stock-count">5 rodadas</strong></div>
+    </div>
+
+    <div class="board-scroll" id="board-scroll" tabindex="0" aria-label="Mesa de dez colunas, rolável horizontalmente no celular">
+      <div class="spider-table" id="table" aria-label="Tabuleiro de Paciência Spider"></div>
+    </div>
+    <p class="scroll-note">↔ Em telas menores, arraste horizontalmente para visualizar as dez colunas.</p>
+    <div class="table-actions">
+      <button type="button" id="stock" class="stock-control" aria-label="Distribuir mais dez cartas">
+        <span class="stock-icon">▤</span><span><b>Distribuir cartas</b><small>Uma para cada coluna · 5 rodadas</small></span><span id="stock-badge" class="tiny-badge">5</span>
+      </button>
+      <div class="table-tools">
+        <button id="undo" type="button" class="tool-btn" title="Desfazer último movimento">↶ Desfazer</button>
+        <button id="hint" type="button" class="tool-btn" title="Sugerir um movimento válido">✦ Dica</button>
+        <button id="help-open" type="button" class="tool-btn">? Como jogar</button>
+      </div>
+    </div>
+    <div class="completed-area" aria-label="Sequências concluídas"><span class="small-label">SEQUÊNCIAS RESOLVIDAS</span><div class="finished-suits" id="finished-suits"></div></div>
+    <p class="notice" id="game-message" role="status" aria-live="polite">Selecione uma carta de sequência válida e depois uma coluna de destino.</p>
+    <p class="play-tip">Computador: arraste cartas ou clique na origem e no destino. Celular: toque na sequência e depois na coluna. Mova apenas sequências descendentes do mesmo naipe.</p>
+  </section>
+
+  <div class="bottom-grid">
+    <section class="info-card" aria-labelledby="rules-title">
+      <div class="eyebrow">PROTOCOLO // ESTRATÉGIA</div>
+      <h2 id="rules-title">Construa oito sequências.</h2>
+      <div class="instruction"><b>01</b><div><strong>Ordene as cartas</strong><small>Empilhe valores decrescentes: Rei, Dama, Valete, 10, 9 ... Ás.</small></div></div>
+      <div class="instruction"><b>02</b><div><strong>Mova sequências</strong><small>Somente grupos do mesmo naipe podem ser movidos juntos.</small></div></div>
+      <div class="instruction"><b>03</b><div><strong>Complete e remova</strong><small>Uma sequência K→A do mesmo naipe é removida automaticamente.</small></div></div>
+      <div class="side-tip">Distribua mais dez cartas apenas quando todas as colunas possuírem ao menos uma carta. Desfazer ou usar dica torna o desafio diário não elegível ao ranking.</div>
+    </section>
+    <section class="info-card leaderboard" aria-labelledby="ranking-title">
+      <div class="rank-title"><div><div class="eyebrow">DESAFIO COMPARTILHADO</div><h2 id="ranking-title">Ranking diário</h2></div><button id="rank-refresh" type="button" class="icon-action" aria-label="Atualizar ranking">↻</button></div>
+      <p class="rank-day" id="rank-day">Um tabuleiro por nível e dia.</p>
+      <div id="rank-tabs" class="rank-tabs" role="group" aria-label="Escolher dificuldade do ranking">
+        <button data-rank="facil" type="button">Fácil</button>
+        <button data-rank="medio" type="button" class="active" aria-pressed="true">Médio</button>
+        <button data-rank="dificil" type="button">Difícil</button>
+        <button data-rank="extremo" type="button">Extremo</button>
+      </div>
+      <div class="rank-head"><span># / JOGADOR</span><span>MOVIMENTOS · TEMPO</span></div>
+      <ol id="rank-list" class="rank-list"></ol>
+      <p id="rank-status" class="rank-feedback" role="status">Aguardando consulta.</p>
+    </section>
+    <section class="info-card registration">
+      <div class="eyebrow">IDENTIDADE // PARTICIPAÇÃO OPCIONAL</div>
+      <h2>Seu nome no ranking.</h2>
+      <p>Sem criar conta tradicional. Conclua o <b>desafio diário com cronômetro e sem auxílio</b> para registrar sua melhor estratégia.</p>
+      <label for="nickname">APELIDO PÚBLICO</label>
+      <input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Como deseja aparecer?">
+      <button id="submit-score" class="primary-btn" type="button" disabled>✦ Registrar resultado</button>
+      <p id="submit-status" class="rank-feedback" role="status">Conclua um desafio diário elegível para participar.</p>
+    </section>
+  </div>
+  <footer>NEXUS // PACIÊNCIA SPIDER <span>104 CARTAS · 10 COLUNAS · 8 SEQUÊNCIAS</span></footer>
+</main>
+
+<dialog id="win-dialog" aria-labelledby="win-title">
+  <div class="result-icon">♠</div>
+  <div class="eyebrow">NEXUS // DESAFIO CONCLUÍDO</div>
+  <h2 id="win-title">Oito sequências completas!</h2>
+  <p id="win-description"></p>
+  <div class="dialog-actions">
+    <button id="win-rank" type="button" class="primary-btn" hidden>🏅 Registrar resultado</button>
+    <button id="win-next" type="button" class="primary-btn">↻ Nova partida</button>
+    <button id="win-close" type="button" class="tool-btn">Ver tabuleiro</button>
+  </div>
+</dialog>
+<dialog id="help-dialog" aria-labelledby="help-title">
+  <div class="eyebrow">NEXUS // MANUAL</div><h2 id="help-title">Como jogar Spider</h2>
+  <p>O jogo usa 104 cartas, dez colunas e uma reserva com cinco distribuições de dez cartas. A carta mais abaixo de cada pilha está virada para cima.</p>
+  <p>Você pode colocar uma carta (ou sequência descendente do mesmo naipe) sobre outra carta de valor imediatamente superior, mesmo de naipe diferente. Colunas vazias aceitam qualquer carta ou sequência válida.</p>
+  <p>As sequências completas do <b>Rei ao Ás do mesmo naipe</b> desaparecem automaticamente. Você vence após remover todas as oito sequências.</p>
+  <p>Clique/toque uma carta e depois o destino, ou arraste com o mouse. A reserva só pode ser distribuída se nenhuma coluna estiver vazia. O primeiro resultado diário enviado por pessoa autenticada conta; menos movimentos vence e o tempo desempata. A pontuação é enviada pelo navegador, sem certificação antifraude.</p>
+  <button id="help-close" type="button" class="primary-btn">Entendido</button>
+</dialog>
+<script type="module" src="./jogo.js"></script>
+</body>
+</html>
