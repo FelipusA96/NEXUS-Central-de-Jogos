@@ -57,9 +57,19 @@ function updateStatus(state,subtitle){
   $('round-status').textContent=subtitle;
 }
 
+// Coordenadas: coluna A..T, seguida da linha 1..20 (ex.: A3).
+function tileCoordinate(index){
+  const row=Math.floor(index/game.config.cols)+1;
+  const column=String.fromCharCode(65+(index%game.config.cols));
+  return `${column}${row}`;
+}
+function showCoordinate(index){
+  $('active-coordinate').textContent=tileCoordinate(index);
+}
 function tileLabel(index){
-  const cell=game.cells[index],r=Math.floor(index/game.config.cols)+1,c=index%game.config.cols+1;
-  const loc=`linha ${r}, coluna ${c}`;
+  const cell=game.cells[index],r=Math.floor(index/game.config.cols)+1;
+  const col=String.fromCharCode(65+(index%game.config.cols));
+  const loc=`${col}${r}, coluna ${col}, linha ${r}`;
   if (game.outcome==='lost'&&cell.mine) return `Mina, ${loc}`;
   if(cell.flag) return `Bandeira, ${loc}`;
   if(!cell.open)return `Casa oculta, ${loc}`;
@@ -127,15 +137,35 @@ function freshRound(){
     btn.setAttribute('aria-pressed',String(active));
   });
   board.replaceChildren();tiles=[];
+  $('active-coordinate').textContent='—';
   const fragment=document.createDocumentFragment();
-  game.cells.forEach((cell,index)=>{
-    const btn=document.createElement('button');
-    btn.type='button';
-    btn.className='cell';
-    btn.dataset.index=String(index);
-    btn.setAttribute('aria-label',tileLabel(index));
-    fragment.append(btn);tiles.push(btn);
-  });
+  const axis=(text,classes)=>{
+    const el=document.createElement('span');
+    el.className=`axis-label ${classes}`;
+    el.textContent=text;
+    el.setAttribute('aria-hidden','true');
+    return el;
+  };
+  // Linha superior: canto vazio e letras alinhadas às colunas.
+  fragment.append(axis('','axis-corner'));
+  for(let c=0;c<game.config.cols;c++){
+    fragment.append(axis(String.fromCharCode(65+c),'axis-col'));
+  }
+  // Corpo: números das linhas, seguidos pelas casas clicáveis.
+  for(let r=0;r<game.config.rows;r++){
+    fragment.append(axis(String(r+1),'axis-row'));
+    for(let c=0;c<game.config.cols;c++){
+      const index=r*game.config.cols+c;
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='cell';
+      btn.dataset.index=String(index);
+      btn.dataset.coordinate=tileCoordinate(index);
+      btn.title=tileCoordinate(index);
+      btn.setAttribute('aria-label',tileLabel(index));
+      fragment.append(btn);tiles.push(btn);
+    }
+  }
   board.append(fragment);
   renderCells();
   persistPreference();
@@ -154,6 +184,7 @@ function changeConfiguration(nextLevel,nextTimer){
   freshRound();
 }
 function act(index,action='reveal'){
+  showCoordinate(index);
   if(game.outcome)return;
   if(action==='flag'){
     if(toggleFlag(game,index)){
@@ -202,6 +233,14 @@ function showResult(won){
 }
 
 // Interface do tabuleiro: mouse, toque e teclado.
+board.addEventListener('pointerover',event=>{
+  const target=event.target.closest('.cell');
+  if(target)showCoordinate(Number(target.dataset.index));
+});
+board.addEventListener('focusin',event=>{
+  const target=event.target.closest('.cell');
+  if(target)showCoordinate(Number(target.dataset.index));
+});
 board.addEventListener('click',event=>{
   const target=event.target.closest('.cell');
   if(!target)return;

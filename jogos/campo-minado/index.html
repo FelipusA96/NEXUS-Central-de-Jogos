@@ -57,7 +57,10 @@
       <section class="board-panel" aria-labelledby="field-title">
         <div class="board-heading">
           <div><p class="eyebrow">PAINEL OPERACIONAL</p><h2 id="field-title">Setor de exploração</h2></div>
-          <span class="field-indicator" id="field-size">12 × 12</span>
+          <div class="field-tags">
+            <span class="coordinate-indicator" id="active-coordinate" aria-label="Coordenada selecionada">—</span>
+            <span class="field-indicator" id="field-size">12 × 12</span>
+          </div>
         </div>
         <div class="stats-row" aria-label="Indicadores da partida">
           <div class="metric"><span>MINAS RESTANTES</span><strong id="mines-left">024</strong></div>
@@ -71,9 +74,9 @@
           <span class="mode-help">Mouse: botão direito coloca uma bandeira</span>
         </div>
         <div class="board-scroller" tabindex="0" aria-label="Tabuleiro. Em telas pequenas, deslize lateralmente para ver todas as casas.">
-          <div class="board" id="board" role="group" aria-label="Campo Minado"></div>
+          <div class="board" id="board" role="group" aria-label="Campo Minado com colunas de A a T e linhas numeradas"></div>
         </div>
-        <p class="scroll-hint">↔ Deslize horizontalmente para visualizar todas as colunas.</p>
+        <p class="scroll-hint">↔ Deslize horizontalmente para visualizar todas as colunas. As coordenadas seguem o padrão A1, B3, T20.</p>
         <div class="board-foot">
           <span id="game-message" role="status" aria-live="polite">Selecione uma casa para iniciar a missão. O primeiro clique sempre será seguro.</span>
           <button id="help-open" type="button" class="text-button">❔ Como jogar</button>
@@ -84,7 +87,7 @@
         <section class="side-card info-panel">
           <div class="panel-kicker">SISTEMA // INSTRUÇÕES</div>
           <h2>Decifre o campo.</h2>
-          <p>Cada número mostra quantas minas existem nas oito posições ao redor.</p>
+          <p>Cada número mostra quantas minas existem nas oito posições ao redor. As colunas são identificadas por letras e as linhas por números: <strong>A3</strong> significa coluna A, linha 3.</p>
           <div class="legend-item"><span class="legend-cell number">2</span><div><strong>Número</strong><small>Duas minas nas casas vizinhas</small></div></div>
           <div class="legend-item"><span class="legend-cell flag">⚑</span><div><strong>Bandeira</strong><small>Marque uma mina suspeita</small></div></div>
           <div class="legend-item"><span class="legend-cell clear">✓</span><div><strong>Vitória</strong><small>Revele todas as casas seguras</small></div></div>
@@ -134,6 +137,7 @@
     <h2 id="help-title">Como jogar</h2>
     <p>Revele todas as casas sem minas. Números indicam quantas minas estão em volta de cada casa (incluindo diagonais).</p>
     <ul>
+      <li><strong>Coordenadas:</strong> letras identificam as colunas (A, B, C...) e números identificam as linhas (1, 2, 3...). Exemplo: A3.</li>
       <li><strong>Mouse:</strong> clique esquerdo para revelar e direito para marcar/desmarcar bandeiras.</li>
       <li><strong>Celular:</strong> escolha os botões Revelar ou Bandeira acima do tabuleiro.</li>
       <li><strong>Teclado:</strong> use as setas para navegar, Enter para realizar a ação selecionada e F para marcar bandeira.</li>
