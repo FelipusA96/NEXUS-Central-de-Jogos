@@ -1,167 +1,211 @@
-# NEXUS — Palavras Cruzadas (módulo 006)
+<div align="center">
 
-Esta atualização adiciona **Palavras Cruzadas** à Central NEXUS, mantendo os jogos já existentes. O catálogo passa a ter seis jogos disponíveis e o Quiz permanece como módulo em breve.
+# ✦ NEXUS — Central de Jogos
 
-## Funcionalidades
+**Uma central de desafios digitais para exercitar a lógica, a memória e o conhecimento.**
 
-- Banco local com **54 palavras e dicas originais** em português. Cada nova grade sorteia uma combinação e embaralha as posições.
-- Quatro dificuldades: Fácil (até 8 palavras), Médio (12), Difícil (16) e Extremo (20).
-- Gerador de grade que tenta cruzar todas as palavras por letras compatíveis; a seleção é repetida em várias tentativas para encontrar uma montagem compacta.
-- Dicas separadas em horizontais e verticais, numeração das casas iniciais e destaque da palavra selecionada.
-- Digitação pelo teclado do computador e teclado virtual para celulares.
-- Conferência de respostas, indicação de letras incorretas, limpeza da grade, cronômetro opcional e alternância entre tema claro e escuro.
-- Modo **Minhas palavras**: até 50 palavras próprias, uma por linha. Para adicionar uma dica, use `PALAVRA | DICA`; por exemplo, `PRAIA | Faixa de areia junto ao mar`. Linhas sem dica recebem uma indicação neutra de tamanho.
-- Acentos e espaços são normalizados para a montagem; a resposta é exibida sem acentos na grade, como é comum em palavras cruzadas.
-- A lista personalizada e as preferências ficam no armazenamento local do navegador. Não foi adicionado ranking Firebase a este módulo nesta versão.
+Explore jogos independentes em uma interface unificada, com identidade visual futurista, desafios em diferentes dificuldades e recursos que incentivam a evolução a cada partida.
 
-## Publicar a atualização
+[**🎮 Abrir a Central**](https://felipusa96.github.io/NEXUS-Central-de-Jogos/)
 
-### Pacote completo
+![Status do projeto](https://img.shields.io/badge/status-em%20desenvolvimento-7c3aed?style=for-the-badge)
+![HTML5](https://img.shields.io/badge/HTML5-estrutura-e34f26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-interface-1572b6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-interatividade-f7df1e?style=for-the-badge&logo=javascript&logoColor=111111)
 
-1. Faça backup do repositório NEXUS.
-2. Extraia `NEXUS-Central-de-Jogos-Palavras-Cruzadas.zip`.
-3. Envie os arquivos e diretórios extraídos para a raiz do repositório, mantendo os caminhos.
-4. Faça commit/push e aguarde o GitHub Pages atualizar.
-
-### Atualização incremental
-
-Se a Central já estiver na versão dos cronômetros corrigidos, extraia `NEXUS-Atualizacao-Palavras-Cruzadas.zip` sobre a raiz do repositório. O pacote contém apenas os arquivos do catálogo e o novo módulo: `index.html`, `assets/js/catalog.js`, `jogos/palavras-cruzadas/index.html`, `jogos/palavras-cruzadas/estilo.css`, `jogos/palavras-cruzadas/engine.js`, `jogos/palavras-cruzadas/jogo.js` e este README.
-
-## Catálogo atualizado
-
-| Número | Jogo | Estado |
-| --- | --- | --- |
-| 001 | Caça-Palavras | Disponível |
-| 002 | Campo Minado | Disponível |
-| 003 | Sudoku | Disponível |
-| 004 | Jogo da Memória | Disponível |
-| 005 | Paciência Spider | Disponível |
-| 006 | Palavras Cruzadas | Disponível |
-| 007 | Quiz | Em breve |
-
-**Verificação técnica realizada:** o motor foi exercitado com 25 grades aleatórias por dificuldade; as palavras selecionadas foram posicionadas e suas letras, cruzamentos, referências e numeração inicial foram conferidos. A publicação no GitHub Pages e o funcionamento em dispositivos reais ainda dependem de teste após o envio do pacote.
+</div>
 
 ---
 
-# NEXUS — atualização dos cronômetros
+## 🧭 Sobre o projeto
 
-Nesta versão, os cronômetros dos cinco jogos e os tempos exibidos nos rankings foram padronizados:
+A **NEXUS — Central de Jogos** é um projeto web que reúne diferentes experiências de entretenimento e raciocínio em um só lugar. A proposta é oferecer uma navegação simples, uma apresentação visual consistente e jogos que possam ser acessados diretamente pelo navegador.
 
-- Antes de completar uma hora: **MM:SS** (ex.: `59:59`).
-- A partir de uma hora: **HH:MM:SS** (ex.: `01:00:00`, `02:15:09`).
-- Os tempos continuam sendo armazenados em milissegundos; os rankings existentes não precisam de migração.
-- O principal defeito corrigido estava no Paciência Spider, que continuava mostrando minutos acumulados acima de 59.
-- Nenhuma mudança nas regras do Firestore é necessária.
+A plataforma está em evolução contínua. Novos recursos, melhorias de interface e ajustes nas mecânicas são incorporados gradualmente, mantendo os jogos organizados em módulos próprios.
 
-## Publicar
+### ✨ Principais objetivos
 
-Extraia a atualização ZIP sobre a raiz do repositório NEXUS, preservando os caminhos. É suficiente substituir os seis arquivos JavaScript/HTML modificados. Se preferir, use o ZIP completo para substituir a plataforma toda. Depois faça commit e atualize a página com `Ctrl+F5`.
+- Reunir jogos de palavras, lógica, memória e cartas em uma única central.
+- Criar uma identidade visual futurista, com HUD, elementos neon e temas claro e escuro.
+- Oferecer diferentes níveis de dificuldade e desafios que incentivem a prática.
+- Organizar o catálogo por categorias, com pesquisa e navegação direta para cada jogo.
+- Centralizar a leitura de rankings compatíveis com a integração ao Firebase.
+- Manter uma estrutura modular para facilitar manutenção e futuras expansões.
+
+## 🎮 Catálogo de jogos
+
+| Código | Jogo | Categoria | Descrição | Situação |
+|:---:|---|---|---|:---:|
+| 001 | [Caça-Palavras](./jogos/caca-palavras/) | Palavras | Encontre palavras escondidas, explore temas e tente superar seus melhores tempos. | **Disponível** |
+| 002 | [Campo Minado](./jogos/campo-minado/) | Lógica | Analise as pistas numéricas, marque possíveis minas e descubra as casas seguras. | **Disponível** |
+| 003 | [Sudoku](./jogos/sudoku/) | Lógica | Complete a grade respeitando as regras do Sudoku, com níveis de dificuldade e desafio diário. | **Disponível** |
+| 004 | [Jogo da Memória](./jogos/memoria/) | Memória | Encontre os pares de cartas e tente concluir a partida com o menor número de tentativas. | **Disponível** |
+| 005 | [Paciência Spider](./jogos/paciencia-spider/) | Cartas | Organize as cartas em sequências decrescentes e conclua as sequências do Rei ao Ás. | **Disponível** |
+| 006 | [Palavras Cruzadas](./jogos/palavras-cruzadas/) | Palavras | Preencha a grade usando pistas horizontais e verticais ou uma lista de palavras. | **Disponível** |
+| 007 | Quiz | Conhecimento | Uma experiência de perguntas e respostas planejada para uma próxima etapa do projeto. | **Em planejamento** |
+
+> A situação dos módulos reflete a organização atual do código e pode mudar conforme novas versões forem desenvolvidas.
+
+## 🧩 Destaques da plataforma
+
+### Uma interface unificada
+
+- Visual inspirado em interfaces futuristas e HUDs de jogos.
+- Alternância entre tema escuro e claro.
+- Catálogo com busca por texto e filtros por categoria.
+- Navegação entre início, catálogo, rankings e perfil.
+- Layout pensado para uso em computadores e dispositivos móveis.
+
+### Desafios e pontuações
+
+Os jogos possuem regras próprias de pontuação e conclusão. Nos módulos compatíveis, a central pode consultar rankings por jogo e dificuldade. Alguns resultados dependem de condições específicas, como concluir um desafio diário ou jogar com o cronômetro ativado.
+
+A disponibilidade dos rankings depende da configuração do Firebase, das regras do Firestore e da publicação correta da aplicação.
+
+## 🔤 Banco compartilhado de palavras
+
+O projeto conta com um banco compartilhado de **299 palavras únicas**, revisado a partir de uma lista de 300 entradas. O banco mantém palavras, pistas e categorias para reutilização entre os jogos de palavras.
+
+As palavras estão organizadas em seis grupos temáticos:
+
+- **Animais e Plantas**
+- **Geografia, Astronomia e Clima**
+- **Comida e Bebida**
+- **Corpo Humano e Saúde**
+- **Profissões, Objetos e Cotidiano**
+- **Conhecimentos Gerais, Verbos, Cores e Abstratos**
+
+O arquivo compartilhado está em `assets/js/word-bank.js`.
+
+### Caça-Palavras
+
+Além dos temas já existentes, o jogo pode utilizar os grupos do banco compartilhado, permitindo ampliar o conteúdo sem manter listas duplicadas em cada módulo.
+
+### Palavras Cruzadas
+
+O módulo possui duas modalidades principais:
+
+- **Com dicas:** descubra as respostas pelas pistas horizontais e verticais.
+- **Lista de palavras:** consulte a lista de respostas que foram posicionadas na grade; cada palavra é marcada como concluída quando suas letras são preenchidas corretamente.
+
+Também é possível trabalhar com listas personalizadas, incluindo dicas no formato `PALAVRA | DICA`.
+
+## 🛠️ Tecnologias utilizadas
+
+| Tecnologia | Utilização |
+|---|---|
+| **HTML5** | Estrutura das páginas e dos módulos de jogo. |
+| **CSS3** | Identidade visual, HUD, temas, animações e adaptação de layout. |
+| **JavaScript** | Mecânicas dos jogos, navegação, filtros, estado de interface e validações. |
+| **JavaScript ES Modules** | Organização dos recursos compartilhados e carregamento modular. |
+| **Firebase Authentication** | Integração de autenticação e identificação de sessão nos recursos compatíveis. |
+| **Cloud Firestore** | Consulta e armazenamento de resultados nos rankings configurados. |
+| **GitHub Pages** | Hospedagem estática da aplicação web. |
+
+O projeto não depende de um processo de compilação para servir suas páginas estáticas. Os módulos utilizam arquivos HTML, CSS e JavaScript organizados por responsabilidade.
+
+## 🗂️ Organização dos arquivos
+
+```text
+NEXUS-Central-de-Jogos/
+├── index.html
+├── assets/
+│   ├── css/
+│   │   ├── hud.css
+│   │   └── game-bridge.css
+│   └── js/
+│       ├── app.js
+│       ├── catalog.js
+│       ├── firebase.js
+│       └── word-bank.js
+├── jogos/
+│   ├── caca-palavras/
+│   ├── campo-minado/
+│   ├── sudoku/
+│   ├── memoria/
+│   ├── paciencia-spider/
+│   └── palavras-cruzadas/
+└── firestore.rules
+```
+
+Cada jogo mantém seus próprios arquivos e lógica, enquanto os recursos compartilhados ficam em `assets/`. Essa separação ajuda a evoluir um módulo sem concentrar toda a aplicação em um único arquivo.
+
+## ▶️ Como executar localmente
+
+Como a aplicação utiliza módulos JavaScript, recomendamos executá-la por um servidor local em vez de abrir o `index.html` diretamente pelo explorador de arquivos.
+
+### Opção 1 — Visual Studio Code
+
+1. Baixe ou clone o repositório.
+2. Abra a pasta do projeto no Visual Studio Code.
+3. Inicie um servidor local com uma extensão como **Live Server**.
+4. Abra o endereço local informado pela extensão.
+
+### Opção 2 — Python
+
+Se o Python estiver instalado, abra um terminal na raiz do projeto e execute:
+
+```bash
+python -m http.server 8000
+```
+
+Depois, acesse `http://localhost:8000` no navegador.
+
+## 🌐 Publicação no GitHub Pages
+
+Para hospedar a versão estática pelo GitHub Pages:
+
+1. Envie os arquivos do projeto para o repositório, preservando a estrutura de pastas.
+2. Abra **Settings → Pages** no GitHub.
+3. Configure a publicação a partir da branch e da pasta utilizadas pelo repositório — normalmente a raiz (`/`).
+4. Aguarde a publicação e abra o endereço indicado pelo GitHub Pages.
+5. Após atualizar os arquivos, recarregue o site. Se necessário, utilize `Ctrl + F5` para limpar o cache da página.
+
+## 🔐 Firebase e rankings
+
+Os recursos que utilizam Firebase precisam estar configurados no projeto correspondente. Em uma nova instalação ou ao alterar as regras, confira:
+
+- Os provedores de autenticação necessários estão ativados no Firebase Authentication.
+- O Cloud Firestore está habilitado.
+- As regras de segurança do Firestore correspondem aos recursos publicados.
+- Os jogos e a central estão apontando para o projeto Firebase correto.
+
+**Importante:** o arquivo `firestore.rules` presente no repositório é uma referência versionada das regras. Enviá-lo ao GitHub **não publica automaticamente** as regras no Firebase. A publicação deve ser feita separadamente pelo Firebase Console ou por uma ferramenta de implantação configurada.
+
+Os rankings são alimentados por dados enviados pela aplicação cliente. Portanto, resultados usados em competições com premiações ou decisões importantes exigiriam validações adicionais em um ambiente confiável de servidor.
+
+## 🧪 Desenvolvimento e próximos passos
+
+O desenvolvimento da NEXUS é incremental. Entre as frentes de evolução estão:
+
+- Refinar a experiência visual e a navegação entre módulos.
+- Ampliar e revisar os conteúdos utilizados nos jogos de palavras.
+- Melhorar consistência, responsividade e usabilidade em diferentes telas.
+- Evoluir os rankings e os desafios diários de acordo com as regras de cada jogo.
+- Planejar e desenvolver novos módulos, incluindo o Quiz.
+- Realizar testes após cada atualização e validar os recursos que dependem de serviços externos.
+
+As funcionalidades disponíveis podem variar conforme a versão dos arquivos publicada e a configuração dos serviços externos.
+
+## 🤝 Sugestões e melhorias
+
+Ideias para novos jogos, sugestões de interface e relatos de problemas são bem-vindos. Ao registrar uma sugestão, procure informar:
+
+1. Qual jogo ou área da central está envolvida.
+2. O comportamento esperado.
+3. O que aconteceu na prática.
+4. Os passos necessários para reproduzir o problema, quando aplicável.
+
+## 📌 Status do projeto
+
+A NEXUS está **em desenvolvimento ativo**. A estrutura modular permite adicionar novos jogos e recursos gradualmente, preservando a identidade da central e os módulos já existentes.
 
 ---
 
-# NEXUS — Central de Jogos | Paciência Spider + catálogo organizado
+<div align="center">
 
-Este pacote adiciona o **Paciência Spider** como quinto jogo jogável à NEXUS, mantendo Caça-Palavras, Campo Minado, Sudoku e Jogo da Memória. O **Quiz** continua como **Em breve**.
+**NEXUS — Pense. Jogue. Evolua.**
 
-## Ordem definitiva do catálogo
+*Uma central em constante construção, feita para transformar pequenas pausas em novos desafios.*
 
-| Número | Jogo | Estado |
-| --- | --- | --- |
-| 001 | Caça-Palavras | Disponível |
-| 002 | Campo Minado | Disponível |
-| 003 | Sudoku | Disponível |
-| 004 | Jogo da Memória | Disponível |
-| 005 | Paciência Spider | Disponível |
-| 006 | Quiz | Em breve |
-
-A ordem foi corrigida em `assets/js/catalog.js` e agora coincide com os códigos e com o Hall da Fama. O filtro **Cartas** foi incluído.
-
-## Spider: funcionalidades
-
-- 104 cartas, 10 colunas e 50 cartas de reserva, distribuídas em cinco grupos de dez.
-- Nível Fácil: 1 naipe (com sugestões disponíveis); Médio: 1 naipe; Difícil: 2 naipes; Extremo: 4 naipes.
-- Cartas inicialmente ocultas e abertas automaticamente à medida que ficam expostas.
-- Movimentação por **arrastar e soltar (computador)** ou **selecionar a origem e tocar a coluna de destino (celular/teclado)**.
-- Grupos móveis somente quando formados por sequência decrescente de cartas do mesmo naipe.
-- Ao completar uma sequência de Rei ao Ás do mesmo naipe, ela sai automaticamente do tabuleiro. Vitória após 8 sequências.
-- Distribuição permitida somente se todas as dez colunas possuírem cartas.
-- **Desfazer**, **Dica**, modo livre, desafio diário e cronômetro opcional.
-- Tabuleiro horizontalmente rolável no celular, sem quebrar o layout geral da página.
-- **Ranking diário** opcional por apelido: *menos movimentos* primeiro; *tempo* para desempate. Apenas partidas diárias com cronômetro e sem uso de dica/desfazer podem registrar resultado.
-- Cada conta Firebase/UID pode enviar um resultado por dificuldade e data. A classificação continua calculada no navegador e não é antifraude.
-
-## Publicar no GitHub Pages
-
-### Pacote completo
-
-1. Faça backup do repositório NEXUS antes de atualizar.
-2. Extraia `NEXUS-Central-de-Jogos-Spider.zip`.
-3. Envie **os arquivos e diretórios extraídos**, não a pasta externa, à **raiz do repositório NEXUS**.
-4. Preserve os caminhos `assets/` e `jogos/`. Substitua os arquivos compartilhados alterados quando solicitado.
-5. Aguarde a publicação da branch configurada em **Settings → Pages**.
-
-### Atualização incremental
-
-Se já utiliza a versão da NEXUS com os quatro jogos, extraia `NEXUS-Atualizacao-Spider.zip`. Essa atualização contém:
-
-```
-index.html
-assets/css/hud.css
-assets/js/catalog.js
-assets/js/app.js
-assets/js/firebase.js
-jogos/paciencia-spider/index.html
-jogos/paciencia-spider/estilo.css
-jogos/paciencia-spider/engine.js
-jogos/paciencia-spider/jogo.js
-jogos/paciencia-spider/ranking.js
-firestore.rules
-README.md
-```
-
-Os códigos dos quatro jogos anteriores não precisaram ser modificados.
-
-### Endereços
-
-- Central: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/`
-- Spider: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/jogos/paciencia-spider/`
-- Ranking da Central: `https://SEU-USUARIO.github.io/NEXUS-Central-de-Jogos/#ranking?jogo=paciencia-spider`
-
-## Configuração do Firebase
-
-O Spider utiliza o mesmo Firebase do projeto NEXUS. Ele depende de:
-
-1. **Authentication**: provedores E-mail/Senha e Anônimo ativados.
-2. **Firestore Database → Regras**: publicar as **regras completas atualizadas** do arquivo `firestore.rules` após fazer backup das regras atuais.
-3. O caminho novo será `rankings_spider/{nivel}/dias/{AAAA-MM-DD}/participantes/{uid}`. O Firestore cria os documentos na primeira inscrição; não é necessário criar a coleção manualmente.
-4. O ranking usa `orderBy('ordem')`, com `ordem = movimentos * 100000000 + tempoMs`, sem necessidade de índice composto.
-
-**Importante:** fazer upload de `firestore.rules` no GitHub não publica as permissões no Firebase. É obrigatório publicar também no Firebase Console.
-
-## Verificações realizadas
-
-- 600 embaralhamentos de teste (150 por nível), verificando 104 cartas únicas, 10 colunas, 50 cartas de reserva e reprodutibilidade com a mesma semente.
-- Testes da remoção automática de sequências completas, da movimentação e da distribuição.
-- Teste visual no Chromium (desktop e celular) com clique, movimento válido, desfazer, distribuição, dica, troca de dificuldade e reinício diário idêntico.
-- Busca, filtro Cartas e ordem 001–006 do catálogo conferidos no navegador.
-- Os arquivos dos quatro jogos anteriores foram comparados com a versão anterior: nenhum foi modificado.
-
-**Ainda precisa de validação real:** registro e consulta no Firestore do seu projeto após publicar as regras. Como os tempos e movimentos são enviados pelo navegador, para premiações é recomendável verificar as partidas em backend confiável.
-
-
-## Atualização: Coordenadas no Campo Minado
-
-- Cabeçalho A–T (de acordo com o nível) e linhas 1–20 ao lado esquerdo.
-- A casa **A3** é a primeira coluna, terceira linha.
-- Ao passar o mouse, clicar ou focar uma casa, a coordenada é exibida no painel acima do tabuleiro.
-- Indicadores visuais não interferem nos cliques, nas bandeiras ou na navegação por teclado.
-- Para atualizar uma NEXUS já publicada, substitua apenas `jogos/campo-minado/index.html`, `jogos/campo-minado/estilo.css` e `jogos/campo-minado/jogo.js`.
-- Nenhuma mudança no Firestore é necessária.
-
-
-## Banco de palavras revisado e modalidade de lista
-
-- O arquivo compartilhado `assets/js/word-bank.js` contém 299 palavras únicas da lista enviada, com as dicas correspondentes e seis grupos temáticos.
-- O Caça-Palavras preserva seus temas existentes e adiciona esses seis grupos ao seletor de temas.
-- Palavras Cruzadas utiliza o mesmo banco e oferece duas modalidades: **Com dicas** e **Lista de palavras**. Na segunda, a lista de respostas aparece ao lado da grade e cada palavra é riscada quando todas as suas letras estão corretas.
-- A duplicata `GELO` foi removida; `ÁGORA`, `LOB0` e `RELOGIO` foram corrigidas para `ÁGUIA`, `LOBO` e `RELÓGIO`.
+</div>
