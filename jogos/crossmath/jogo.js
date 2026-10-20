@@ -1,9 +1,9 @@
 const $ = id => document.getElementById(id);
 const LEVELS = {
-  facil:  { label:'Fácil',   rows:3, cols:4, nodeRatio:.67, givenRatio:.42, cell:'clamp(31px,4.2vw,45px)', description:'Um tabuleiro irregular compacto, com equações que se conectam em diferentes direções.' },
-  medio:  { label:'Médio',   rows:4, cols:5, nodeRatio:.67, givenRatio:.32, cell:'clamp(25px,3.1vw,35px)', description:'Mais ramificações, cruzamentos e menos números iniciais. Planeje cada operação.' },
-  dificil:{ label:'Difícil', rows:5, cols:6, nodeRatio:.70, givenRatio:.24, cell:'clamp(22px,2.55vw,31px)', description:'Um tabuleiro assimétrico com caminhos matemáticos e cruzamentos variados.' },
-  extremo:{ label:'Extremo', rows:6, cols:7, nodeRatio:.72, givenRatio:.18, cell:'clamp(21px,2.2vw,28px)', description:'O maior formato irregular, com ramificações densas e poucas casas reveladas.' }
+  facil:  { label:'Fácil',   rows:3, cols:4, nodeRatio:.67, givenRatio:.42, minValue:1,   maxValue:9,   maxDigits:1, nodeRangeLabel:'1–9',       cell:'clamp(31px,4.2vw,45px)', description:'Introdução à lógica cruzada, com valores de 1 a 9 e um tabuleiro irregular compacto.' },
+  medio:  { label:'Médio',   rows:4, cols:5, nodeRatio:.67, givenRatio:.32, minValue:1,   maxValue:99,  maxDigits:2, nodeRangeLabel:'1–99',      cell:'clamp(27px,3.25vw,37px)', description:'Valores de até 99, mais ramificações, cruzamentos e menos números iniciais.' },
+  dificil:{ label:'Difícil', rows:5, cols:6, nodeRatio:.70, givenRatio:.24, minValue:10,  maxValue:999, maxDigits:3, nodeRangeLabel:'10–999',    cell:'clamp(25px,2.8vw,33px)', description:'Valores-base de dois e três dígitos, com operações que exigem atenção aos cruzamentos.' },
+  extremo:{ label:'Extremo', rows:6, cols:7, nodeRatio:.72, givenRatio:.18, minValue:100, maxValue:999, maxDigits:3, nodeRangeLabel:'100–999',   cell:'clamp(24px,2.55vw,31px)', description:'Valores-base na casa das centenas, grade mais densa e poucas casas reveladas.' }
 };
 const RECENT_LIMIT = 80;
 let level = 'medio';
@@ -29,16 +29,21 @@ function keyOf(r,c) { return `${r},${c}`; }
 function parseKey(key) { return key.split(',').map(Number); }
 function setCell(cells, r, c, data) { cells.set(keyOf(r,c), {r,c,...data}); }
 function getCell(cells, r, c) { return cells.get(keyOf(r,c)); }
-function getNumberCandidates(a, result) {
+function getNumberCandidates(a, result, maxOperand) {
   const candidates = [];
   const plus = result - a;
-  if (plus >= 1 && plus <= 9) candidates.push({op:'+', operand:plus, weight:2});
+  if (plus >= 1 && plus <= maxOperand) candidates.push({op:'+', operand:plus, weight:2});
   const minus = a - result;
-  if (minus >= 1 && minus <= 9) candidates.push({op:'−', operand:minus, weight:2});
-  if (result % a === 0 && result / a >= 1 && result / a <= 9) candidates.push({op:'×', operand:result / a, weight:3});
-  if (a % result === 0 && a / result >= 1 && a / result <= 9) candidates.push({op:'÷', operand:a / result, weight:3});
+  if (minus >= 1 && minus <= maxOperand) candidates.push({op:'−', operand:minus, weight:2});
+  if (a !== 0 && result % a === 0 && result / a >= 1 && result / a <= maxOperand) candidates.push({op:'×', operand:result / a, weight:3});
+  if (result !== 0 && a % result === 0 && a / result >= 1 && a / result <= maxOperand) candidates.push({op:'÷', operand:a / result, weight:3});
   const weighted = candidates.flatMap(candidate => Array(candidate.weight).fill(candidate));
-  return weighted.length ? weighted : [{op:'+', operand:result-a}];
+  if (weighted.length) return weighted;
+  // Com os limites de cada dificuldade, uma diferença positiva sempre cabe
+  // no limite. Este fallback mantém a geração matematicamente segura.
+  if (result > a) return [{op:'+', operand:result-a, weight:1}];
+  if (a > result) return [{op:'−', operand:a-result, weight:1}];
+  return [{op:'×', operand:1, weight:1}];
 }
 function createNodeMask(rows, cols, ratio) {
   const total = rows * cols;
@@ -135,7 +140,7 @@ function createPuzzle(selectedLevel) {
   const gridRows = rows * 4 - 3;
   const gridCols = cols * 4 - 3;
   const activeNodes = createNodeMask(rows, cols, config.nodeRatio);
-  const nodeValues = Array.from({length:rows}, () => Array.from({length:cols}, () => randomInt(9) + 1));
+  const nodeValues = Array.from({length:rows}, () => Array.from({length:cols}, () => config.minValue + randomInt(config.maxValue - config.minValue + 1)));
   const cells = new Map();
   const equations = [];
   const numberKeys = new Set();
@@ -152,7 +157,7 @@ function createPuzzle(selectedLevel) {
   function addEquation(startR, startC, endR, endC, direction) {
     const a = nodeValues[startR][startC];
     const result = nodeValues[endR][endC];
-    const candidate = choose(getNumberCandidates(a, result));
+    const candidate = choose(getNumberCandidates(a, result, config.maxValue));
     const dr = direction === 'v' ? 1 : 0;
     const dc = direction === 'h' ? 1 : 0;
     const r0 = startR*4, c0 = startC*4;
@@ -221,7 +226,7 @@ function valueAt(key) {
   const raw = answers.get(key);
   if (raw === undefined || raw === '') return null;
   const value = Number(raw);
-  return Number.isInteger(value) && value >= 1 && value <= 9 ? value : null;
+  return Number.isInteger(value) && value >= 1 && value <= puzzle.config.maxValue ? value : null;
 }
 function formatTime(total) {
   const minutes = String(Math.floor(total/60)).padStart(2,'0');
@@ -248,6 +253,7 @@ function updateMetrics() {
   $('equations').textContent = `${lastValidEquations}/${puzzle.equations.length}`;
   $('level-title').textContent = puzzle.config.label;
   $('level-description').textContent = puzzle.config.description;
+  $('level-range').textContent = puzzle.config.nodeRangeLabel;
   $('level-grid').textContent = `${puzzle.sizeRows} × ${puzzle.sizeCols} · irregular`; 
   $('level-equation-count').textContent = puzzle.equations.length;
   $('level-givens').textContent = puzzle.givenKeys.size;
@@ -274,11 +280,11 @@ function renderBoard() {
       }
       if (cell.type === 'number') {
         const input = document.createElement('input');
-        input.className = 'math-cell number';
+        input.className = `math-cell number digits-${puzzle.config.maxDigits}`;
         input.type = 'text';
         input.inputMode = 'numeric';
         input.autocomplete = 'off';
-        input.maxLength = 1;
+        input.maxLength = puzzle.config.maxDigits;
         input.dataset.key = keyOf(r,c);
         input.dataset.row = String(r+1);
         input.dataset.col = String(c+1);
@@ -287,7 +293,7 @@ function renderBoard() {
         input.value = cell.given ? String(cell.solution) : (answers.get(keyOf(r,c)) || '');
         input.readOnly = cell.given || gameOver;
         if (cell.given) input.title = 'Número fornecido como pista';
-        else input.title = 'Digite um número de 1 a 9';
+        else input.title = `Digite um número de 1 a ${puzzle.config.maxValue}`;
         fragment.appendChild(input);
       } else {
         const token = document.createElement('div');
@@ -390,7 +396,7 @@ function startNewGame() {
     button.setAttribute('aria-pressed', String(active));
   });
   renderBoard();
-  setMessage('Novo tabuleiro irregular gerado. Preencha as casas vazias com números de 1 a 9.');
+  setMessage(`Novo tabuleiro irregular gerado. ${puzzle.config.label}: valores-base de ${puzzle.config.nodeRangeLabel}; complete as casas com números de até ${puzzle.config.maxDigits} ${puzzle.config.maxDigits === 1 ? 'dígito' : 'dígitos'}.`);
   if ($('result-dialog').open) $('result-dialog').close();
   startClock();
 }
@@ -423,7 +429,7 @@ $('board').addEventListener('input', event => {
   const input = event.target.closest('.number-input, input.number');
   if (!input || input.readOnly || gameOver) return;
   const key = input.dataset.key;
-  const cleaned = input.value.replace(/[^1-9]/g,'').slice(-1);
+  const cleaned = input.value.replace(/\D/g,'').replace(/^0+(?=\d)/,'').slice(0,puzzle.config.maxDigits);
   input.value = cleaned;
   answers.set(key, cleaned);
   input.classList.remove('correct','incorrect','revealed');

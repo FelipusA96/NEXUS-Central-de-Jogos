@@ -1,3 +1,13 @@
+## 2026-10-20 — CrossMath R2: ampliação dos valores numéricos
+
+- Fácil: valores-base de 1 a 9.
+- Médio: valores-base de 1 a 99, com campos para até dois dígitos.
+- Difícil: valores-base de 10 a 999, com campos para até três dígitos.
+- Extremo: valores-base de 100 a 999, priorizando a casa das centenas.
+- A geração das operações foi adaptada aos limites de cada nível; a validação aceita respostas maiores e preserva operações inteiras.
+- Interface, instruções, indicador de faixa e cache dos arquivos atualizados.
+- CSS refinado para legibilidade de números com dois e três dígitos.
+
 ## 2026-10-20 — Palavras Cruzadas: regeneração ao trocar modalidade
 
 - Ao alternar entre “Com dicas” e “Lista de palavras” durante uma partida, a grade é gerada novamente com uma nova seleção/disposição de palavras.
@@ -34,3 +44,4 @@ As datas e descrições abaixo registram os principais marcos consolidados neste
 - Adicionar testes de interface em diferentes navegadores e tamanhos de tela.
 - Definir e documentar uma licença caso o projeto seja destinado à reutilização pública.
 - Automatizar verificações de integridade antes da publicação.
+
