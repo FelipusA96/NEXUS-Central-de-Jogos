@@ -59,7 +59,7 @@ O projeto está em desenvolvimento contínuo. Algumas funções, como rankings e
 
 **Palavras Cruzadas** — banco compartilhado com **299 palavras únicas**, modalidade **Com dicas**, modalidade **Lista de palavras**, quatro níveis de dificuldade e suporte a listas personalizadas.
 
-**CrossMath** — desafios matemáticos gerados dinamicamente, com equações horizontais e verticais e quatro níveis de dificuldade.
+**CrossMath** — desafios matemáticos gerados dinamicamente em tabuleiros assimétricos e irregulares, com equações horizontais e verticais conectadas, ramificações, quatro níveis de dificuldade e validação das operações.
 
 ## Tecnologias
 

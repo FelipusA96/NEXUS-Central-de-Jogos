@@ -1,3 +1,18 @@
+## 2026-10-20 — Palavras Cruzadas: regeneração ao trocar modalidade
+
+- Ao alternar entre “Com dicas” e “Lista de palavras” durante uma partida, a grade é gerada novamente com uma nova seleção/disposição de palavras.
+- Ao clicar novamente na modalidade já ativa, a partida não é reiniciada.
+- Atualizados os parâmetros de cache para a versão R3.
+
+## 2026-10-20 — CrossMath: tabuleiros irregulares
+
+- Substituída a matriz totalmente preenchida por uma máscara conectada e assimétrica de nós matemáticos.
+- As equações só são criadas entre nós vizinhos presentes no tabuleiro; os cruzamentos continuam compartilhando os mesmos números.
+- Os formatos variam por dificuldade e passam a usar dimensões retangulares com ramificações e espaços vazios, aproximando a leitura visual de um jogo de palavras cruzadas.
+- A contagem de equações passa a refletir a estrutura gerada em cada partida.
+- Adicionado versionamento de cache para os arquivos do CrossMath.
+- Validadas localmente 2.000 matrizes geradas, incluindo conectividade, variação de linhas/colunas e consistência aritmética.
+
 # Histórico de alterações
 
 As datas e descrições abaixo registram os principais marcos consolidados neste pacote. O projeto continua em desenvolvimento.

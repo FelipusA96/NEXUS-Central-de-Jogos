@@ -1,9 +1,9 @@
 const $ = id => document.getElementById(id);
 const LEVELS = {
-  facil:  { label:'Fácil',   nodes:3, givenRatio:.42, cell:'clamp(31px,4.2vw,45px)', description:'Uma matriz compacta para entender como os cálculos se cruzam.' },
-  medio:  { label:'Médio',   nodes:4, givenRatio:.32, cell:'clamp(25px,3.1vw,35px)', description:'Mais cruzamentos e menos números iniciais. Planeje cada operação.' },
-  dificil:{ label:'Difícil', nodes:5, givenRatio:.24, cell:'clamp(22px,2.55vw,31px)', description:'Uma grade extensa com muitas relações horizontais e verticais.' },
-  extremo:{ label:'Extremo', nodes:6, givenRatio:.18, cell:'clamp(21px,2.2vw,28px)', description:'A matriz máxima: 60 equações conectadas e poucas casas reveladas.' }
+  facil:  { label:'Fácil',   rows:3, cols:4, nodeRatio:.67, givenRatio:.42, cell:'clamp(31px,4.2vw,45px)', description:'Um tabuleiro irregular compacto, com equações que se conectam em diferentes direções.' },
+  medio:  { label:'Médio',   rows:4, cols:5, nodeRatio:.67, givenRatio:.32, cell:'clamp(25px,3.1vw,35px)', description:'Mais ramificações, cruzamentos e menos números iniciais. Planeje cada operação.' },
+  dificil:{ label:'Difícil', rows:5, cols:6, nodeRatio:.70, givenRatio:.24, cell:'clamp(22px,2.55vw,31px)', description:'Um tabuleiro assimétrico com caminhos matemáticos e cruzamentos variados.' },
+  extremo:{ label:'Extremo', rows:6, cols:7, nodeRatio:.72, givenRatio:.18, cell:'clamp(21px,2.2vw,28px)', description:'O maior formato irregular, com ramificações densas e poucas casas reveladas.' }
 };
 const RECENT_LIMIT = 80;
 let level = 'medio';
@@ -40,23 +40,113 @@ function getNumberCandidates(a, result) {
   const weighted = candidates.flatMap(candidate => Array(candidate.weight).fill(candidate));
   return weighted.length ? weighted : [{op:'+', operand:result-a}];
 }
+function createNodeMask(rows, cols, ratio) {
+  const total = rows * cols;
+  const minTarget = Math.max(rows + cols - 2, Math.floor(total * ratio));
+  const maxTarget = Math.min(total - 2, Math.ceil(total * (ratio + .08)));
+
+  function neighborsOf(key) {
+    const [r, c] = key.split(',').map(Number);
+    return [[r-1,c],[r+1,c],[r,c-1],[r,c+1]]
+      .filter(([nr,nc]) => nr >= 0 && nr < rows && nc >= 0 && nc < cols)
+      .map(([nr,nc]) => `${nr},${nc}`);
+  }
+
+  function isUsable(mask) {
+    const rowCounts = Array(rows).fill(0);
+    const colCounts = Array(cols).fill(0);
+    let horizontalEdges = 0, verticalEdges = 0, crossings = 0;
+    for (const key of mask) {
+      const [r,c] = key.split(',').map(Number);
+      rowCounts[r]++;
+      colCounts[c]++;
+      const hasLeft = c > 0 && mask.has(`${r},${c-1}`);
+      const hasRight = c < cols-1 && mask.has(`${r},${c+1}`);
+      const hasUp = r > 0 && mask.has(`${r-1},${c}`);
+      const hasDown = r < rows-1 && mask.has(`${r+1},${c}`);
+      if (hasRight) horizontalEdges++;
+      if (hasDown) verticalEdges++;
+      if ((hasLeft || hasRight) && (hasUp || hasDown)) crossings++;
+    }
+    const coversEveryRow = rowCounts.every(count => count > 0);
+    const coversEveryCol = colCounts.every(count => count > 0);
+    const rowVariation = Math.min(...rowCounts) < Math.max(...rowCounts);
+    const colVariation = Math.min(...colCounts) < Math.max(...colCounts);
+    const minimumCrossings = Math.max(1, Math.floor(mask.size * .08));
+    return coversEveryRow && coversEveryCol && rowVariation && colVariation &&
+      horizontalEdges >= rows && verticalEdges >= cols && crossings >= minimumCrossings && mask.size < total;
+  }
+
+  for (let attempt = 0; attempt < 180; attempt++) {
+    const target = minTarget + randomInt(Math.max(1, maxTarget - minTarget + 1));
+    const seedRow = randomInt(rows), seedCol = randomInt(cols);
+    const mask = new Set([`${seedRow},${seedCol}`]);
+    while (mask.size < target) {
+      const frontier = new Set();
+      for (const key of mask) {
+        for (const neighbor of neighborsOf(key)) if (!mask.has(neighbor)) frontier.add(neighbor);
+      }
+      if (!frontier.size) break;
+      const candidates = Array.from(frontier);
+      // Prefere levemente pontos com apenas um vizinho ativo, criando ramificações
+      // e contornos menos retangulares sem quebrar a conectividade do tabuleiro.
+      const weighted = candidates.flatMap(key => {
+        const activeNeighbors = neighborsOf(key).filter(neighbor => mask.has(neighbor)).length;
+        return Array(Math.max(1, 4 - activeNeighbors)).fill(key);
+      });
+      mask.add(choose(weighted));
+    }
+    if (mask.size === target && isUsable(mask)) return mask;
+  }
+
+  // Fallback seguro: constrói uma máscara conectada removendo células periféricas
+  // de uma grade completa e valida a conectividade antes de aceitar cada remoção.
+  const mask = new Set(Array.from({length:total}, (_,i) => `${Math.floor(i/cols)},${i%cols}`));
+  const target = minTarget;
+  const connected = candidate => {
+    if (!candidate.size) return false;
+    const visited = new Set([candidate.values().next().value]);
+    const stack = [...visited];
+    while (stack.length) {
+      for (const neighbor of neighborsOf(stack.pop())) {
+        if (candidate.has(neighbor) && !visited.has(neighbor)) { visited.add(neighbor); stack.push(neighbor); }
+      }
+    }
+    return visited.size === candidate.size;
+  };
+  let guard = total * 20;
+  while (mask.size > target && guard-- > 0) {
+    const candidates = Array.from(mask).sort(() => Math.random() - .5);
+    let removed = false;
+    for (const key of candidates) {
+      const candidate = new Set(mask);
+      candidate.delete(key);
+      if (connected(candidate) && isUsable(candidate)) { mask.delete(key); removed = true; break; }
+    }
+    if (!removed) break;
+  }
+  return mask;
+}
+
 function createPuzzle(selectedLevel) {
   const config = LEVELS[selectedLevel];
-  const n = config.nodes;
-  const size = n * 4 - 3;
-  const nodeValues = Array.from({length:n}, () => Array.from({length:n}, () => randomInt(9) + 1));
+  const rows = config.rows;
+  const cols = config.cols;
+  const gridRows = rows * 4 - 3;
+  const gridCols = cols * 4 - 3;
+  const activeNodes = createNodeMask(rows, cols, config.nodeRatio);
+  const nodeValues = Array.from({length:rows}, () => Array.from({length:cols}, () => randomInt(9) + 1));
   const cells = new Map();
   const equations = [];
   const numberKeys = new Set();
   const edgeKeys = [];
 
-  // Primeiro cria todos os nós compartilhados: cada um cruza até quatro equações.
-  for (let r=0; r<n; r++) {
-    for (let c=0; c<n; c++) {
-      const rr = r*4, cc = c*4, key = keyOf(rr,cc), value = nodeValues[r][c];
-      setCell(cells, rr, cc, {type:'number', solution:value, given:false, node:true});
-      numberKeys.add(key);
-    }
+  // Os nós agora ocupam uma máscara conectada e assimétrica, em vez de uma matriz cheia.
+  for (const nodeKey of activeNodes) {
+    const [r,c] = nodeKey.split(',').map(Number);
+    const rr = r * 4, cc = c * 4, key = keyOf(rr,cc), value = nodeValues[r][c];
+    setCell(cells, rr, cc, {type:'number', solution:value, given:false, node:true});
+    numberKeys.add(key);
   }
 
   function addEquation(startR, startC, endR, endC, direction) {
@@ -79,23 +169,26 @@ function createPuzzle(selectedLevel) {
     equations.push(eq);
     edgeKeys.push([startKey, operandKey, resultKey]);
   }
-  for (let r=0; r<n; r++) for (let c=0; c<n-1; c++) addEquation(r,c,r,c+1,'h');
-  for (let r=0; r<n-1; r++) for (let c=0; c<n; c++) addEquation(r,c,r+1,c,'v');
 
-  // Sorteia as casas iniciais e garante ao menos uma pista numérica em cada equação.
+  // Só cria uma equação quando os dois nós vizinhos existem na máscara.
+  for (const nodeKey of activeNodes) {
+    const [r,c] = nodeKey.split(',').map(Number);
+    if (c + 1 < cols && activeNodes.has(`${r},${c+1}`)) addEquation(r,c,r,c+1,'h');
+    if (r + 1 < rows && activeNodes.has(`${r+1},${c}`)) addEquation(r,c,r+1,c,'v');
+  }
+
+  // Sorteia casas iniciais e garante ao menos uma pista numérica por equação.
   const givenKeys = new Set();
   for (const key of numberKeys) if (randomInt(1000) < config.givenRatio*1000) givenKeys.add(key);
   for (const edge of edgeKeys) {
     if (!edge.some(key => givenKeys.has(key))) givenKeys.add(choose(edge));
   }
-  for (const key of numberKeys) {
-    const cell = cells.get(key);
-    cell.given = givenKeys.has(key);
-  }
+  for (const key of numberKeys) cells.get(key).given = givenKeys.has(key);
 
-  const signature = Array.from(numberKeys).sort().map(key => `${key}:${cells.get(key).solution}${givenKeys.has(key)?'g':'_'}`).join('|') + '//' + equations.map(eq=>`${eq.op}:${cells.get(eq.operandKey).solution}`).join(',');
+  const signature = Array.from(numberKeys).sort().map(key => `${key}:${cells.get(key).solution}${givenKeys.has(key)?'g':'_'}`).join('|') +
+    '//' + equations.map(eq=>`${eq.startKey}>${eq.resultKey}:${eq.op}:${cells.get(eq.operandKey).solution}`).join(',');
   const id = makePuzzleId(signature);
-  return {level:selectedLevel, config, size, cells, equations, numberKeys, givenKeys, id, signature};
+  return {level:selectedLevel, config, sizeRows:gridRows, sizeCols:gridCols, rows, cols, activeNodes, cells, equations, numberKeys, givenKeys, id, signature};
 }
 function makePuzzleId(signature) {
   let hash = 2166136261;
@@ -155,20 +248,22 @@ function updateMetrics() {
   $('equations').textContent = `${lastValidEquations}/${puzzle.equations.length}`;
   $('level-title').textContent = puzzle.config.label;
   $('level-description').textContent = puzzle.config.description;
-  $('level-grid').textContent = `${puzzle.size} × ${puzzle.size}`;
+  $('level-grid').textContent = `${puzzle.sizeRows} × ${puzzle.sizeCols} · irregular`; 
   $('level-equation-count').textContent = puzzle.equations.length;
   $('level-givens').textContent = puzzle.givenKeys.size;
   $('puzzle-id').textContent = puzzle.id;
 }
 function renderBoard() {
   const board = $('board');
-  board.style.setProperty('--size', puzzle.size);
+  board.style.setProperty('--rows', puzzle.sizeRows);
+  board.style.setProperty('--cols', puzzle.sizeCols);
   board.style.setProperty('--cell-size', puzzle.config.cell);
-  board.dataset.size = puzzle.size;
+  board.dataset.rows = puzzle.sizeRows;
+  board.dataset.cols = puzzle.sizeCols;
   board.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  for (let r=0; r<puzzle.size; r++) {
-    for (let c=0; c<puzzle.size; c++) {
+  for (let r=0; r<puzzle.sizeRows; r++) {
+    for (let c=0; c<puzzle.sizeCols; c++) {
       const cell = getCell(puzzle.cells,r,c);
       if (!cell) {
         const empty = document.createElement('div');
@@ -285,7 +380,7 @@ function startNewGame() {
   $('elapsed').textContent = '00:00';
   $('mission-state').textContent = 'MATRIZ GERADA';
   $('status-caption').textContent = 'PRONTA PARA RESOLUÇÃO';
-  $('game-mode-label').textContent = 'MODO PROCEDURAL';
+  $('game-mode-label').textContent = 'GRADE IRREGULAR';
   $('check-board').disabled = false;
   $('hint').disabled = false;
   $('give-up').disabled = false;
@@ -295,7 +390,7 @@ function startNewGame() {
     button.setAttribute('aria-pressed', String(active));
   });
   renderBoard();
-  setMessage('Matriz nova gerada. Preencha as casas vazias com números de 1 a 9.');
+  setMessage('Novo tabuleiro irregular gerado. Preencha as casas vazias com números de 1 a 9.');
   if ($('result-dialog').open) $('result-dialog').close();
   startClock();
 }

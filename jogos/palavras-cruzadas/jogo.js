@@ -1,4 +1,4 @@
-import { WORD_BANK, LEVELS, chooseWords, generateCrossword, parseCustomWords } from './engine.js?v=20261020-r2';
+import { WORD_BANK, LEVELS, chooseWords, generateCrossword, parseCustomWords } from './engine.js?v=20261020-r3';
 
 const $ = id => document.getElementById(id);
 const STORAGE = {
@@ -65,7 +65,9 @@ function setSourceMode(mode) {
 }
 
 function setGameMode(mode, announce = false) {
-  gameMode = mode === 'list' ? 'list' : 'clues';
+  const nextMode = mode === 'list' ? 'list' : 'clues';
+  const modeChanged = gameMode !== nextMode;
+  gameMode = nextMode;
   $('mode-clues').classList.toggle('active', gameMode === 'clues');
   $('mode-list').classList.toggle('active', gameMode === 'list');
   $('mode-clues').setAttribute('aria-selected', String(gameMode === 'clues'));
@@ -74,9 +76,20 @@ function setGameMode(mode, announce = false) {
   $('word-list-content').hidden = gameMode !== 'list';
   safeStorageSet(STORAGE.mode, gameMode);
   renderWordList();
+
+  // Ao trocar de modalidade durante uma partida, gere outra combinação e outra
+  // disposição de palavras para impedir que a pessoa use a grade anterior como gabarito.
+  if (announce && modeChanged && puzzle) {
+    createPuzzle();
+    setFeedback(gameMode === 'list'
+      ? 'Modalidade alterada: uma nova grade foi gerada para esta rodada. As palavras anteriores não correspondem necessariamente às respostas atuais.'
+      : 'Modalidade alterada: uma nova grade foi gerada com outra combinação de palavras.');
+    return;
+  }
+
   if (announce && puzzle) {
     setFeedback(gameMode === 'list'
-      ? 'Modo lista ativado: encaixe as palavras do banco nas posições corretas.'
+      ? 'Modo lista ativado: encaixe as palavras exibidas nas posições corretas.'
       : 'Modo com dicas ativado: selecione uma pista horizontal ou vertical.');
   }
 }

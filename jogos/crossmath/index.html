@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080e1a">
-  <meta name="description" content="CrossMath NEXUS: palavras cruzadas matemáticas geradas a cada partida, com quatro dificuldades.">
+  <meta name="description" content="CrossMath NEXUS: desafios matemáticos em tabuleiros irregulares gerados a cada partida, com quatro dificuldades.">
   <title>CrossMath | NEXUS</title>
   <link rel="stylesheet" href="../../assets/css/game-bridge.css">
-  <link rel="stylesheet" href="./estilo.css">
+  <link rel="stylesheet" href="./estilo.css?v=20261020-irregular-r1">
 </head>
 <body>
   <nav class="portal-nav" aria-label="Navegação NEXUS">
@@ -24,7 +24,7 @@
       <div>
         <div class="eyebrow">NEXUS / RACIOCÍNIO / GAME 008</div>
         <h1>CROSS<span>MATH</span><i>_</i></h1>
-        <p class="intro">Uma equação abre caminho para a próxima. Resolva os cálculos horizontais e verticais, descubra os números que se cruzam e complete a matriz.</p>
+        <p class="intro">Uma equação abre caminho para a próxima. Resolva os cálculos horizontais e verticais em um tabuleiro irregular, com ramificações e cruzamentos variados.</p>
       </div>
       <div class="game-status"><span class="status-light"></span><strong id="mission-state">SISTEMA PRONTO</strong><small id="status-caption">GERAÇÃO PROCEDURAL ATIVA</small></div>
     </header>
@@ -33,10 +33,10 @@
       <fieldset class="config-group difficulty-fieldset">
         <legend>01 // DIFICULDADE</legend>
         <div class="choices" id="level-options">
-          <button type="button" data-level="facil" aria-pressed="false">Fácil <small>9 × 9 · 12 equações</small></button>
-          <button type="button" data-level="medio" class="active" aria-pressed="true">Médio <small>13 × 13 · 24 equações</small></button>
-          <button type="button" data-level="dificil" aria-pressed="false">Difícil <small>17 × 17 · 40 equações</small></button>
-          <button type="button" data-level="extremo" aria-pressed="false">Extremo <small>21 × 21 · 60 equações</small></button>
+          <button type="button" data-level="facil" aria-pressed="false">Fácil <small>9 × 13 · formato irregular</small></button>
+          <button type="button" data-level="medio" class="active" aria-pressed="true">Médio <small>13 × 17 · formato irregular</small></button>
+          <button type="button" data-level="dificil" aria-pressed="false">Difícil <small>17 × 21 · formato irregular</small></button>
+          <button type="button" data-level="extremo" aria-pressed="false">Extremo <small>21 × 25 · formato irregular</small></button>
         </div>
       </fieldset>
       <div class="config-group config-actions">
@@ -59,7 +59,7 @@
         <div class="board-scroller" aria-label="Tabuleiro com rolagem horizontal quando necessário">
           <div id="board" class="math-board" role="grid" aria-label="Grade de equações matemáticas"></div>
         </div>
-        <p class="notice" id="game-message" role="status" aria-live="polite">Preencha os espaços vazios com números de 1 a 9. Cada linha e coluna forma equações que se cruzam.</p>
+        <p class="notice" id="game-message" role="status" aria-live="polite">Preencha os espaços vazios com números de 1 a 9. As equações se conectam pelos números compartilhados.</p>
         <div class="tools" role="group" aria-label="Ferramentas da partida">
           <button type="button" id="check-board">◎ Conferir equações</button>
           <button type="button" id="hint">✧ Revelar um número</button>
@@ -79,7 +79,7 @@
           <div class="instruction"><b>01</b><div><strong>Complete</strong><small>Digite um número de 1 a 9 em cada casa vazia.</small></div></div>
           <div class="instruction"><b>02</b><div><strong>Conecte</strong><small>Use os sinais +, −, × e ÷; os resultados precisam ser inteiros.</small></div></div>
           <div class="instruction"><b>03</b><div><strong>Confira</strong><small>Valide as equações. Uma casa de cruzamento precisa funcionar nas duas direções.</small></div></div>
-          <div class="side-tip">Cada nova partida sorteia uma matriz, operações e casas iniciais diferentes. O jogo evita repetir configurações recentes neste navegador.</div>
+          <div class="side-tip">Cada nova partida sorteia um formato irregular, operações e casas iniciais diferentes. O jogo evita repetir configurações recentes neste navegador.</div>
         </section>
         <section class="info-card difficulty-info">
           <div class="eyebrow">ESCALADA // NÍVEIS</div>
@@ -111,9 +111,9 @@
     <p>Preencha cada casa numérica vazia com um valor de <strong>1 a 9</strong>. Os sinais e o símbolo de igualdade já fazem parte da grade.</p>
     <p>As contas se cruzam: um número pode ser o resultado de uma equação e, ao mesmo tempo, o primeiro número de outra. Todas as equações horizontais e verticais precisam estar corretas.</p>
     <p><strong>Conferir equações</strong> destaca contas válidas e as que precisam de revisão. <strong>Revelar um número</strong> preenche uma casa. <strong>Desistir e ver gabarito</strong> mostra a solução gerada para a partida atual.</p>
-    <p>Há quatro dificuldades, de Fácil a Extremo. Cada partida é gerada na hora; o navegador guarda uma pequena lista de matrizes recentes para evitar repetições imediatas.</p>
+    <p>Há quatro dificuldades, de Fácil a Extremo, com tabuleiros assimétricos e ramificações variadas. Cada partida é gerada na hora; o navegador guarda uma pequena lista de matrizes recentes para evitar repetições imediatas.</p>
     <button type="button" id="help-close" class="primary-btn">Entendido</button>
   </dialog>
-  <script type="module" src="./jogo.js"></script>
+  <script type="module" src="./jogo.js?v=20261020-irregular-r1"></script>
 </body>
 </html>
