@@ -1,61 +1,8 @@
 // Motor de geração de palavras cruzadas do NEXUS.
 // As palavras são normalizadas sem acentos para o encaixe, mas as dicas preservam a grafia original.
-export const WORD_BANK = [
-  { word: 'AMIZADE', clue: 'Laço afetivo de carinho e confiança entre pessoas.' },
-  { word: 'AVENTURA', clue: 'Experiência que envolve emoção, risco ou descoberta.' },
-  { word: 'BALEIA', clue: 'Mamífero marinho de grande porte.' },
-  { word: 'BIBLIOTECA', clue: 'Lugar onde livros são organizados para consulta ou empréstimo.' },
-  { word: 'BRASIL', clue: 'País de maior extensão territorial da América do Sul.' },
-  { word: 'CACHORRO', clue: 'Animal doméstico também conhecido como cão.' },
-  { word: 'CAMINHO', clue: 'Rota usada para chegar a um destino.' },
-  { word: 'CANETA', clue: 'Objeto usado para escrever com tinta.' },
-  { word: 'CAVERNA', clue: 'Cavidade natural geralmente encontrada em rochas.' },
-  { word: 'CEREBRO', clue: 'Órgão do sistema nervoso ligado ao pensamento e à memória.' },
-  { word: 'CHUVA', clue: 'Precipitação de água que cai das nuvens.' },
-  { word: 'CIDADE', clue: 'Área urbana com ruas, casas, comércios e serviços.' },
-  { word: 'CINEMA', clue: 'Arte e local associados à exibição de filmes.' },
-  { word: 'CIENCIA', clue: 'Conhecimento produzido por observação, estudo e experimentação.' },
-  { word: 'COELHO', clue: 'Animal conhecido pelas orelhas longas e pelos saltos.' },
-  { word: 'CORAGEM', clue: 'Qualidade de enfrentar o medo ou uma situação difícil.' },
-  { word: 'DESERTO', clue: 'Região que recebe pouca chuva.' },
-  { word: 'DIAMANTE', clue: 'Pedra preciosa muito dura, formada por carbono.' },
-  { word: 'DINHEIRO', clue: 'Meio de pagamento usado para comprar bens e serviços.' },
-  { word: 'ELEFANTE', clue: 'Grande mamífero terrestre que possui tromba.' },
-  { word: 'ENERGIA', clue: 'Capacidade de realizar trabalho ou provocar mudanças.' },
-  { word: 'ESCOLA', clue: 'Instituição dedicada ao ensino e à aprendizagem.' },
-  { word: 'ESTRELA', clue: 'Astro que emite luz própria, como o Sol.' },
-  { word: 'FLORESTA', clue: 'Grande área coberta por árvores e vegetação.' },
-  { word: 'FUTEBOL', clue: 'Esporte coletivo jogado principalmente com os pés e uma bola.' },
-  { word: 'GIRAFA', clue: 'Animal africano conhecido pelo pescoço muito comprido.' },
-  { word: 'HISTORIA', clue: 'Estudo dos acontecimentos e das sociedades do passado.' },
-  { word: 'ILHA', clue: 'Porção de terra completamente cercada por água.' },
-  { word: 'JANELA', clue: 'Abertura na parede que permite entrada de luz e ar.' },
-  { word: 'JARDIM', clue: 'Espaço cultivado com flores, plantas ou arbustos.' },
-  { word: 'LARANJA', clue: 'Fruta cítrica que também dá nome a uma cor.' },
-  { word: 'LEITURA', clue: 'Ato de interpretar palavras e textos escritos.' },
-  { word: 'LIVRO', clue: 'Publicação formada por páginas com texto ou imagens.' },
-  { word: 'MONTANHA', clue: 'Grande elevação natural do terreno.' },
-  { word: 'MUSICA', clue: 'Arte que organiza sons, ritmos e melodias.' },
-  { word: 'NATUREZA', clue: 'Conjunto dos seres vivos e fenômenos naturais.' },
-  { word: 'NUVEM', clue: 'Conjunto visível de gotículas de água ou cristais de gelo no céu.' },
-  { word: 'OCEANO', clue: 'Enorme extensão de água salgada.' },
-  { word: 'PIRAMIDE', clue: 'Construção ou sólido geométrico com base e faces triangulares.' },
-  { word: 'PLANETA', clue: 'Corpo celeste que orbita uma estrela.' },
-  { word: 'PONTE', clue: 'Construção que permite atravessar um rio, vale ou estrada.' },
-  { word: 'RELAMPAGO', clue: 'Clarão produzido por uma descarga elétrica na atmosfera.' },
-  { word: 'RELOGIO', clue: 'Instrumento usado para medir ou indicar as horas.' },
-  { word: 'RIO', clue: 'Curso natural de água que corre por um leito.' },
-  { word: 'SABEDORIA', clue: 'Conhecimento profundo aliado à experiência e ao bom julgamento.' },
-  { word: 'SATELITE', clue: 'Objeto natural ou artificial que orbita um corpo celeste.' },
-  { word: 'TESOURO', clue: 'Conjunto de objetos valiosos ou riquezas guardadas.' },
-  { word: 'TIGRE', clue: 'Grande felino com pelagem marcada por listras.' },
-  { word: 'UNIVERSO', clue: 'Conjunto de tudo o que existe: espaço, matéria e energia.' },
-  { word: 'VIAGEM', clue: 'Deslocamento de uma pessoa entre lugares.' },
-  { word: 'VULCAO', clue: 'Abertura ou montanha que pode expelir lava e gases.' },
-  { word: 'ZEBRA', clue: 'Animal africano parecido com o cavalo e coberto de listras.' },
-  { word: 'AMAZONIA', clue: 'Grande região de floresta tropical presente no norte da América do Sul.' },
-  { word: 'FAROL', clue: 'Torre luminosa que orienta embarcações perto da costa.' },
-];
+// O banco é carregado por word-bank.js antes deste módulo.
+export const WORD_BANK = (Array.isArray(globalThis.NEXUS_WORD_BANK) ? globalThis.NEXUS_WORD_BANK : [])
+  .map((item, index) => ({ ...item, id: `bank-${index}`, original: item.original || item.word }));
 
 export const LEVELS = {
   facil: { label: 'Fácil', count: 8, description: '8 palavras' },
@@ -86,7 +33,7 @@ export function parseCustomWords(text) {
     const word = normalizeWord(original);
     const clue = (parts[1] || '').trim();
 
-    if (word.length < 3 || word.length > 16) {
+    if (word.length < 2 || word.length > 16) {
       ignored.push(original || line);
       continue;
     }
@@ -299,7 +246,7 @@ export function generateCrossword(inputWords, options = {}) {
       word: normalizeWord(item.word),
       id: item.id ?? `${normalizeWord(item.word)}-${index}`,
     }))
-    .filter(item => item.word.length >= 3 && item.word.length <= size - 4);
+    .filter(item => item.word.length >= 2 && item.word.length <= size - 4);
 
   if (!words.length) throw new Error('Inclua pelo menos uma palavra válida.');
   let best = null;

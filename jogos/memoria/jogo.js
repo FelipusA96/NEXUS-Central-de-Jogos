@@ -8,7 +8,16 @@ let level='medio',mode='livre',useTimer=true;
 let deck=null,cards=[],matched=new Set(),first=null,second=null,locked=false,tries=0;
 let roundId=0,flipTimer=null,clockTimer=null,startStamp=null,finalMs=0,won=false;
 let result=null,submittedRound=null,rankingLevel='medio',rankFetchId=0;
-const fmt=ms=>{const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=String(Math.floor(s%3600/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');return h?`${h}:${m}:${ss}`:`${m}:${ss}`;};
+function fmt(ms) {
+  const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const two = value => String(value).padStart(2, '0');
+  return hours > 0
+    ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+    : `${two(minutes)}:${two(seconds)}`;
+}
 const dayText=day=>day.split('-').reverse().join('/');
 const elapsed=()=>startStamp===null?0:won?finalMs:Math.max(0,performance.now()-startStamp);
 function showMessage(message,type=''){const el=$('game-message');el.textContent=message;el.className='notice'+(type?' '+type:'');}

@@ -24,11 +24,15 @@ let lastSubmitted=null;
 let rankingLevel='medio';
 let listToken=0;
 
-function formatTime(ms){
-  const sec=Math.floor(ms/1000),h=Math.floor(sec/3600);
-  const min=String(Math.floor(sec%3600/60)).padStart(2,'0');
-  const rem=String(sec%60).padStart(2,'0');
-  return h?`${h}:${min}:${rem}`:`${min}:${rem}`;
+function formatTime(ms) {
+  const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const two = value => String(value).padStart(2, '0');
+  return hours > 0
+    ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+    : `${two(minutes)}:${two(seconds)}`;
 }
 
 function now(){return performance.now();}

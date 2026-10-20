@@ -38,14 +38,24 @@ h3 { font-size:.9rem; }
 .btn:active { transform:translateY(1px); }
 .btn-primary { border-color:transparent; background:linear-gradient(110deg,#087fa2,#4b64c9); color:#fff; box-shadow:0 7px 18px rgba(16,113,158,.18); }
 .btn-quiet { background:transparent; }
+.btn-danger { border-color:color-mix(in srgb,var(--bad) 48%,var(--border)); background:color-mix(in srgb,var(--bad) 8%,var(--panel-2)); color:var(--bad); }
+.btn-danger:hover { border-color:var(--bad); background:color-mix(in srgb,var(--bad) 15%,var(--panel-2)); }
+.btn:disabled { cursor:not-allowed; opacity:.48; filter:saturate(.5); }
 .page-shell { max-width:1400px; margin:0 auto; padding:25px 20px 32px; }
 .panel { min-width:0; border:1px solid var(--border); border-radius:18px; background:linear-gradient(145deg,color-mix(in srgb,var(--panel) 98%,#1d3553),var(--panel)); box-shadow:0 14px 38px var(--shadow); }
 .setup-panel { padding:22px; margin-bottom:20px; }
 .section-heading { justify-content:space-between; gap:12px; margin-bottom:18px; }
 .bank-count { display:inline-flex; align-items:center; gap:7px; padding:8px 11px; border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:.76rem; white-space:nowrap; }
 .bank-count strong { color:var(--text); }
+
+.bank-status { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:7px; }
+.build-stamp { display:inline-flex; align-items:center; padding:7px 9px; border:1px solid rgba(73,215,255,.28); border-radius:999px; color:var(--cyan); font-size:.62rem; font-weight:800; letter-spacing:.06em; white-space:nowrap; }
+
 .status-dot { width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 10px color-mix(in srgb,var(--good) 60%,transparent); }
-.source-tabs { display:flex; gap:8px; margin-bottom:16px; }
+.source-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.mode-selector { margin:0 0 16px; padding:12px 13px 2px; border:1px solid var(--border); border-radius:12px; background:var(--panel-2); }
+.mode-label { margin:0 0 9px; color:var(--muted); font-size:.72rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+.mode-selector .source-tabs { margin-bottom:8px; }
 .source-tab { padding:10px 14px; border:1px solid var(--border); border-radius:10px; background:var(--panel-2); color:var(--muted); font-size:.84rem; font-weight:800; }
 .source-tab.active { border-color:color-mix(in srgb,var(--cyan) 60%,var(--border)); background:color-mix(in srgb,var(--cyan) 13%,var(--panel)); color:var(--text); box-shadow:inset 0 -2px var(--cyan); }
 .custom-panel { padding:15px; margin-bottom:16px; border:1px solid var(--border); border-radius:13px; background:var(--panel-2); }
@@ -93,10 +103,12 @@ select { min-height:42px; padding:9px 11px; }
 .cross-cell.is-current { outline:2px solid var(--cyan); outline-offset:-2px; z-index:1; background:var(--cell-active); color:var(--cell-active-text); }
 .cross-cell.is-wrong { border-color:var(--bad); background:color-mix(in srgb,var(--bad) 32%,var(--cell)); color:var(--cell-text); }
 .cross-cell.is-hinted .cell-letter { color:var(--good); }
+.cross-cell.is-revealed { border-color:color-mix(in srgb,var(--violet) 58%,#c2d2e7); background:color-mix(in srgb,var(--violet) 22%,var(--cell)); color:var(--cell-text); box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--violet) 15%,transparent); }
 .board-legend { display:flex; justify-content:center; flex-wrap:wrap; gap:15px; margin-top:11px; color:var(--muted); font-size:.7rem; }
 .legend-square { display:inline-block; width:10px;height:10px; margin-right:4px; border:1px solid var(--border-strong); border-radius:2px; vertical-align:-1px; }
 .active-square { background:color-mix(in srgb,var(--cyan) 35%,var(--cell)); border-color:var(--cyan); }
 .wrong-square { background:color-mix(in srgb,var(--bad) 32%,var(--cell)); border-color:var(--bad); }
+.revealed-square { background:color-mix(in srgb,var(--violet) 30%,var(--cell)); border-color:var(--violet); }
 .virtual-keyboard { display:none; grid-template-columns:repeat(7,minmax(0,1fr)); gap:5px; margin-top:16px; }
 .virtual-keyboard button { min-height:36px; padding:5px; border:1px solid var(--border); border-radius:7px; background:var(--panel-2); color:var(--text); font-weight:800; }
 .virtual-keyboard button[data-key="backspace"] { grid-column:span 2; color:var(--bad); }
@@ -107,6 +119,8 @@ select { min-height:42px; padding:9px 11px; }
 .win-banner { display:flex; align-items:center; gap:12px; margin-top:15px; padding:13px; border:1px solid color-mix(in srgb,var(--good) 45%,var(--border)); border-radius:13px; background:color-mix(in srgb,var(--good) 9%,var(--panel)); }
 .win-icon { display:grid; place-items:center; width:37px;height:37px; flex:none; border-radius:11px; background:color-mix(in srgb,var(--good) 18%,var(--panel)); color:var(--good); font-size:1.3rem; }
 .win-banner>div { flex:1; min-width:0; }
+.win-banner.is-revealed { border-color:color-mix(in srgb,var(--violet) 48%,var(--border)); background:color-mix(in srgb,var(--violet) 9%,var(--panel)); }
+.win-banner.is-revealed .win-icon { color:var(--violet); background:color-mix(in srgb,var(--violet) 18%,var(--panel)); }
 .win-banner strong { display:block; font-size:.87rem; }
 .win-banner p { margin:3px 0 0; color:var(--muted); font-size:.73rem; }
 .win-banner .btn { flex:none; min-height:35px; padding:7px 10px; font-size:.75rem; }
@@ -128,6 +142,15 @@ select { min-height:42px; padding:9px 11px; }
 .unused-panel strong { font-size:.77rem; }
 .unused-panel p { margin:6px 0; color:var(--text); font-size:.75rem; line-height:1.5; overflow-wrap:anywhere; }
 .unused-panel small { color:var(--muted); font-size:.68rem; }
+.target-word-list { display:grid; gap:6px; margin:0; padding:0; list-style:none; max-height:640px; overflow:auto; }
+.target-word { display:grid; grid-template-columns:22px minmax(0,1fr) auto; align-items:center; gap:8px; padding:9px 10px; border:1px solid var(--border); border-radius:9px; background:var(--panel-2); }
+.target-word-mark { display:grid; place-items:center; width:21px; height:21px; border:1px solid var(--border-strong); border-radius:50%; color:var(--muted); font-size:.72rem; font-weight:900; }
+.target-word-name { min-width:0; overflow-wrap:anywhere; font-size:.78rem; font-weight:800; }
+.target-word-length { color:var(--muted); font-size:.63rem; white-space:nowrap; }
+.target-word.is-solved { border-color:color-mix(in srgb,var(--good) 40%,var(--border)); background:color-mix(in srgb,var(--good) 7%,var(--panel-2)); }
+.target-word.is-solved .target-word-mark { border-color:var(--good); background:color-mix(in srgb,var(--good) 16%,var(--panel)); color:var(--good); }
+.target-word.is-solved .target-word-name { color:var(--muted); text-decoration:line-through; text-decoration-thickness:2px; }
+.target-word.is-solved .target-word-length { text-decoration:line-through; opacity:.65; }
 .how-panel { display:flex; align-items:flex-start; gap:13px; margin-top:20px; padding:17px 20px; }
 .how-icon { display:grid; place-items:center; width:32px;height:32px; flex:none; border:1px solid var(--border); border-radius:10px; color:var(--cyan); font-weight:900; }
 .how-panel h2 { margin:2px 0 6px; font-size:.9rem; }
@@ -135,6 +158,8 @@ select { min-height:42px; padding:9px 11px; }
 .how-panel p + p { margin-top:7px; }
 .footerline { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:20px 3px 0; color:var(--muted); font-size:.66rem; letter-spacing:.06em; }
 @media(max-width:1050px) { .game-layout { grid-template-columns:minmax(0,1fr) minmax(280px,.8fr); gap:14px; } .board-panel,.clues-panel { padding:16px; } .crossword-board { --cell-size:clamp(21px,2.4vw,28px); } }
-@media(max-width:850px) { .game-layout { grid-template-columns:1fr; } .clues-panel { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; } .clues-title,.clue-instructions,.unused-panel { grid-column:1/-1; } .clue-group + .clue-group { margin-top:0; } .clue-list { max-height:420px; overflow:auto; padding-right:3px; } .crossword-board { --cell-size:clamp(22px,3vw,30px); } }
-@media(max-width:600px) { .game-topbar { align-items:flex-start; padding:15px 13px; } .brand-lockup { gap:9px; } .brand-icon { width:39px;height:39px; border-radius:12px; font-size:21px; } .eyebrow { font-size:.59rem; } .subtitle { font-size:.77rem; } .top-actions { justify-content:flex-end; gap:6px; } .timer-chip { padding:8px 9px; } .timer-chip strong { font-size:.85rem; } #theme-toggle { width:39px; min-width:39px; padding:8px; font-size:0; } #theme-label { display:none; } .page-shell { padding:14px 9px 22px; } .setup-panel,.board-panel,.clues-panel { padding:13px; border-radius:14px; } .section-heading { align-items:flex-start; flex-direction:column; gap:8px; margin-bottom:13px; } .source-tabs { display:grid; grid-template-columns:1fr 1fr; gap:6px; } .source-tab { padding:10px 6px; font-size:.75rem; } .setup-controls { align-items:stretch; gap:10px; } .select-field { flex-basis:100%; } .timer-option { flex:1; } #generate-puzzle { flex:1 1 100%; } .board-heading { flex-direction:column; } .board-actions { width:100%; } .board-actions .btn { flex:1; } .crossword-board { --cell-size:clamp(23px,6.2vw,29px); margin:0; } .board-scroll { margin:0 -5px; } .virtual-keyboard { display:grid; } .clues-panel { display:block; } .clue-group + .clue-group { margin-top:19px; } .clue-list { max-height:none; overflow:visible; } .clue-item { padding:8px; } .win-banner { flex-wrap:wrap; } .win-banner>div { min-width:calc(100% - 55px); } .win-banner .btn { width:100%; } .how-panel { padding:13px; } .footerline { font-size:.59rem; } }
+@media(max-width:850px) { .game-layout { grid-template-columns:1fr; } .clues-panel { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; } #clues-content,#word-list-content { grid-column:1/-1; } #clues-content { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; } #clues-content .clues-title,#clues-content .clue-instructions { grid-column:1/-1; } #clues-content .clue-group + .clue-group { margin-top:0; } .clue-list { max-height:420px; overflow:auto; padding-right:3px; } .crossword-board { --cell-size:clamp(22px,3vw,30px); } }
+@media(max-width:600px) { .game-topbar { align-items:flex-start; padding:15px 13px; } .brand-lockup { gap:9px; } .brand-icon { width:39px;height:39px; border-radius:12px; font-size:21px; } .eyebrow { font-size:.59rem; } .subtitle { font-size:.77rem; } .top-actions { justify-content:flex-end; gap:6px; } .timer-chip { padding:8px 9px; } .timer-chip strong { font-size:.85rem; } #theme-toggle { width:39px; min-width:39px; padding:8px; font-size:0; } #theme-label { display:none; } .page-shell { padding:14px 9px 22px; } .setup-panel,.board-panel,.clues-panel { padding:13px; border-radius:14px; } .section-heading { align-items:flex-start; flex-direction:column; gap:8px; margin-bottom:13px; } .source-tabs { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.mode-selector { padding:10px 9px 1px; }
+.mode-selector .source-tab { font-size:.7rem; } .source-tab { padding:10px 6px; font-size:.75rem; } .setup-controls { align-items:stretch; gap:10px; } .select-field { flex-basis:100%; } .timer-option { flex:1; } #generate-puzzle { flex:1 1 100%; } .board-heading { flex-direction:column; } .board-actions { width:100%; } .board-actions .btn { flex:1; } .crossword-board { --cell-size:clamp(23px,6.2vw,29px); margin:0; } .board-scroll { margin:0 -5px; } .virtual-keyboard { display:grid; } .clues-panel { display:block; } #clues-content { display:block; } .clue-group + .clue-group { margin-top:19px; } .clue-list { max-height:none; overflow:visible; } .clue-item { padding:8px; } .win-banner { flex-wrap:wrap; } .win-banner>div { min-width:calc(100% - 55px); } .win-banner .btn { width:100%; } .how-panel { padding:13px; } .footerline { font-size:.59rem; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition-duration:.01ms!important; animation-duration:.01ms!important; } }

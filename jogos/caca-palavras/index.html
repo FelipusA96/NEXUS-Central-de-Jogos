@@ -386,14 +386,17 @@
   </div>
   <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
 
-  <footer>Escolha entre 12 subtemas ou use suas próprias palavras. Salvar na nuvem exige login e senha cadastrados no Firebase.</footer>
+  <footer>Escolha entre os temas disponíveis ou use suas próprias palavras. Salvar na nuvem exige login e senha cadastrados no Firebase.</footer>
+
+  <!-- Banco de palavras compartilhado com o módulo de Palavras Cruzadas -->
+  <script src="../../assets/js/word-bank.js"></script>
 
   <!-- JOGO: independente do Firebase -->
   <script>
     (() => {
       'use strict';
 
-      // As 120 palavras estão divididas nos 12 subtemas abaixo.
+      // Os temas originais são preservados; o banco compartilhado acrescenta as palavras revisadas do usuário.
       const THEMES = {
   "Cultura Pop e Entretenimento": {
     "Videogames Clássicos e RPGs": [
@@ -548,6 +551,17 @@
     ]
   }
 };
+      // Acrescenta as seis categorias da lista revisada compartilhada com Palavras Cruzadas.
+      const SHARED_WORD_BANK = Array.isArray(window.NEXUS_WORD_BANK) ? window.NEXUS_WORD_BANK : [];
+      const SHARED_GROUPS = new Map();
+      SHARED_WORD_BANK.forEach(item => {
+        const category = item.category || 'Banco geral';
+        if (!SHARED_GROUPS.has(category)) SHARED_GROUPS.set(category, []);
+        SHARED_GROUPS.get(category).push(item.word);
+      });
+      SHARED_GROUPS.forEach((list, category) => {
+        THEMES[category] = { [`Lista completa (${list.length} palavras)`]: list };
+      });
       const DEFAULT_WORDS = THEMES['Cultura Pop e Entretenimento']['Videogames Clássicos e RPGs'];
       const WORDS_KEY = 'caca-palavras-lista-v1';
       const THEME_KEY = 'caca-palavras-tema-v1';
@@ -647,8 +661,11 @@
       }
       function updateDifficultyInfo() {
         const level = selectedLevel();
-        const isCustom = $('category-select').value === 'personalizado';
-        const available = isCustom ? customWords.length : 10;
+        const category = $('category-select').value;
+        const isCustom = category === 'personalizado';
+        const subtheme = $('subtheme-select').value;
+        const selectedList = category === 'aleatorio' ? null : THEMES[category]?.[subtheme];
+        const available = isCustom ? customWords.length : Array.isArray(selectedList) ? selectedList.length : 10;
         const number = Math.min(level.count, available);
         const detail = available < level.count
           ? `Esta lista tem apenas ${available} palavra(s), portanto serão usadas todas. `
@@ -735,10 +752,14 @@
 
       // ----- Relógio -----
       function formatTime(ms) {
-        const s = Math.floor(ms / 1000), h = Math.floor(s / 3600);
-        const m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
-        const sec = String(s % 60).padStart(2, '0');
-        return h ? `${h}:${m}:${sec}` : `${m}:${sec}`;
+        const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        const two = value => String(value).padStart(2, '0');
+        return hours > 0
+          ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+          : `${two(minutes)}:${two(seconds)}`;
       }
       function getElapsed() {
         return elapsedMs + (clockHandle !== null ? Date.now() - clockStartedAt : 0);
@@ -1340,11 +1361,14 @@
     let submittedRound = null;
 
     function formatRankingTime(ms) {
-      const seconds = Math.floor(ms / 1000);
-      const h = Math.floor(seconds / 3600);
-      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2,'0');
-      const s = String(seconds % 60).padStart(2,'0');
-      return h ? `${h}:${m}:${s}` : `${m}:${s}`;
+      const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      const two = value => String(value).padStart(2, '0');
+      return hours > 0
+        ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+        : `${two(minutes)}:${two(seconds)}`;
     }
 
     function selectRanking(level) {

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080e1a">
+  <meta name="description" content="CrossMath NEXUS: palavras cruzadas matemáticas geradas a cada partida, com quatro dificuldades.">
+  <title>CrossMath | NEXUS</title>
+  <link rel="stylesheet" href="../../assets/css/game-bridge.css">
+  <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+  <nav class="portal-nav" aria-label="Navegação NEXUS">
+    <a class="portal-brand" href="../../"><span class="portal-emblem">∑</span> NEXUS // GAMING HUB</a>
+    <div class="portal-links">
+      <a class="portal-back" href="../../">← Central de Jogos</a>
+      <a href="../../#jogos">Biblioteca</a>
+      <a href="#manual">Como jogar</a>
+    </div>
+  </nav>
+  <div class="ambient" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">NEXUS / RACIOCÍNIO / GAME 008</div>
+        <h1>CROSS<span>MATH</span><i>_</i></h1>
+        <p class="intro">Uma equação abre caminho para a próxima. Resolva os cálculos horizontais e verticais, descubra os números que se cruzam e complete a matriz.</p>
+      </div>
+      <div class="game-status"><span class="status-light"></span><strong id="mission-state">SISTEMA PRONTO</strong><small id="status-caption">GERAÇÃO PROCEDURAL ATIVA</small></div>
+    </header>
+
+    <section class="config" aria-label="Configurações da partida">
+      <fieldset class="config-group difficulty-fieldset">
+        <legend>01 // DIFICULDADE</legend>
+        <div class="choices" id="level-options">
+          <button type="button" data-level="facil" aria-pressed="false">Fácil <small>9 × 9 · 12 equações</small></button>
+          <button type="button" data-level="medio" class="active" aria-pressed="true">Médio <small>13 × 13 · 24 equações</small></button>
+          <button type="button" data-level="dificil" aria-pressed="false">Difícil <small>17 × 17 · 40 equações</small></button>
+          <button type="button" data-level="extremo" aria-pressed="false">Extremo <small>21 × 21 · 60 equações</small></button>
+        </div>
+      </fieldset>
+      <div class="config-group config-actions">
+        <label class="clock-option"><input type="checkbox" id="clock-enabled" checked> Cronômetro ativado</label>
+        <button type="button" id="new-round" class="primary-btn">↻ Gerar nova matriz</button>
+      </div>
+    </section>
+
+    <div class="game-layout">
+      <section class="board-panel" aria-labelledby="board-title">
+        <div class="board-heading">
+          <div><div class="eyebrow">MATRIZ // ARITMÉTICA CRUZADA</div><h2 id="board-title">Resolva as equações.</h2></div>
+          <span class="mode-stamp" id="game-mode-label">MODO PROCEDURAL</span>
+        </div>
+        <div class="metrics">
+          <div><small>TEMPO</small><strong id="elapsed">00:00</strong></div>
+          <div><small>CASAS PREENCHIDAS</small><strong id="filled">0/0</strong></div>
+          <div><small>EQUAÇÕES VÁLIDAS</small><strong id="equations">0/24</strong></div>
+        </div>
+        <div class="board-scroller" aria-label="Tabuleiro com rolagem horizontal quando necessário">
+          <div id="board" class="math-board" role="grid" aria-label="Grade de equações matemáticas"></div>
+        </div>
+        <p class="notice" id="game-message" role="status" aria-live="polite">Preencha os espaços vazios com números de 1 a 9. Cada linha e coluna forma equações que se cruzam.</p>
+        <div class="tools" role="group" aria-label="Ferramentas da partida">
+          <button type="button" id="check-board">◎ Conferir equações</button>
+          <button type="button" id="hint">✧ Revelar um número</button>
+          <button type="button" id="give-up" class="danger-btn">⚑ Desistir e ver gabarito</button>
+        </div>
+        <div class="board-footer">
+          <span><b>Teclado:</b> digite números de 1 a 9 · use as setas para navegar entre casas vazias.</span>
+          <button type="button" class="link-btn" id="help-open">? Regras</button>
+        </div>
+      </section>
+
+      <aside class="side-stack" id="manual">
+        <section class="info-card">
+          <div class="eyebrow">SISTEMA // MANUAL</div>
+          <h2>Matemática em cruz.</h2>
+          <p>Os números são compartilhados por equações horizontais e verticais. Uma casa pode fazer parte de mais de uma conta — por isso, cada resposta influencia outras equações.</p>
+          <div class="instruction"><b>01</b><div><strong>Complete</strong><small>Digite um número de 1 a 9 em cada casa vazia.</small></div></div>
+          <div class="instruction"><b>02</b><div><strong>Conecte</strong><small>Use os sinais +, −, × e ÷; os resultados precisam ser inteiros.</small></div></div>
+          <div class="instruction"><b>03</b><div><strong>Confira</strong><small>Valide as equações. Uma casa de cruzamento precisa funcionar nas duas direções.</small></div></div>
+          <div class="side-tip">Cada nova partida sorteia uma matriz, operações e casas iniciais diferentes. O jogo evita repetir configurações recentes neste navegador.</div>
+        </section>
+        <section class="info-card difficulty-info">
+          <div class="eyebrow">ESCALADA // NÍVEIS</div>
+          <h2 id="level-title">Médio</h2>
+          <p id="level-description">Uma matriz maior, mais cruzamentos e menos números revelados.</p>
+          <div class="level-facts"><span>Grade</span><strong id="level-grid">13 × 13</strong></div>
+          <div class="level-facts"><span>Equações</span><strong id="level-equation-count">24</strong></div>
+          <div class="level-facts"><span>Casas iniciais</span><strong id="level-givens">—</strong></div>
+          <div class="level-facts"><span>Identificador</span><strong id="puzzle-id">NEX-000000</strong></div>
+        </section>
+      </aside>
+    </div>
+    <footer>NEXUS // CROSSMATH <span>HTML · CSS · JAVASCRIPT · GERAÇÃO PROCEDURAL LOCAL</span></footer>
+  </main>
+
+  <dialog id="result-dialog" aria-labelledby="result-title">
+    <div class="result-icon" id="result-icon">∑</div>
+    <div class="eyebrow">SISTEMA // MATRIZ FINALIZADA</div>
+    <h2 id="result-title">Equações resolvidas!</h2>
+    <p id="result-description"></p>
+    <div class="dialog-actions">
+      <button type="button" id="result-next" class="primary-btn">↻ Nova matriz</button>
+      <button type="button" id="result-close">Ver tabuleiro</button>
+    </div>
+  </dialog>
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <div class="eyebrow">NEXUS // MANUAL CROSSMATH</div>
+    <h2 id="help-title">Como jogar</h2>
+    <p>Preencha cada casa numérica vazia com um valor de <strong>1 a 9</strong>. Os sinais e o símbolo de igualdade já fazem parte da grade.</p>
+    <p>As contas se cruzam: um número pode ser o resultado de uma equação e, ao mesmo tempo, o primeiro número de outra. Todas as equações horizontais e verticais precisam estar corretas.</p>
+    <p><strong>Conferir equações</strong> destaca contas válidas e as que precisam de revisão. <strong>Revelar um número</strong> preenche uma casa. <strong>Desistir e ver gabarito</strong> mostra a solução gerada para a partida atual.</p>
+    <p>Há quatro dificuldades, de Fácil a Extremo. Cada partida é gerada na hora; o navegador guarda uma pequena lista de matrizes recentes para evitar repetições imediatas.</p>
+    <button type="button" id="help-close" class="primary-btn">Entendido</button>
+  </dialog>
+  <script type="module" src="./jogo.js"></script>
+</body>
+</html>

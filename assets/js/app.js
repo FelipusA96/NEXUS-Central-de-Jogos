@@ -1,4 +1,4 @@
-import { games, categories } from './catalog.js';
+import { games, categories } from './catalog.js?v=20261020-crossmath1';
 
 const $ = id => document.getElementById(id);
 const pageNames = { inicio:'INÍCIO', jogos:'JOGOS', ranking:'RANKINGS', perfil:'PERFIL' };
@@ -88,11 +88,14 @@ function setTheme(mode) {
 }
 
 function formatTime(ms) {
-  const seconds = Math.floor(ms/1000);
-  const hrs = Math.floor(seconds/3600);
-  const minutes = String(Math.floor(seconds%3600/60)).padStart(2,'0');
-  const secs = String(seconds%60).padStart(2,'0');
-  return hrs ? `${hrs}:${minutes}:${secs}` : `${minutes}:${secs}`;
+  const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const two = value => String(value).padStart(2, '0');
+  return hours > 0
+    ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+    : `${two(minutes)}:${two(seconds)}`;
 }
 
 async function loadRanking() {

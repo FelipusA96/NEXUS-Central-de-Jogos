@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#080d19">
   <meta name="description" content="Monte e resolva palavras cruzadas no NEXUS. Escolha palavras do banco ou crie um desafio personalizado.">
   <title>Palavras Cruzadas | NEXUS</title>
-  <link rel="stylesheet" href="../../assets/css/game-bridge.css">
-  <link rel="stylesheet" href="./estilo.css">
+  <link rel="stylesheet" href="../../assets/css/game-bridge.css?v=20261020-r2">
+  <link rel="stylesheet" href="./estilo.css?v=20261020-r2">
 </head>
 <body>
   <nav class="portal-nav" aria-label="Navegação da Central NEXUS">
@@ -34,7 +34,7 @@
     <section class="setup-panel panel" aria-labelledby="setup-title">
       <div class="section-heading">
         <div><p class="eyebrow">CONFIGURAÇÃO DO DESAFIO</p><h2 id="setup-title">Monte sua grade</h2></div>
-        <span class="bank-count"><span class="status-dot"></span><strong id="bank-count">54</strong> palavras no banco</span>
+        <div class="bank-status"><span class="bank-count"><span class="status-dot"></span><strong id="bank-count">299</strong> palavras no banco</span><span class="build-stamp" title="Versão atualizada do Palavras Cruzadas">ATUALIZADO · 2 MODOS</span></div>
       </div>
 
       <div class="source-tabs" role="tablist" aria-label="Origem das palavras">
@@ -42,10 +42,19 @@
         <button type="button" class="source-tab" id="tab-custom" data-source="custom" role="tab" aria-selected="false">＋ Minhas palavras</button>
       </div>
 
+      <div class="mode-selector">
+        <p class="mode-label">Modalidade da partida</p>
+        <div class="source-tabs" role="tablist" aria-label="Modalidade de palavras cruzadas">
+          <button type="button" class="source-tab active" id="mode-clues" role="tab" aria-selected="true">🧩 Com dicas</button>
+          <button type="button" class="source-tab" id="mode-list" role="tab" aria-selected="false">☷ Lista de palavras</button>
+        </div>
+        <p class="field-help">No modo com dicas, preencha a grade usando as pistas horizontais e verticais. No modo lista, veja as palavras que fazem parte da grade e descubra onde encaixá-las; cada palavra concluída corretamente será riscada automaticamente.</p>
+      </div>
+
       <div id="custom-panel" class="custom-panel" hidden>
         <label for="custom-words">Sua lista personalizada <span>até 50 palavras</span></label>
         <textarea id="custom-words" rows="5" maxlength="6000" placeholder="Digite uma palavra por linha. Para criar uma dica, use PALAVRA | DICA.&#10;&#10;Exemplo:&#10;PRAIA | Faixa de areia junto ao mar&#10;GATO | Animal doméstico que mia&#10;MONTANHA | Grande elevação natural"></textarea>
-        <p class="field-help">Aceita palavras de 3 a 16 letras. Acentos e espaços são tratados automaticamente. Linhas sem dica recebem uma indicação neutra; para uma cruzadinha mais interessante, use <code>PALAVRA | DICA</code>.</p>
+        <p class="field-help">Aceita palavras de 2 a 16 letras. Acentos e espaços são tratados automaticamente. Linhas sem dica recebem uma indicação neutra; para uma cruzadinha mais interessante, use <code>PALAVRA | DICA</code>.</p>
       </div>
 
       <div class="setup-controls">
@@ -70,32 +79,41 @@
           <div class="board-actions">
             <button type="button" class="btn btn-quiet" id="clear-board">Limpar</button>
             <button type="button" class="btn btn-primary" id="check-answers">Conferir</button>
+            <button type="button" class="btn btn-danger" id="give-up" aria-label="Desistir e revelar o gabarito" title="Encerrar a partida e preencher a grade com as respostas corretas">Desistir</button>
           </div>
         </div>
 
         <div class="progress-line"><div><span id="progress-label">0% preenchido</span><span id="letter-count">0 letras</span></div><div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div></div>
         <div class="board-scroll" id="board-scroll"><div id="crossword-board" class="crossword-board" aria-label="Grade de palavras cruzadas"></div></div>
-        <div class="board-legend"><span><i class="legend-square active-square"></i> Palavra selecionada</span><span><i class="legend-square wrong-square"></i> Letra incorreta</span></div>
+        <div class="board-legend"><span><i class="legend-square active-square"></i> Palavra selecionada</span><span><i class="legend-square wrong-square"></i> Letra incorreta</span><span><i class="legend-square revealed-square"></i> Gabarito revelado</span></div>
         <div class="virtual-keyboard" id="virtual-keyboard" aria-label="Teclado virtual"></div>
         <div id="game-feedback" class="game-feedback" role="status" aria-live="polite">As palavras se cruzam pelas letras em comum. Use as dicas para preencher a grade.</div>
-        <div id="win-banner" class="win-banner" hidden><span class="win-icon">✦</span><div><strong>Desafio concluído!</strong><p id="win-message">Todas as palavras estão corretas.</p></div><button type="button" class="btn btn-primary" id="next-puzzle">Próxima grade ↗</button></div>
+        <div id="win-banner" class="win-banner" hidden><span class="win-icon">✦</span><div><strong id="win-title">Desafio concluído!</strong><p id="win-message">Todas as palavras estão corretas.</p></div><button type="button" class="btn btn-primary" id="next-puzzle">Próxima grade ↗</button></div>
       </section>
 
-      <aside class="clues-panel panel" aria-label="Dicas da cruzadinha">
-        <div class="clues-title"><div><p class="eyebrow">CENTRAL DE PISTAS</p><h2>Encontre as respostas</h2></div><span class="clue-counter" id="clue-count">0 pistas</span></div>
-        <p class="clue-instructions">Clique em uma dica para selecionar a palavra correspondente. Se uma casa pertencer a duas palavras, clique nela novamente para alternar o sentido.</p>
-        <section class="clue-group" aria-labelledby="across-title"><h3 id="across-title"><span>→</span> Horizontais <small id="across-count">0</small></h3><div id="across-clues" class="clue-list"></div></section>
-        <section class="clue-group" aria-labelledby="down-title"><h3 id="down-title"><span>↓</span> Verticais <small id="down-count">0</small></h3><div id="down-clues" class="clue-list"></div></section>
+      <aside class="clues-panel panel" aria-label="Dicas e palavras da cruzadinha">
+        <div id="clues-content">
+          <div class="clues-title"><div><p class="eyebrow">CENTRAL DE PISTAS</p><h2>Encontre as respostas</h2></div><span class="clue-counter" id="clue-count">0 pistas</span></div>
+          <p class="clue-instructions">Clique em uma dica para selecionar a palavra correspondente. Se uma casa pertencer a duas palavras, clique nela novamente para alternar o sentido.</p>
+          <section class="clue-group" aria-labelledby="across-title"><h3 id="across-title"><span>→</span> Horizontais <small id="across-count">0</small></h3><div id="across-clues" class="clue-list"></div></section>
+          <section class="clue-group" aria-labelledby="down-title"><h3 id="down-title"><span>↓</span> Verticais <small id="down-count">0</small></h3><div id="down-clues" class="clue-list"></div></section>
+        </div>
+        <div id="word-list-content" hidden>
+          <div class="clues-title"><div><p class="eyebrow">BANCO DE RESPOSTAS</p><h2>Palavras para descobrir</h2></div><span class="clue-counter" id="word-list-count">0/0</span></div>
+          <p class="clue-instructions">Use os cruzamentos e o tamanho dos espaços para descobrir onde cada palavra se encaixa. Quando todas as letras de uma palavra estiverem corretas, ela será riscada automaticamente.</p>
+          <ul id="target-word-list" class="target-word-list" aria-live="polite"></ul>
+        </div>
         <div id="unused-panel" class="unused-panel" hidden><strong>Não encaixadas nesta grade</strong><p id="unused-words"></p><small>Gere outra grade para tentar uma combinação diferente.</small></div>
       </aside>
     </section>
 
     <section class="how-panel panel">
-      <div class="how-icon" aria-hidden="true">ⓘ</div><div><h2>Como jogar</h2><p>Escolha uma dica horizontal ou vertical, clique na primeira casa e digite as letras. As letras compartilhadas ajudam a resolver palavras que se cruzam. Você pode conferir as respostas ou limpar a grade sem perder a seleção de palavras.</p><p class="field-help">No modo <strong>Minhas palavras</strong>, cada linha pode conter apenas a palavra ou <code>PALAVRA | DICA</code>. O banco padrão possui <strong id="bank-count-copy">54 palavras originais</strong>; cada rodada sorteia uma combinação de acordo com a dificuldade.</p></div>
+      <div class="how-icon" aria-hidden="true">ⓘ</div><div><h2>Como jogar</h2><p>No modo com dicas, escolha uma pista horizontal ou vertical e digite a resposta. No modo lista, use o banco de palavras e os cruzamentos para descobrir em quais posições elas se encaixam. Você pode conferir as respostas, limpar a grade ou selecionar <strong>Desistir</strong> para encerrar a partida e revelar o gabarito completo nas células.</p><p class="field-help">No modo <strong>Minhas palavras</strong>, cada linha pode conter apenas a palavra ou <code>PALAVRA | DICA</code>. O banco padrão possui <strong id="bank-count-copy">299 palavras únicas</strong>; cada rodada sorteia uma combinação de acordo com a dificuldade.</p></div>
     </section>
-    <footer class="footerline"><span>NEXUS // CENTRAL DE JOGOS</span><span>PALAVRAS CRUZADAS · MÓDULO 006</span></footer>
+    <footer class="footerline"><span>NEXUS // CENTRAL DE JOGOS</span><span>PALAVRAS CRUZADAS · MÓDULO 006 · BUILD R2</span></footer>
   </main>
 
-  <script type="module" src="./jogo.js"></script>
+  <script src="../../assets/js/word-bank.js?v=20261020-r2"></script>
+  <script type="module" src="./jogo.js?v=20261020-r2"></script>
 </body>
 </html>

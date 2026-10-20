@@ -11,7 +11,16 @@ let timer=null,startedAt=0,finalElapsed=0;
 let rankingLevel='medio',rankingRequest=0;
 let cells=[];
 
-const fmt=ms=>{const s=Math.floor(ms/1000),h=Math.floor(s/3600);const m=String(Math.floor(s%3600/60)).padStart(2,'0'),r=String(s%60).padStart(2,'0');return h?`${h}:${m}:${r}`:`${m}:${r}`;};
+function fmt(ms) {
+  const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const two = value => String(value).padStart(2, '0');
+  return hours > 0
+    ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+    : `${two(minutes)}:${two(seconds)}`;
+}
 const now=()=>performance.now();
 const elapsed=()=>gameOver?finalElapsed:useTimer?Math.max(0,now()-startedAt):0;
 function dayBrazil(){

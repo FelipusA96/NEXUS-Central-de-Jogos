@@ -4,7 +4,16 @@ const state={level:'medio',mode:'livre',clock:true,game:null,selected:null,histo
 const NICK_KEY='nexus-spider-apelido-v1';
 const SUIT_COLOR={'♠':'black','♣':'black','♥':'red','♦':'red'};
 function timeMs(){return state.time+(state.running?Date.now()-state.startedAt:0);}
-function format(ms){const n=Math.floor(ms/1000),m=Math.floor(n/60),s=n%60;return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+function format(ms) {
+  const totalSeconds = Math.max(0, Math.floor((Number(ms) || 0) / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const two = value => String(value).padStart(2, '0');
+  return hours > 0
+    ? `${two(hours)}:${two(minutes)}:${two(seconds)}`
+    : `${two(minutes)}:${two(seconds)}`;
+}
 function tick(){$('elapsed').textContent=state.clock?format(timeMs()):'—';}
 function startClock(){if(!state.clock||state.running||state.won)return;state.startedAt=Date.now();state.running=true;state.interval=setInterval(tick,250);tick();}
 function stopClock(){if(!state.running)return;state.time=timeMs();state.running=false;clearInterval(state.interval);state.interval=null;tick();}

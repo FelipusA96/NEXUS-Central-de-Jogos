@@ -1,4 +1,4 @@
-import { WORD_BANK, LEVELS, chooseWords, generateCrossword, parseCustomWords } from './engine.js';
+import { WORD_BANK, LEVELS, chooseWords, generateCrossword, parseCustomWords } from './engine.js?v=20261020-r2';
 
 const $ = id => document.getElementById(id);
 const STORAGE = {
@@ -6,9 +6,11 @@ const STORAGE = {
   custom: 'nexus-crossword-custom-v1',
   difficulty: 'nexus-crossword-difficulty-v1',
   source: 'nexus-crossword-source-v1',
+  mode: 'nexus-crossword-mode-v1',
 };
 
 let sourceMode = 'bank';
+let gameMode = 'clues';
 let puzzle = null;
 let answers = new Map();
 let wrongCells = new Set();
@@ -20,6 +22,7 @@ let startedAt = 0;
 let elapsedMs = 0;
 let timerInterval = null;
 let finished = false;
+let solutionRevealed = false;
 
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[ch]);
@@ -59,6 +62,23 @@ function setSourceMode(mode) {
   $('tab-custom').setAttribute('aria-selected', String(sourceMode === 'custom'));
   $('custom-panel').hidden = sourceMode !== 'custom';
   safeStorageSet(STORAGE.source, sourceMode);
+}
+
+function setGameMode(mode, announce = false) {
+  gameMode = mode === 'list' ? 'list' : 'clues';
+  $('mode-clues').classList.toggle('active', gameMode === 'clues');
+  $('mode-list').classList.toggle('active', gameMode === 'list');
+  $('mode-clues').setAttribute('aria-selected', String(gameMode === 'clues'));
+  $('mode-list').setAttribute('aria-selected', String(gameMode === 'list'));
+  $('clues-content').hidden = gameMode !== 'clues';
+  $('word-list-content').hidden = gameMode !== 'list';
+  safeStorageSet(STORAGE.mode, gameMode);
+  renderWordList();
+  if (announce && puzzle) {
+    setFeedback(gameMode === 'list'
+      ? 'Modo lista ativado: encaixe as palavras do banco nas posições corretas.'
+      : 'Modo com dicas ativado: selecione uma pista horizontal ou vertical.');
+  }
 }
 
 function setFeedback(message, type = '') {
@@ -116,14 +136,14 @@ function createPuzzle() {
 
   if (pool.length < 4) {
     setSetupFeedback(sourceMode === 'custom'
-      ? 'Adicione pelo menos 4 palavras válidas (de 3 a 16 letras) para montar uma cruzadinha.'
+      ? 'Adicione pelo menos 4 palavras válidas (de 2 a 16 letras) para montar uma cruzadinha.'
       : 'O banco não possui palavras suficientes para gerar esta grade.', 'error');
     return;
   }
 
   const selected = chooseWords(pool, level.count).map((word, index) => ({ ...word, id: `${word.id || word.word}-${index}` }));
   try {
-    puzzle = generateCrossword(selected, { attempts: 90, size: 35 });
+    puzzle = generateCrossword(selected, { attempts: 120, size: 37 });
   } catch (error) {
     setSetupFeedback(error?.message || 'Não foi possível gerar a grade. Tente outra lista.', 'error');
     return;
@@ -135,16 +155,24 @@ function createPuzzle() {
   activeCellKey = puzzle.words[0] ? `${puzzle.words[0].row},${puzzle.words[0].col}` : null;
   lastClickedKey = null;
   finished = false;
+  solutionRevealed = false;
   timerEnabled = $('timer-enabled').checked;
   $('win-banner').hidden = true;
+  $('win-banner').classList.remove('is-revealed');
+  $('give-up').disabled = false;
+  $('check-answers').disabled = false;
+  $('win-title').textContent = 'Desafio concluído!';
   startClock();
   renderBoard();
   renderClues();
+  renderWordList();
   updateProgress();
   renderUnusedWords();
   $('board-subtitle').textContent = `${level.label} · ${puzzle.words.length} palavras · ${puzzle.crossings} cruzamentos`;
   $('clue-count').textContent = `${puzzle.words.length} pistas`;
-  setFeedback('Selecione uma dica ou uma casa da grade. As letras compartilhadas pertencem às duas palavras.');
+  setFeedback(gameMode === 'list'
+    ? 'Modo lista: use as palavras exibidas e os cruzamentos para descobrir onde cada resposta se encaixa.'
+    : 'Selecione uma dica ou uma casa da grade. As letras compartilhadas pertencem às duas palavras.');
 
   const pieces = [];
   pieces.push(sourceMode === 'bank' ? `Banco NEXUS: sorteio de ${selected.length} entre ${pool.length} palavras` : `Lista personalizada: ${selected.length} palavra(s) selecionada(s) de ${pool.length}`);
@@ -194,7 +222,8 @@ function renderBoard(shouldFocus = false) {
       if (wordActive) classes.push('is-active-word');
       if (activeCellKey === key) classes.push('is-current');
       if (wrongCells.has(key)) classes.push('is-wrong');
-      const label = `Linha ${row + 1}, coluna ${col + 1}${cell.number ? `, número ${cell.number}` : ''}, ${value || 'vazia'}`;
+      if (solutionRevealed) classes.push('is-revealed');
+      const label = `Linha ${row + 1}, coluna ${col + 1}${cell.number ? `, número ${cell.number}` : ''}, ${value || 'vazia'}${solutionRevealed ? ', gabarito revelado' : ''}`;
       html.push(`<button type="button" class="${classes.join(' ')}" data-row="${row}" data-col="${col}" data-key="${key}" aria-label="${escapeHTML(label)}"><span class="cell-number">${cell.number || ''}</span><span class="cell-letter">${value}</span></button>`);
     }
   }
@@ -219,6 +248,29 @@ function renderClues() {
   $('across-count').textContent = across;
   $('down-count').textContent = down;
   $('clue-count').textContent = `${puzzle.words.length} pistas`;
+}
+
+function isWordSolved(word) {
+  const keys = wordCellKeys(word);
+  return keys.length === word.word.length && keys.every((key, index) => answers.get(key) === word.word[index]);
+}
+
+function renderWordList() {
+  const list = $('target-word-list');
+  if (!list) return;
+  if (!puzzle) {
+    list.replaceChildren();
+    $('word-list-count').textContent = '0/0';
+    return;
+  }
+  const items = [...puzzle.words].sort((a, b) => (a.original || a.word).localeCompare(b.original || b.word, 'pt-BR'));
+  const solvedCount = items.filter(isWordSolved).length;
+  list.innerHTML = items.map(word => {
+    const solved = isWordSolved(word);
+    const label = word.original || word.word;
+    return `<li class="target-word${solved ? ' is-solved' : ''}"><span class="target-word-mark" aria-hidden="true">${solved ? '✓' : '○'}</span><span class="target-word-name">${escapeHTML(label)}</span><span class="target-word-length">${word.length} letras</span></li>`;
+  }).join('');
+  $('word-list-count').textContent = `${solvedCount}/${items.length} encontradas`;
 }
 
 function renderUnusedWords() {
@@ -309,6 +361,7 @@ function setLetter(letter) {
   if (index >= 0 && index < keys.length - 1) activeCellKey = keys[index + 1];
   renderBoard(true);
   renderClues();
+  renderWordList();
   updateProgress();
   if (isSolved()) finishGame();
 }
@@ -331,6 +384,8 @@ function deleteLetter() {
     }
   }
   renderBoard(true);
+  renderClues();
+  renderWordList();
   updateProgress();
 }
 
@@ -352,9 +407,48 @@ function finishGame() {
   stopClock();
   wrongCells.clear();
   renderBoard();
+  renderClues();
+  renderWordList();
+  $('win-banner').classList.remove('is-revealed');
+  $('win-title').textContent = 'Desafio concluído!';
   $('win-banner').hidden = false;
+  $('give-up').disabled = true;
+  $('check-answers').disabled = true;
   $('win-message').textContent = `${puzzle.words.length} palavras resolvidas${timerEnabled ? ` em ${formatTime(elapsedMs)}` : ', sem cronômetro'}.`;
   setFeedback('Todas as letras estão corretas. Excelente trabalho!', 'success');
+}
+
+function revealSolution() {
+  if (!puzzle || finished) return;
+  const confirmed = window.confirm('Deseja desistir desta partida? O jogo será encerrado e o gabarito completo será preenchido nas células.');
+  if (!confirmed) return;
+
+  for (let row = 0; row < puzzle.rows; row++) {
+    for (let col = 0; col < puzzle.cols; col++) {
+      const cell = puzzle.cells[row][col];
+      if (!cell) continue;
+      answers.set(`${row},${col}`, cell.letter);
+    }
+  }
+
+  finished = true;
+  solutionRevealed = true;
+  stopClock();
+  wrongCells.clear();
+  activeWordId = null;
+  activeCellKey = null;
+  lastClickedKey = null;
+  renderBoard();
+  renderClues();
+  renderWordList();
+  updateProgress();
+  $('win-banner').classList.add('is-revealed');
+  $('win-title').textContent = 'Gabarito revelado';
+  $('win-banner').hidden = false;
+  $('give-up').disabled = true;
+  $('check-answers').disabled = true;
+  $('win-message').textContent = `Partida encerrada por desistência. As respostas corretas de todas as ${puzzle.words.length} palavras foram preenchidas na grade${timerEnabled ? ` · tempo: ${formatTime(elapsedMs)}` : ''}.`;
+  setFeedback('Você desistiu da rodada. O gabarito completo está destacado nas células.', '');
 }
 
 function checkAnswers() {
@@ -375,6 +469,7 @@ function checkAnswers() {
     return;
   }
   renderBoard();
+  renderWordList();
   if (wrongCells.size) setFeedback(`${wrongCells.size} letra(s) incorreta(s) sinalizada(s). Revise as casas destacadas.`, 'error');
   else if (empty) setFeedback(`Ainda faltam ${empty} casa(s). Continue preenchendo a grade.`, '');
   else setFeedback('Confira os cruzamentos: todas as casas estão preenchidas, mas algumas letras precisam ser corrigidas.', 'error');
@@ -385,13 +480,19 @@ function clearBoard() {
   answers.clear();
   wrongCells.clear();
   finished = false;
+  solutionRevealed = false;
   $('win-banner').hidden = true;
+  $('win-banner').classList.remove('is-revealed');
+  $('win-title').textContent = 'Desafio concluído!';
+  $('give-up').disabled = false;
+  $('check-answers').disabled = false;
   const word = puzzle.words.find(item => item.id === activeWordId) || puzzle.words[0];
   activeWordId = word?.id ?? null;
   activeCellKey = word ? `${word.row},${word.col}` : null;
   startClock();
   renderBoard(true);
   renderClues();
+  renderWordList();
   updateProgress();
   setFeedback('Grade limpa. Você pode começar novamente.');
 }
@@ -438,10 +539,13 @@ function onKeyboardInput(event) {
 function bindEvents() {
   $('tab-bank').addEventListener('click', () => setSourceMode('bank'));
   $('tab-custom').addEventListener('click', () => setSourceMode('custom'));
+  $('mode-clues').addEventListener('click', () => setGameMode('clues', true));
+  $('mode-list').addEventListener('click', () => setGameMode('list', true));
   $('generate-puzzle').addEventListener('click', createPuzzle);
   $('next-puzzle').addEventListener('click', createPuzzle);
   $('clear-board').addEventListener('click', clearBoard);
   $('check-answers').addEventListener('click', checkAnswers);
+  $('give-up').addEventListener('click', revealSolution);
   $('theme-toggle').addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
   $('custom-words').addEventListener('input', () => safeStorageSet(STORAGE.custom, $('custom-words').value));
   $('difficulty').addEventListener('change', () => safeStorageSet(STORAGE.difficulty, $('difficulty').value));
@@ -476,15 +580,26 @@ function bindEvents() {
 
 function initialize() {
   $('bank-count').textContent = WORD_BANK.length;
-  $('bank-count-copy').textContent = `${WORD_BANK.length} palavras originais`;
+  $('bank-count-copy').textContent = `${WORD_BANK.length} palavras únicas`;
   $('custom-words').value = safeStorageGet(STORAGE.custom, '');
   const savedLevel = safeStorageGet(STORAGE.difficulty, 'medio');
   if (LEVELS[savedLevel]) $('difficulty').value = savedLevel;
   setTheme(safeStorageGet(STORAGE.theme, 'dark'));
   const savedSource = safeStorageGet(STORAGE.source, 'bank');
   setSourceMode(savedSource === 'custom' && $('custom-words').value.trim() ? 'custom' : 'bank');
+  setGameMode(safeStorageGet(STORAGE.mode, 'clues'));
   renderVirtualKeyboard();
   bindEvents();
+
+  // Evita que uma versão antiga/incompleta do banco seja usada silenciosamente.
+  if (!Array.isArray(globalThis.NEXUS_WORD_BANK) || globalThis.NEXUS_WORD_BANK.length < 299 || WORD_BANK.length < 299) {
+    setSetupFeedback(`Banco de palavras incompleto (${WORD_BANK.length}/299). Atualize os arquivos do Palavras Cruzadas e recarregue a página.`, 'error');
+    setFeedback('Não foi possível carregar o banco atualizado de 299 palavras. Atualize os arquivos e recarregue a página.', 'error');
+    $('generate-puzzle').disabled = true;
+    return;
+  }
+
+  $('generate-puzzle').disabled = false;
   createPuzzle();
 }
 
