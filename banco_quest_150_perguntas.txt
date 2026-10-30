@@ -1,0 +1,1407 @@
+BANCO DE PERGUNTAS — NEXUS CENTRAL DE JOGOS
+150 perguntas | 6 categorias | 4 alternativas por pergunta
+
+ATENÇÃO: banco consolidado a partir das 120 perguntas-base e do lote 151–180.
+Não é uma transcrição oficial de Quest ou Show do Milhão.
+Todas as perguntas estão marcadas como PENDENTE DE REVISÃO FACTUAL.
+O número de origem foi preservado; o ID interno é estável e próprio do NEXUS.
+
+==============================================================================
+
+SOCIEDADE
+------------------------------------------------------------------------------
+SOC-001 | Origem: 1 | Fácil
+Qual documento estabelece os direitos e deveres fundamentais no Brasil?
+  A) Código Civil
+  B) Constituição Federal
+  C) Código de Trânsito
+  D) Estatuto da Criança
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-002 | Origem: 2 | Fácil
+Em que ano foi proclamada a República no Brasil?
+  A) 1808
+  B) 1822
+  C) 1889
+  D) 1930
+  Gabarito: C
+  Status: pendente_revisao
+
+SOC-003 | Origem: 3 | Fácil
+Qual órgão brasileiro tem a função principal de elaborar leis federais?
+  A) Congresso Nacional
+  B) Supremo Tribunal Federal
+  C) Banco Central
+  D) Tribunal de Contas da União
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-004 | Origem: 4 | Fácil
+Qual movimento histórico brasileiro defendia a abolição da escravidão no século XIX?
+  A) Tenentismo
+  B) Abolicionismo
+  C) Integralismo
+  D) Modernismo
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-005 | Origem: 5 | Médio
+Qual é a principal função do IBGE?
+  A) Julgar crimes federais
+  B) Produzir estatísticas e informações geográficas
+  C) Fiscalizar eleições
+  D) Controlar a moeda
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-006 | Origem: 6 | Fácil
+Em qual ano foi promulgada a atual Constituição brasileira?
+  A) 1967
+  B) 1979
+  C) 1988
+  D) 1994
+  Gabarito: C
+  Status: pendente_revisao
+
+SOC-007 | Origem: 7 | Médio
+Qual instituição é responsável por organizar as eleições brasileiras?
+  A) TSE e Justiça Eleitoral
+  B) Ministério da Fazenda
+  C) Supremo Tribunal Federal isoladamente
+  D) Polícia Federal
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-008 | Origem: 8 | Médio
+A Revolução Industrial começou primeiro em qual país?
+  A) França
+  B) Alemanha
+  C) Inglaterra
+  D) Estados Unidos
+  Gabarito: C
+  Status: pendente_revisao
+
+SOC-009 | Origem: 9 | Médio
+Qual lei brasileira é conhecida por estabelecer normas de proteção de dados pessoais?
+  A) LGPD
+  B) CLT
+  C) LDB
+  D) Lei de Diretrizes Orçamentárias
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-010 | Origem: 10 | Fácil
+Qual foi o principal objetivo da Lei Áurea, assinada em 1888?
+  A) Proclamar a República
+  B) Abolir legalmente a escravidão
+  C) Criar o voto secreto
+  D) Instituir o salário mínimo
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-011 | Origem: 11 | Fácil
+Qual organização internacional foi fundada em 1945 para promover a cooperação entre países e a paz?
+  A) OTAN
+  B) ONU
+  C) OPEP
+  D) Mercosul
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-012 | Origem: 12 | Médio
+Qual movimento brasileiro de 1922 marcou a história cultural do país?
+  A) Diretas Já
+  B) Semana de Arte Moderna
+  C) Revolta da Vacina
+  D) Inconfidência Mineira
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-013 | Origem: 13 | Fácil
+O que significa a sigla CLT no contexto trabalhista brasileiro?
+  A) Cadastro Legal do Trabalhador
+  B) Consolidação das Leis do Trabalho
+  C) Conselho Laboral Técnico
+  D) Código de Licenças Trabalhistas
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-014 | Origem: 14 | Fácil
+Qual sistema político permite que cidadãos escolham representantes por meio de eleições?
+  A) Democracia representativa
+  B) Monarquia absoluta
+  C) Oligarquia hereditária
+  D) Ditadura militar
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-015 | Origem: 15 | Médio
+Qual acontecimento é associado à queda do Muro de Berlim em 1989?
+  A) Início da Primeira Guerra Mundial
+  B) Processo de reunificação alemã
+  C) Fundação da União Europeia
+  D) Fim da Guerra do Vietnã
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-016 | Origem: 16 | Fácil
+Qual é a principal função do Poder Judiciário?
+  A) Criar todas as leis
+  B) Executar políticas públicas
+  C) Julgar conflitos conforme a lei
+  D) Administrar eleições diretamente
+  Gabarito: C
+  Status: pendente_revisao
+
+SOC-017 | Origem: 17 | Médio
+Qual filósofo é associado à obra A República, que aborda justiça e organização política?
+  A) Platão
+  B) Nietzsche
+  C) John Locke
+  D) Simone de Beauvoir
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-018 | Origem: 18 | Médio
+Qual conferência da ONU de 1992 ficou conhecida por discutir meio ambiente e desenvolvimento no Rio de Janeiro?
+  A) Conferência de Bandung
+  B) Eco-92
+  C) Conferência de Bretton Woods
+  D) Conferência de Yalta
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-019 | Origem: 19 | Difícil
+Qual instituição brasileira é responsável pela fiscalização da aplicação de recursos públicos federais no âmbito do controle externo?
+  A) Tribunal de Contas da União
+  B) IBGE
+  C) Banco do Brasil
+  D) INEP
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-020 | Origem: 20 | Médio
+Qual documento internacional, adotado em 1948 pela Assembleia Geral da ONU, enumera direitos humanos fundamentais?
+  A) Tratado de Versalhes
+  B) Declaração Universal dos Direitos Humanos
+  C) Carta de Kyoto
+  D) Convenção de Viena sobre Relações Diplomáticas
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-021 | Origem: 151 | Médio
+Qual documento inglês de 1215 limitou certos poderes do rei?
+  A) Bill of Rights
+  B) Magna Carta
+  C) Tratado de Versalhes
+  D) Código Napoleônico
+  Gabarito: B
+  Status: pendente_revisao
+
+SOC-022 | Origem: 152 | Difícil
+Os Julgamentos de Nuremberg, após a Segunda Guerra Mundial, tiveram como foco principal:
+  A) A divisão territorial da Alemanha
+  B) A criação da ONU
+  C) Julgar líderes nazistas por crimes de guerra e outros crimes
+  D) A reconstrução econômica do Japão
+  Gabarito: C
+  Status: pendente_revisao
+
+SOC-023 | Origem: 153 | Difícil
+Qual revolta ocorreu em Salvador em 1835, envolvendo africanos muçulmanos escravizados e libertos?
+  A) Revolta dos Malês
+  B) Revolta da Chibata
+  C) Sabinada
+  D) Cabanagem
+  Gabarito: A
+  Status: pendente_revisao
+
+SOC-024 | Origem: 154 | Médio
+Em que ano ocorreu a primeira eleição nacional multirracial da África do Sul, que levou Nelson Mandela à presidência?
+  A) 1989
+  B) 1991
+  C) 1994
+  D) 1999
+  Gabarito: C
+  Status: pendente_revisao
+
+SOC-025 | Origem: 155 | Difícil
+Qual organização internacional criada em 1919 promove a justiça social e os direitos trabalhistas?
+  A) Organização Mundial do Comércio
+  B) Organização Internacional do Trabalho
+  C) Organização Mundial da Saúde
+  D) Fundo Monetário Internacional
+  Gabarito: B
+  Status: pendente_revisao
+
+Total da categoria: 25
+Distribuição: Fácil 10 | Médio 11 | Difícil 4
+==============================================================================
+
+ARTES E ENTRETENIMENTO
+------------------------------------------------------------------------------
+ART-001 | Origem: 1 | Fácil
+Quem pintou a Mona Lisa?
+  A) Vincent van Gogh
+  B) Leonardo da Vinci
+  C) Pablo Picasso
+  D) Claude Monet
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-002 | Origem: 2 | Fácil
+Qual é o nome da escola de magia frequentada por Harry Potter?
+  A) Nárnia
+  B) Hogwarts
+  C) Camelot
+  D) Westeros
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-003 | Origem: 3 | Fácil
+Qual compositor criou a Nona Sinfonia, que inclui a Ode à Alegria?
+  A) Mozart
+  B) Beethoven
+  C) Bach
+  D) Chopin
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-004 | Origem: 4 | Fácil
+Qual cineasta dirigiu o filme Titanic, lançado em 1997?
+  A) Steven Spielberg
+  B) James Cameron
+  C) Ridley Scott
+  D) George Lucas
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-005 | Origem: 5 | Fácil
+Qual escritor brasileiro criou o personagem Bentinho, narrador de Dom Casmurro?
+  A) José de Alencar
+  B) Machado de Assis
+  C) Graciliano Ramos
+  D) Jorge Amado
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-006 | Origem: 6 | Fácil
+Qual artista é conhecido pelo quadro A Noite Estrelada?
+  A) Salvador Dalí
+  B) Vincent van Gogh
+  C) Edvard Munch
+  D) Paul Cézanne
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-007 | Origem: 7 | Fácil
+Qual banda britânica lançou o álbum Abbey Road?
+  A) Queen
+  B) The Beatles
+  C) The Rolling Stones
+  D) Pink Floyd
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-008 | Origem: 8 | Fácil
+Quem escreveu Romeu e Julieta?
+  A) William Shakespeare
+  B) Charles Dickens
+  C) Oscar Wilde
+  D) George Orwell
+  Gabarito: A
+  Status: pendente_revisao
+
+ART-009 | Origem: 9 | Médio
+Qual movimento artístico é associado a Salvador Dalí e a imagens de sonhos?
+  A) Realismo
+  B) Surrealismo
+  C) Cubismo
+  D) Impressionismo
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-010 | Origem: 10 | Fácil
+Qual animação da Pixar acompanha um robô compactador de lixo chamado WALL-E?
+  A) WALL-E
+  B) Carros
+  C) Up
+  D) Ratatouille
+  Gabarito: A
+  Status: pendente_revisao
+
+ART-011 | Origem: 11 | Fácil
+Qual cantora lançou o álbum Thriller em 1982?
+  A) Madonna
+  B) Whitney Houston
+  C) Michael Jackson
+  D) Prince
+  Gabarito: C
+  Status: pendente_revisao
+
+ART-012 | Origem: 12 | Fácil
+Qual escritor criou o detetive Sherlock Holmes?
+  A) Agatha Christie
+  B) Arthur Conan Doyle
+  C) Edgar Allan Poe
+  D) J. R. R. Tolkien
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-013 | Origem: 13 | Fácil
+Qual é a principal premiação do cinema concedida pela Academia de Artes e Ciências Cinematográficas dos Estados Unidos?
+  A) Grammy
+  B) Oscar
+  C) Tony
+  D) Pulitzer
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-014 | Origem: 14 | Médio
+Quem pintou Guernica, obra relacionada à Guerra Civil Espanhola?
+  A) Pablo Picasso
+  B) Joan Miró
+  C) Francisco Goya
+  D) Diego Velázquez
+  Gabarito: A
+  Status: pendente_revisao
+
+ART-015 | Origem: 15 | Médio
+Qual musical da Broadway conta a história de Alexander Hamilton?
+  A) Cats
+  B) Hamilton
+  C) Chicago
+  D) Wicked
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-016 | Origem: 16 | Médio
+Qual escritora criou a personagem Elizabeth Bennet em Orgulho e Preconceito?
+  A) Jane Austen
+  B) Emily Brontë
+  C) Mary Shelley
+  D) Virginia Woolf
+  Gabarito: A
+  Status: pendente_revisao
+
+ART-017 | Origem: 17 | Médio
+Qual diretor japonês dirigiu A Viagem de Chihiro?
+  A) Akira Kurosawa
+  B) Hayao Miyazaki
+  C) Makoto Shinkai
+  D) Isao Takahata
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-018 | Origem: 18 | Fácil
+Qual gênero musical brasileiro é fortemente associado a João Gilberto e Tom Jobim?
+  A) Sertanejo
+  B) Bossa nova
+  C) Frevo
+  D) Lambada
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-019 | Origem: 19 | Fácil
+Em qual saga cinematográfica aparece o personagem Darth Vader?
+  A) Star Trek
+  B) Star Wars
+  C) Duna
+  D) Matrix
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-020 | Origem: 20 | Difícil
+Qual dramaturgo norueguês escreveu a peça Casa de Bonecas?
+  A) Henrik Ibsen
+  B) Molière
+  C) Anton Tchekhov
+  D) Bertolt Brecht
+  Gabarito: A
+  Status: pendente_revisao
+
+ART-021 | Origem: 156 | Médio
+Quem pintou a obra O Grito?
+  A) Vincent van Gogh
+  B) Edvard Munch
+  C) Claude Monet
+  D) Salvador Dalí
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-022 | Origem: 157 | Difícil
+Quem escreveu o romance Grande Sertão: Veredas?
+  A) João Guimarães Rosa
+  B) Graciliano Ramos
+  C) Jorge Amado
+  D) José de Alencar
+  Gabarito: A
+  Status: pendente_revisao
+
+ART-023 | Origem: 158 | Médio
+Quem compôs a cantata Carmina Burana, estreada em 1937?
+  A) Richard Wagner
+  B) Gustav Mahler
+  C) Carl Orff
+  D) Johann Strauss II
+  Gabarito: C
+  Status: pendente_revisao
+
+ART-024 | Origem: 159 | Difícil
+Qual cineasta japonês dirigiu o filme Rashomon, de 1950?
+  A) Yasujirō Ozu
+  B) Akira Kurosawa
+  C) Hayao Miyazaki
+  D) Kenji Mizoguchi
+  Gabarito: B
+  Status: pendente_revisao
+
+ART-025 | Origem: 160 | Difícil
+Quem criou a escultura O Pensador?
+  A) Auguste Rodin
+  B) Michelangelo
+  C) Donatello
+  D) Gian Lorenzo Bernini
+  Gabarito: A
+  Status: pendente_revisao
+
+Total da categoria: 25
+Distribuição: Fácil 14 | Médio 7 | Difícil 4
+==============================================================================
+
+VARIEDADES
+------------------------------------------------------------------------------
+VAR-001 | Origem: 1 | Fácil
+Quantos lados tem um hexágono?
+  A) Cinco
+  B) Seis
+  C) Sete
+  D) Oito
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-002 | Origem: 2 | Fácil
+Qual é o plural correto de cidadão?
+  A) Cidadões
+  B) Cidadães
+  C) Cidadãos
+  D) Cidadans
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-003 | Origem: 3 | Fácil
+Quantos minutos há em duas horas e meia?
+  A) 120
+  B) 130
+  C) 150
+  D) 180
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-004 | Origem: 4 | Fácil
+Qual instrumento é tradicionalmente usado para medir a temperatura?
+  A) Barômetro
+  B) Termômetro
+  C) Higrômetro
+  D) Anemômetro
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-005 | Origem: 5 | Fácil
+Qual é o ingrediente principal do guacamole tradicional?
+  A) Abacate
+  B) Pepino
+  C) Berinjela
+  D) Ervilha
+  Gabarito: A
+  Status: pendente_revisao
+
+VAR-006 | Origem: 6 | Médio
+Qual unidade é usada para medir a intensidade da corrente elétrica?
+  A) Volt
+  B) Watt
+  C) Ampere
+  D) Ohm
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-007 | Origem: 7 | Fácil
+Como se chama o polígono que possui oito lados?
+  A) Heptágono
+  B) Octógono
+  C) Decágono
+  D) Pentágono
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-008 | Origem: 8 | Fácil
+Qual é a moeda oficial do Japão?
+  A) Won
+  B) Yuan
+  C) Iene
+  D) Baht
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-009 | Origem: 9 | Médio
+Qual destes animais é um mamífero que põe ovos?
+  A) Morcego
+  B) Ornitorrinco
+  C) Golfinho
+  D) Canguru
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-010 | Origem: 10 | Médio
+Qual é o nome do medo intenso de espaços fechados?
+  A) Acrofobia
+  B) Aracnofobia
+  C) Claustrofobia
+  D) Agorafobia
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-011 | Origem: 11 | Fácil
+Qual é o resultado de 15% de 200?
+  A) 15
+  B) 20
+  C) 30
+  D) 35
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-012 | Origem: 12 | Fácil
+Qual destes materiais é naturalmente magnético em condições comuns?
+  A) Madeira
+  B) Ferro
+  C) Vidro
+  D) Borracha
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-013 | Origem: 13 | Fácil
+Qual é o nome dado a uma palavra que tem sentido oposto ao de outra?
+  A) Sinônimo
+  B) Antônimo
+  C) Homônimo
+  D) Parônimo
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-014 | Origem: 14 | Fácil
+Em qual jogo de tabuleiro o objetivo tradicional é dar xeque-mate ao rei adversário?
+  A) Damas
+  B) Xadrez
+  C) Gamão
+  D) Ludo
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-015 | Origem: 15 | Médio
+Qual é o principal gás presente no ar da atmosfera terrestre?
+  A) Oxigênio
+  B) Dióxido de carbono
+  C) Nitrogênio
+  D) Hidrogênio
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-016 | Origem: 16 | Médio
+Quantas teclas brancas existem em uma oitava de um piano tradicional?
+  A) Cinco
+  B) Sete
+  C) Oito
+  D) Doze
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-017 | Origem: 17 | Médio
+Qual é o nome do processo de transformar vapor em líquido?
+  A) Fusão
+  B) Condensação
+  C) Sublimação
+  D) Solidificação
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-018 | Origem: 18 | Fácil
+Qual é o menor número primo?
+  A) 0
+  B) 1
+  C) 2
+  D) 3
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-019 | Origem: 19 | Médio
+Qual desses animais é conhecido por mudar de cor e mover os olhos de forma independente?
+  A) Camaleão
+  B) Iguana-marinha
+  C) Tartaruga-verde
+  D) Salamandra
+  Gabarito: A
+  Status: pendente_revisao
+
+VAR-020 | Origem: 20 | Médio
+Na tipografia, o que significa a sigla RGB?
+  A) Red, Green, Blue
+  B) Rapid Graphic Base
+  C) Raster Grid Balance
+  D) Red, Gray, Black
+  Gabarito: A
+  Status: pendente_revisao
+
+VAR-021 | Origem: 161 | Médio
+Qual é a unidade básica do Sistema Internacional para intensidade luminosa?
+  A) Lux
+  B) Candela
+  C) Lúmen
+  D) Watt
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-022 | Origem: 162 | Difícil
+Na sequência de Fibonacci 1, 1, 2, 3, 5..., qual é o décimo termo?
+  A) 34
+  B) 45
+  C) 55
+  D) 89
+  Gabarito: C
+  Status: pendente_revisao
+
+VAR-023 | Origem: 163 | Médio
+No código Morse, qual sequência representa o sinal de socorro SOS?
+  A) Três traços, três pontos, três traços
+  B) Três pontos, três traços, três pontos
+  C) Dois pontos, dois traços, dois pontos
+  D) Um traço, três pontos, um traço
+  Gabarito: B
+  Status: pendente_revisao
+
+VAR-024 | Origem: 164 | Difícil
+Como se chama um polígono de 12 lados?
+  A) Dodecágono
+  B) Decágono
+  C) Hexadecágono
+  D) Eneágono
+  Gabarito: A
+  Status: pendente_revisao
+
+VAR-025 | Origem: 165 | Difícil
+Quantos semitons há em uma oitava na afinação ocidental temperada usual?
+  A) 7
+  B) 10
+  C) 12
+  D) 14
+  Gabarito: C
+  Status: pendente_revisao
+
+Total da categoria: 25
+Distribuição: Fácil 12 | Médio 10 | Difícil 3
+==============================================================================
+
+CIÊNCIA E TECNOLOGIA
+------------------------------------------------------------------------------
+CIE-001 | Origem: 1 | Fácil
+Qual planeta é conhecido como planeta vermelho?
+  A) Vênus
+  B) Marte
+  C) Júpiter
+  D) Mercúrio
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-002 | Origem: 2 | Fácil
+Qual é a unidade básica de informação digital que pode assumir os valores 0 ou 1?
+  A) Byte
+  B) Bit
+  C) Pixel
+  D) Hertz
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-003 | Origem: 3 | Fácil
+Qual órgão humano bombeia o sangue pelo corpo?
+  A) Fígado
+  B) Pulmão
+  C) Coração
+  D) Rim
+  Gabarito: C
+  Status: pendente_revisao
+
+CIE-004 | Origem: 4 | Fácil
+Qual é a fórmula química da água?
+  A) CO₂
+  B) H₂O
+  C) O₂
+  D) NaCl
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-005 | Origem: 5 | Fácil
+Qual cientista formulou as leis clássicas do movimento e a lei da gravitação universal?
+  A) Albert Einstein
+  B) Isaac Newton
+  C) Galileu Galilei
+  D) Niels Bohr
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-006 | Origem: 6 | Médio
+Qual estrutura celular contém grande parte do material genético das células eucarióticas?
+  A) Ribossomo
+  B) Núcleo
+  C) Membrana plasmática
+  D) Complexo de Golgi
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-007 | Origem: 7 | Fácil
+Qual gás as plantas absorvem da atmosfera durante a fotossíntese?
+  A) Oxigênio
+  B) Hélio
+  C) Dióxido de carbono
+  D) Hidrogênio
+  Gabarito: C
+  Status: pendente_revisao
+
+CIE-008 | Origem: 8 | Fácil
+Qual é a estrela mais próxima da Terra?
+  A) Sirius
+  B) Sol
+  C) Próxima Centauri
+  D) Betelgeuse
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-009 | Origem: 9 | Fácil
+Qual escala é usada para medir a acidez ou alcalinidade de uma solução?
+  A) Richter
+  B) pH
+  C) Beaufort
+  D) Kelvin
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-010 | Origem: 10 | Fácil
+Qual componente de um computador executa instruções e realiza cálculos gerais?
+  A) CPU
+  B) Monitor
+  C) Teclado
+  D) Fonte de alimentação
+  Gabarito: A
+  Status: pendente_revisao
+
+CIE-011 | Origem: 11 | Fácil
+Qual cientista é associado à teoria da relatividade?
+  A) Charles Darwin
+  B) Albert Einstein
+  C) Louis Pasteur
+  D) Michael Faraday
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-012 | Origem: 12 | Médio
+Qual é o nome do processo pelo qual uma célula se divide em duas células-filhas geneticamente semelhantes?
+  A) Meiose
+  B) Mitose
+  C) Osmose
+  D) Fermentação
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-013 | Origem: 13 | Médio
+Qual é o símbolo químico do ouro?
+  A) Ag
+  B) Au
+  C) Fe
+  D) Gd
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-014 | Origem: 14 | Fácil
+Qual partícula subatômica possui carga elétrica negativa?
+  A) Próton
+  B) Nêutron
+  C) Elétron
+  D) Pósitron
+  Gabarito: C
+  Status: pendente_revisao
+
+CIE-015 | Origem: 15 | Fácil
+Qual missão levou os primeiros seres humanos à superfície da Lua?
+  A) Apollo 8
+  B) Apollo 11
+  C) Gemini 7
+  D) Apollo 13
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-016 | Origem: 16 | Fácil
+Qual tecnologia permite que dispositivos troquem dados sem fio em curtas distâncias usando ondas de rádio, em redes locais?
+  A) Ethernet
+  B) Wi-Fi
+  C) HDMI
+  D) SATA
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-017 | Origem: 17 | Médio
+Qual é a unidade de medida da resistência elétrica?
+  A) Ohm
+  B) Ampere
+  C) Tesla
+  D) Joule
+  Gabarito: A
+  Status: pendente_revisao
+
+CIE-018 | Origem: 18 | Médio
+Qual cientista propôs a seleção natural como mecanismo central da evolução das espécies?
+  A) Gregor Mendel
+  B) Charles Darwin
+  C) Dmitri Mendeleev
+  D) Robert Hooke
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-019 | Origem: 19 | Difícil
+Qual camada da atmosfera contém a maior parte do ozônio atmosférico que absorve radiação ultravioleta?
+  A) Troposfera
+  B) Estratosfera
+  C) Mesosfera
+  D) Exosfera
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-020 | Origem: 20 | Médio
+Qual fenômeno explica a mudança de direção da luz ao passar de um meio para outro?
+  A) Reflexão
+  B) Refração
+  C) Difração
+  D) Polarização
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-021 | Origem: 166 | Médio
+Qual cientista propôs a teoria da deriva continental?
+  A) Alfred Wegener
+  B) Charles Darwin
+  C) Gregor Mendel
+  D) James Hutton
+  Gabarito: A
+  Status: pendente_revisao
+
+CIE-022 | Origem: 167 | Difícil
+A técnica CRISPR-Cas9 é conhecida principalmente por permitir:
+  A) Produzir energia por fusão nuclear comercial
+  B) Editar sequências específicas de DNA
+  C) Medir a idade de fósseis com ultrassom
+  D) Criar vacinas sem material genético
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-023 | Origem: 168 | Médio
+Em que ano foi lançado o Telescópio Espacial James Webb?
+  A) 2015
+  B) 2019
+  C) 2021
+  D) 2024
+  Gabarito: C
+  Status: pendente_revisao
+
+CIE-024 | Origem: 169 | Difícil
+Qual elemento químico tem o símbolo W?
+  A) Vanádio
+  B) Tungstênio
+  C) Titânio
+  D) Zinco
+  Gabarito: B
+  Status: pendente_revisao
+
+CIE-025 | Origem: 170 | Difícil
+Qual foi o nome do exoplaneta anunciado em 1995 como o primeiro descoberto orbitando uma estrela semelhante ao Sol?
+  A) Kepler-186f
+  B) Proxima Centauri b
+  C) 51 Pegasi b
+  D) TRAPPIST-1e
+  Gabarito: C
+  Status: pendente_revisao
+
+Total da categoria: 25
+Distribuição: Fácil 13 | Médio 8 | Difícil 4
+==============================================================================
+
+MUNDO
+------------------------------------------------------------------------------
+MUN-001 | Origem: 1 | Fácil
+Qual é a capital da Argentina?
+  A) Santiago
+  B) Buenos Aires
+  C) Montevidéu
+  D) Lima
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-002 | Origem: 2 | Fácil
+Qual é o maior oceano da Terra?
+  A) Atlântico
+  B) Índico
+  C) Pacífico
+  D) Ártico
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-003 | Origem: 3 | Fácil
+Em qual continente fica o Egito?
+  A) África
+  B) Europa
+  C) América do Sul
+  D) Oceania
+  Gabarito: A
+  Status: pendente_revisao
+
+MUN-004 | Origem: 4 | Fácil
+Qual é a capital do Japão?
+  A) Kyoto
+  B) Osaka
+  C) Tóquio
+  D) Hiroshima
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-005 | Origem: 5 | Fácil
+Qual cordilheira se estende ao longo da costa oeste da América do Sul?
+  A) Alpes
+  B) Andes
+  C) Himalaia
+  D) Montes Urais
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-006 | Origem: 6 | Fácil
+Qual país tem formato frequentemente comparado ao de uma bota?
+  A) Grécia
+  B) Itália
+  C) Portugal
+  D) Croácia
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-007 | Origem: 7 | Fácil
+Qual é a capital do Canadá?
+  A) Toronto
+  B) Vancouver
+  C) Ottawa
+  D) Montreal
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-008 | Origem: 8 | Fácil
+Em qual país fica a cidade de Marrakech?
+  A) Marrocos
+  B) Egito
+  C) Tunísia
+  D) Jordânia
+  Gabarito: A
+  Status: pendente_revisao
+
+MUN-009 | Origem: 9 | Fácil
+Qual rio atravessa a cidade de Paris?
+  A) Tâmisa
+  B) Sena
+  C) Danúbio
+  D) Reno
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-010 | Origem: 10 | Fácil
+Qual é o maior país do mundo em área territorial?
+  A) Canadá
+  B) China
+  C) Estados Unidos
+  D) Rússia
+  Gabarito: D
+  Status: pendente_revisao
+
+MUN-011 | Origem: 11 | Médio
+Qual país abriga a região histórica da Capadócia?
+  A) Turquia
+  B) Irã
+  C) Grécia
+  D) Armênia
+  Gabarito: A
+  Status: pendente_revisao
+
+MUN-012 | Origem: 12 | Médio
+Qual é a capital da Nova Zelândia?
+  A) Auckland
+  B) Wellington
+  C) Christchurch
+  D) Hamilton
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-013 | Origem: 13 | Fácil
+Qual deserto ocupa grande parte do norte da África?
+  A) Gobi
+  B) Atacama
+  C) Saara
+  D) Kalahari
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-014 | Origem: 14 | Médio
+Qual país é conhecido por suas cidades históricas de Petra e Amã?
+  A) Líbano
+  B) Jordânia
+  C) Iraque
+  D) Omã
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-015 | Origem: 15 | Médio
+Qual estreito separa a Espanha do Marrocos?
+  A) Estreito de Bering
+  B) Estreito de Gibraltar
+  C) Estreito de Malaca
+  D) Estreito de Magalhães
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-016 | Origem: 16 | Fácil
+Qual é a capital da Coreia do Sul?
+  A) Busan
+  B) Seul
+  C) Pyongyang
+  D) Incheon
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-017 | Origem: 17 | Médio
+Qual país africano tem Adis Abeba como capital?
+  A) Quênia
+  B) Etiópia
+  C) Uganda
+  D) Ruanda
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-018 | Origem: 18 | Médio
+Em qual país fica o sítio arqueológico de Angkor Wat?
+  A) Tailândia
+  B) Vietnã
+  C) Camboja
+  D) Laos
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-019 | Origem: 19 | Médio
+Qual é o menor país do mundo em área territorial?
+  A) Mônaco
+  B) San Marino
+  C) Vaticano
+  D) Liechtenstein
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-020 | Origem: 20 | Fácil
+Qual mar fica entre a Europa e o norte da África?
+  A) Mar do Norte
+  B) Mar Mediterrâneo
+  C) Mar Báltico
+  D) Mar de Bering
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-021 | Origem: 171 | Médio
+O Canal do Panamá conecta quais dois oceanos?
+  A) Atlântico e Pacífico
+  B) Índico e Pacífico
+  C) Ártico e Atlântico
+  D) Índico e Atlântico
+  Gabarito: A
+  Status: pendente_revisao
+
+MUN-022 | Origem: 172 | Difícil
+Qual estreito é uma passagem estratégica entre o Golfo Pérsico e o Golfo de Omã?
+  A) Estreito de Bering
+  B) Estreito de Ormuz
+  C) Estreito de Gibraltar
+  D) Estreito de Magalhães
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-023 | Origem: 173 | Médio
+Qual país é completamente cercado pelo território da África do Sul?
+  A) Botsuana
+  B) Lesoto
+  C) Eswatini
+  D) Namíbia
+  Gabarito: B
+  Status: pendente_revisao
+
+MUN-024 | Origem: 174 | Difícil
+Qual é o lago mais profundo do mundo?
+  A) Lago Vitória
+  B) Lago Superior
+  C) Lago Baikal
+  D) Lago Tanganica
+  Gabarito: C
+  Status: pendente_revisao
+
+MUN-025 | Origem: 175 | Difícil
+Em qual mar deságua o rio Danúbio?
+  A) Mar Negro
+  B) Mar Báltico
+  C) Mar Mediterrâneo
+  D) Mar Cáspio
+  Gabarito: A
+  Status: pendente_revisao
+
+Total da categoria: 25
+Distribuição: Fácil 13 | Médio 9 | Difícil 3
+==============================================================================
+
+ESPORTES E LAZER
+------------------------------------------------------------------------------
+ESP-001 | Origem: 1 | Fácil
+Quantos jogadores de cada equipe ficam em campo no início de uma partida de futebol?
+  A) 9
+  B) 10
+  C) 11
+  D) 12
+  Gabarito: C
+  Status: pendente_revisao
+
+ESP-002 | Origem: 2 | Fácil
+Em qual esporte é disputado o torneio de Wimbledon?
+  A) Golfe
+  B) Tênis
+  C) Críquete
+  D) Rúgbi
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-003 | Origem: 3 | Fácil
+Quantos anéis aparecem no símbolo olímpico tradicional?
+  A) Quatro
+  B) Cinco
+  C) Seis
+  D) Sete
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-004 | Origem: 4 | Fácil
+Qual peça do xadrez se movimenta em formato de L?
+  A) Bispo
+  B) Cavalo
+  C) Torre
+  D) Rainha
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-005 | Origem: 5 | Fácil
+Em qual esporte se utiliza um volante, também chamado de peteca, sobre uma rede?
+  A) Badminton
+  B) Squash
+  C) Tênis de mesa
+  D) Voleibol
+  Gabarito: A
+  Status: pendente_revisao
+
+ESP-006 | Origem: 6 | Fácil
+Qual é a distância oficial de uma maratona?
+  A) 21,097 km
+  B) 40 km
+  C) 42,195 km
+  D) 50 km
+  Gabarito: C
+  Status: pendente_revisao
+
+ESP-007 | Origem: 7 | Fácil
+Em qual esporte uma equipe tenta marcar pontos arremessando uma bola em uma cesta elevada?
+  A) Handebol
+  B) Basquete
+  C) Polo aquático
+  D) Beisebol
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-008 | Origem: 8 | Fácil
+Qual país sediou a Copa do Mundo masculina de futebol de 2014?
+  A) África do Sul
+  B) Brasil
+  C) Alemanha
+  D) Rússia
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-009 | Origem: 9 | Médio
+Quantos sets uma dupla ou um jogador precisa vencer normalmente para ganhar uma partida masculina de simples em um Grand Slam de tênis?
+  A) Dois
+  B) Três
+  C) Quatro
+  D) Cinco
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-010 | Origem: 10 | Fácil
+Qual bandeira indica o fim de uma corrida automobilística?
+  A) Vermelha
+  B) Amarela
+  C) Quadriculada
+  D) Verde
+  Gabarito: C
+  Status: pendente_revisao
+
+ESP-011 | Origem: 11 | Médio
+Em qual modalidade olímpica é executado o movimento chamado ippon?
+  A) Judô
+  B) Esgrima
+  C) Taekwondo
+  D) Luta greco-romana
+  Gabarito: A
+  Status: pendente_revisao
+
+ESP-012 | Origem: 12 | Fácil
+Qual é o nome da principal competição anual de clubes de futebol organizada pela UEFA?
+  A) Copa Libertadores
+  B) Liga dos Campeões
+  C) Copa da Ásia
+  D) Copa Africana de Nações
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-013 | Origem: 13 | Fácil
+Qual país é tradicionalmente associado à origem do sumô?
+  A) China
+  B) Japão
+  C) Coreia do Sul
+  D) Mongólia
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-014 | Origem: 14 | Médio
+No vôlei de quadra, quantos toques uma equipe pode dar antes de devolver a bola, desconsiderando o toque de bloqueio?
+  A) Dois
+  B) Três
+  C) Quatro
+  D) Cinco
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-015 | Origem: 15 | Fácil
+Qual peça do jogo de damas se move diagonalmente sobre as casas do tabuleiro?
+  A) Peão
+  B) Dama
+  C) Cavalo
+  D) Torre
+  Gabarito: A
+  Status: pendente_revisao
+
+ESP-016 | Origem: 16 | Médio
+Qual é a prova de natação que combina borboleta, costas, peito e livre na mesma prova individual?
+  A) Revezamento livre
+  B) Medley individual
+  C) Maratona aquática
+  D) Nado sincronizado
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-017 | Origem: 17 | Médio
+Qual bandeira da Fórmula 1 normalmente indica perigo e proíbe ultrapassagens na área sinalizada?
+  A) Azul
+  B) Amarela
+  C) Branca
+  D) Verde
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-018 | Origem: 18 | Fácil
+Em qual esporte se disputa a competição conhecida como Tour de France?
+  A) Motociclismo
+  B) Ciclismo
+  C) Triatlo
+  D) Patinação
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-019 | Origem: 19 | Médio
+Qual é a pontuação de um touchdown no futebol americano antes de qualquer tentativa extra?
+  A) 3 pontos
+  B) 6 pontos
+  C) 7 pontos
+  D) 8 pontos
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-020 | Origem: 20 | Médio
+Qual modalidade utiliza florete, espada e sabre?
+  A) Esgrima
+  B) Tiro com arco
+  C) Pentatlo moderno
+  D) Hóquei sobre grama
+  Gabarito: A
+  Status: pendente_revisao
+
+ESP-021 | Origem: 176 | Médio
+No golfe, como se chama uma jogada concluída com uma tacada abaixo do par do buraco?
+  A) Eagle
+  B) Bogey
+  C) Birdie
+  D) Albatross
+  Gabarito: C
+  Status: pendente_revisao
+
+ESP-022 | Origem: 177 | Difícil
+Qual é a duração padrão do relógio de arremesso na NBA?
+  A) 14 segundos
+  B) 20 segundos
+  C) 24 segundos
+  D) 30 segundos
+  Gabarito: C
+  Status: pendente_revisao
+
+ESP-023 | Origem: 178 | Médio
+Quantas provas compõem o decatlo do atletismo?
+  A) 8
+  B) 9
+  C) 10
+  D) 12
+  Gabarito: C
+  Status: pendente_revisao
+
+ESP-024 | Origem: 179 | Difícil
+Em que edição dos Jogos Olímpicos modernos o basquete masculino entrou oficialmente no programa?
+  A) Paris 1924
+  B) Berlim 1936
+  C) Londres 1948
+  D) Helsinque 1952
+  Gabarito: B
+  Status: pendente_revisao
+
+ESP-025 | Origem: 180 | Difícil
+No snooker, qual é a pontuação máxima tradicional em uma tacada de entrada, sem bola livre?
+  A) 125
+  B) 139
+  C) 147
+  D) 155
+  Gabarito: C
+  Status: pendente_revisao
+
+Total da categoria: 25
+Distribuição: Fácil 13 | Médio 9 | Difícil 3
+==============================================================================
+
+RESUMO GERAL
+Total: 150
+Fácil: 75
+Médio: 54
+Difícil: 21
+
+REGRAS DE RODADA PREVISTAS
+- Selecionar aleatoriamente uma das seis categorias.
+- Apresentar 2 perguntas fáceis, 2 médias e 2 difíceis, nessa ordem.
+- Não repetir uma pergunta dentro da mesma rodada.
+- O jogo deve carregar este JSON; as perguntas não devem ficar fixas no código principal.

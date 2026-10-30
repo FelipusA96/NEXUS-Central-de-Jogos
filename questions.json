@@ -1,0 +1,4617 @@
+{
+  "schemaVersion": "1.0.0",
+  "title": "Banco de Perguntas — NEXUS Central de Jogos",
+  "totalQuestions": 150,
+  "reviewStatus": "pendente_revisao",
+  "notes": [
+    "Banco consolidado a partir do conjunto-base de 120 perguntas e do lote de perguntas 151 a 180.",
+    "As perguntas não são transcrições oficiais de Quest ou Show do Milhão.",
+    "As respostas ainda precisam de revisão factual antes da publicação.",
+    "As perguntas ficam separadas da lógica do jogo para permitir expansão do banco sem alterar o código principal."
+  ],
+  "categories": [
+    {
+      "id": "sociedade",
+      "name": "Sociedade",
+      "dieFace": 1,
+      "questionCount": 25,
+      "difficultyDistribution": {
+        "facil": 10,
+        "medio": 11,
+        "dificil": 4
+      }
+    },
+    {
+      "id": "artes_entretenimento",
+      "name": "Artes e Entretenimento",
+      "dieFace": 2,
+      "questionCount": 25,
+      "difficultyDistribution": {
+        "facil": 14,
+        "medio": 7,
+        "dificil": 4
+      }
+    },
+    {
+      "id": "variedades",
+      "name": "Variedades",
+      "dieFace": 3,
+      "questionCount": 25,
+      "difficultyDistribution": {
+        "facil": 12,
+        "medio": 10,
+        "dificil": 3
+      }
+    },
+    {
+      "id": "ciencia_tecnologia",
+      "name": "Ciência e Tecnologia",
+      "dieFace": 4,
+      "questionCount": 25,
+      "difficultyDistribution": {
+        "facil": 13,
+        "medio": 8,
+        "dificil": 4
+      }
+    },
+    {
+      "id": "mundo",
+      "name": "Mundo",
+      "dieFace": 5,
+      "questionCount": 25,
+      "difficultyDistribution": {
+        "facil": 13,
+        "medio": 9,
+        "dificil": 3
+      }
+    },
+    {
+      "id": "esportes_lazer",
+      "name": "Esportes e Lazer",
+      "dieFace": 6,
+      "questionCount": 25,
+      "difficultyDistribution": {
+        "facil": 13,
+        "medio": 9,
+        "dificil": 3
+      }
+    }
+  ],
+  "difficulties": [
+    {
+      "id": "facil",
+      "name": "Fácil",
+      "questionsPerRound": 2
+    },
+    {
+      "id": "medio",
+      "name": "Médio",
+      "questionsPerRound": 2
+    },
+    {
+      "id": "dificil",
+      "name": "Difícil",
+      "questionsPerRound": 2
+    }
+  ],
+  "roundRules": {
+    "categorySelection": "random",
+    "questionsPerCategoryPerRound": 6,
+    "difficultyOrder": [
+      "facil",
+      "facil",
+      "medio",
+      "medio",
+      "dificil",
+      "dificil"
+    ],
+    "noRepeatedQuestionWithinRound": true
+  },
+  "difficultyDistribution": {
+    "facil": 75,
+    "medio": 54,
+    "dificil": 21
+  },
+  "questions": [
+    {
+      "sourceNumber": 1,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual documento estabelece os direitos e deveres fundamentais no Brasil?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Código Civil"
+        },
+        {
+          "id": "B",
+          "text": "Constituição Federal"
+        },
+        {
+          "id": "C",
+          "text": "Código de Trânsito"
+        },
+        {
+          "id": "D",
+          "text": "Estatuto da Criança"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-001",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 2,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em que ano foi proclamada a República no Brasil?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1808"
+        },
+        {
+          "id": "B",
+          "text": "1822"
+        },
+        {
+          "id": "C",
+          "text": "1889"
+        },
+        {
+          "id": "D",
+          "text": "1930"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "SOC-002",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 3,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual órgão brasileiro tem a função principal de elaborar leis federais?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Congresso Nacional"
+        },
+        {
+          "id": "B",
+          "text": "Supremo Tribunal Federal"
+        },
+        {
+          "id": "C",
+          "text": "Banco Central"
+        },
+        {
+          "id": "D",
+          "text": "Tribunal de Contas da União"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "SOC-003",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 4,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual movimento histórico brasileiro defendia a abolição da escravidão no século XIX?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tenentismo"
+        },
+        {
+          "id": "B",
+          "text": "Abolicionismo"
+        },
+        {
+          "id": "C",
+          "text": "Integralismo"
+        },
+        {
+          "id": "D",
+          "text": "Modernismo"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-004",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 5,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é a principal função do IBGE?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Julgar crimes federais"
+        },
+        {
+          "id": "B",
+          "text": "Produzir estatísticas e informações geográficas"
+        },
+        {
+          "id": "C",
+          "text": "Fiscalizar eleições"
+        },
+        {
+          "id": "D",
+          "text": "Controlar a moeda"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-005",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 6,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual ano foi promulgada a atual Constituição brasileira?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1967"
+        },
+        {
+          "id": "B",
+          "text": "1979"
+        },
+        {
+          "id": "C",
+          "text": "1988"
+        },
+        {
+          "id": "D",
+          "text": "1994"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "SOC-006",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 7,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual instituição é responsável por organizar as eleições brasileiras?",
+      "options": [
+        {
+          "id": "A",
+          "text": "TSE e Justiça Eleitoral"
+        },
+        {
+          "id": "B",
+          "text": "Ministério da Fazenda"
+        },
+        {
+          "id": "C",
+          "text": "Supremo Tribunal Federal isoladamente"
+        },
+        {
+          "id": "D",
+          "text": "Polícia Federal"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "SOC-007",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 8,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "A Revolução Industrial começou primeiro em qual país?",
+      "options": [
+        {
+          "id": "A",
+          "text": "França"
+        },
+        {
+          "id": "B",
+          "text": "Alemanha"
+        },
+        {
+          "id": "C",
+          "text": "Inglaterra"
+        },
+        {
+          "id": "D",
+          "text": "Estados Unidos"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "SOC-008",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 9,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual lei brasileira é conhecida por estabelecer normas de proteção de dados pessoais?",
+      "options": [
+        {
+          "id": "A",
+          "text": "LGPD"
+        },
+        {
+          "id": "B",
+          "text": "CLT"
+        },
+        {
+          "id": "C",
+          "text": "LDB"
+        },
+        {
+          "id": "D",
+          "text": "Lei de Diretrizes Orçamentárias"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "SOC-009",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 10,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual foi o principal objetivo da Lei Áurea, assinada em 1888?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Proclamar a República"
+        },
+        {
+          "id": "B",
+          "text": "Abolir legalmente a escravidão"
+        },
+        {
+          "id": "C",
+          "text": "Criar o voto secreto"
+        },
+        {
+          "id": "D",
+          "text": "Instituir o salário mínimo"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-010",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 11,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual organização internacional foi fundada em 1945 para promover a cooperação entre países e a paz?",
+      "options": [
+        {
+          "id": "A",
+          "text": "OTAN"
+        },
+        {
+          "id": "B",
+          "text": "ONU"
+        },
+        {
+          "id": "C",
+          "text": "OPEP"
+        },
+        {
+          "id": "D",
+          "text": "Mercosul"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-011",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 12,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual movimento brasileiro de 1922 marcou a história cultural do país?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Diretas Já"
+        },
+        {
+          "id": "B",
+          "text": "Semana de Arte Moderna"
+        },
+        {
+          "id": "C",
+          "text": "Revolta da Vacina"
+        },
+        {
+          "id": "D",
+          "text": "Inconfidência Mineira"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-012",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 13,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "O que significa a sigla CLT no contexto trabalhista brasileiro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cadastro Legal do Trabalhador"
+        },
+        {
+          "id": "B",
+          "text": "Consolidação das Leis do Trabalho"
+        },
+        {
+          "id": "C",
+          "text": "Conselho Laboral Técnico"
+        },
+        {
+          "id": "D",
+          "text": "Código de Licenças Trabalhistas"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-013",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 14,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual sistema político permite que cidadãos escolham representantes por meio de eleições?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Democracia representativa"
+        },
+        {
+          "id": "B",
+          "text": "Monarquia absoluta"
+        },
+        {
+          "id": "C",
+          "text": "Oligarquia hereditária"
+        },
+        {
+          "id": "D",
+          "text": "Ditadura militar"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "SOC-014",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 15,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual acontecimento é associado à queda do Muro de Berlim em 1989?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Início da Primeira Guerra Mundial"
+        },
+        {
+          "id": "B",
+          "text": "Processo de reunificação alemã"
+        },
+        {
+          "id": "C",
+          "text": "Fundação da União Europeia"
+        },
+        {
+          "id": "D",
+          "text": "Fim da Guerra do Vietnã"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-015",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 16,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a principal função do Poder Judiciário?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Criar todas as leis"
+        },
+        {
+          "id": "B",
+          "text": "Executar políticas públicas"
+        },
+        {
+          "id": "C",
+          "text": "Julgar conflitos conforme a lei"
+        },
+        {
+          "id": "D",
+          "text": "Administrar eleições diretamente"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "SOC-016",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 17,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual filósofo é associado à obra A República, que aborda justiça e organização política?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Platão"
+        },
+        {
+          "id": "B",
+          "text": "Nietzsche"
+        },
+        {
+          "id": "C",
+          "text": "John Locke"
+        },
+        {
+          "id": "D",
+          "text": "Simone de Beauvoir"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "SOC-017",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 18,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual conferência da ONU de 1992 ficou conhecida por discutir meio ambiente e desenvolvimento no Rio de Janeiro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Conferência de Bandung"
+        },
+        {
+          "id": "B",
+          "text": "Eco-92"
+        },
+        {
+          "id": "C",
+          "text": "Conferência de Bretton Woods"
+        },
+        {
+          "id": "D",
+          "text": "Conferência de Yalta"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-018",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 19,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual instituição brasileira é responsável pela fiscalização da aplicação de recursos públicos federais no âmbito do controle externo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tribunal de Contas da União"
+        },
+        {
+          "id": "B",
+          "text": "IBGE"
+        },
+        {
+          "id": "C",
+          "text": "Banco do Brasil"
+        },
+        {
+          "id": "D",
+          "text": "INEP"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "SOC-019",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 20,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual documento internacional, adotado em 1948 pela Assembleia Geral da ONU, enumera direitos humanos fundamentais?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tratado de Versalhes"
+        },
+        {
+          "id": "B",
+          "text": "Declaração Universal dos Direitos Humanos"
+        },
+        {
+          "id": "C",
+          "text": "Carta de Kyoto"
+        },
+        {
+          "id": "D",
+          "text": "Convenção de Viena sobre Relações Diplomáticas"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "SOC-020",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 1,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Quem pintou a Mona Lisa?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vincent van Gogh"
+        },
+        {
+          "id": "B",
+          "text": "Leonardo da Vinci"
+        },
+        {
+          "id": "C",
+          "text": "Pablo Picasso"
+        },
+        {
+          "id": "D",
+          "text": "Claude Monet"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-001",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 2,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o nome da escola de magia frequentada por Harry Potter?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nárnia"
+        },
+        {
+          "id": "B",
+          "text": "Hogwarts"
+        },
+        {
+          "id": "C",
+          "text": "Camelot"
+        },
+        {
+          "id": "D",
+          "text": "Westeros"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-002",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 3,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual compositor criou a Nona Sinfonia, que inclui a Ode à Alegria?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mozart"
+        },
+        {
+          "id": "B",
+          "text": "Beethoven"
+        },
+        {
+          "id": "C",
+          "text": "Bach"
+        },
+        {
+          "id": "D",
+          "text": "Chopin"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-003",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 4,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual cineasta dirigiu o filme Titanic, lançado em 1997?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Steven Spielberg"
+        },
+        {
+          "id": "B",
+          "text": "James Cameron"
+        },
+        {
+          "id": "C",
+          "text": "Ridley Scott"
+        },
+        {
+          "id": "D",
+          "text": "George Lucas"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-004",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 5,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual escritor brasileiro criou o personagem Bentinho, narrador de Dom Casmurro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "José de Alencar"
+        },
+        {
+          "id": "B",
+          "text": "Machado de Assis"
+        },
+        {
+          "id": "C",
+          "text": "Graciliano Ramos"
+        },
+        {
+          "id": "D",
+          "text": "Jorge Amado"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-005",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 6,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual artista é conhecido pelo quadro A Noite Estrelada?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Salvador Dalí"
+        },
+        {
+          "id": "B",
+          "text": "Vincent van Gogh"
+        },
+        {
+          "id": "C",
+          "text": "Edvard Munch"
+        },
+        {
+          "id": "D",
+          "text": "Paul Cézanne"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-006",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 7,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual banda britânica lançou o álbum Abbey Road?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Queen"
+        },
+        {
+          "id": "B",
+          "text": "The Beatles"
+        },
+        {
+          "id": "C",
+          "text": "The Rolling Stones"
+        },
+        {
+          "id": "D",
+          "text": "Pink Floyd"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-007",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 8,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Quem escreveu Romeu e Julieta?",
+      "options": [
+        {
+          "id": "A",
+          "text": "William Shakespeare"
+        },
+        {
+          "id": "B",
+          "text": "Charles Dickens"
+        },
+        {
+          "id": "C",
+          "text": "Oscar Wilde"
+        },
+        {
+          "id": "D",
+          "text": "George Orwell"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ART-008",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 9,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual movimento artístico é associado a Salvador Dalí e a imagens de sonhos?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Realismo"
+        },
+        {
+          "id": "B",
+          "text": "Surrealismo"
+        },
+        {
+          "id": "C",
+          "text": "Cubismo"
+        },
+        {
+          "id": "D",
+          "text": "Impressionismo"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-009",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 10,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual animação da Pixar acompanha um robô compactador de lixo chamado WALL-E?",
+      "options": [
+        {
+          "id": "A",
+          "text": "WALL-E"
+        },
+        {
+          "id": "B",
+          "text": "Carros"
+        },
+        {
+          "id": "C",
+          "text": "Up"
+        },
+        {
+          "id": "D",
+          "text": "Ratatouille"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ART-010",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 11,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual cantora lançou o álbum Thriller em 1982?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Madonna"
+        },
+        {
+          "id": "B",
+          "text": "Whitney Houston"
+        },
+        {
+          "id": "C",
+          "text": "Michael Jackson"
+        },
+        {
+          "id": "D",
+          "text": "Prince"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "ART-011",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 12,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual escritor criou o detetive Sherlock Holmes?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Agatha Christie"
+        },
+        {
+          "id": "B",
+          "text": "Arthur Conan Doyle"
+        },
+        {
+          "id": "C",
+          "text": "Edgar Allan Poe"
+        },
+        {
+          "id": "D",
+          "text": "J. R. R. Tolkien"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-012",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 13,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a principal premiação do cinema concedida pela Academia de Artes e Ciências Cinematográficas dos Estados Unidos?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Grammy"
+        },
+        {
+          "id": "B",
+          "text": "Oscar"
+        },
+        {
+          "id": "C",
+          "text": "Tony"
+        },
+        {
+          "id": "D",
+          "text": "Pulitzer"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-013",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 14,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Quem pintou Guernica, obra relacionada à Guerra Civil Espanhola?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pablo Picasso"
+        },
+        {
+          "id": "B",
+          "text": "Joan Miró"
+        },
+        {
+          "id": "C",
+          "text": "Francisco Goya"
+        },
+        {
+          "id": "D",
+          "text": "Diego Velázquez"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ART-014",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 15,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual musical da Broadway conta a história de Alexander Hamilton?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cats"
+        },
+        {
+          "id": "B",
+          "text": "Hamilton"
+        },
+        {
+          "id": "C",
+          "text": "Chicago"
+        },
+        {
+          "id": "D",
+          "text": "Wicked"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-015",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 16,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual escritora criou a personagem Elizabeth Bennet em Orgulho e Preconceito?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Jane Austen"
+        },
+        {
+          "id": "B",
+          "text": "Emily Brontë"
+        },
+        {
+          "id": "C",
+          "text": "Mary Shelley"
+        },
+        {
+          "id": "D",
+          "text": "Virginia Woolf"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ART-016",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 17,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual diretor japonês dirigiu A Viagem de Chihiro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Akira Kurosawa"
+        },
+        {
+          "id": "B",
+          "text": "Hayao Miyazaki"
+        },
+        {
+          "id": "C",
+          "text": "Makoto Shinkai"
+        },
+        {
+          "id": "D",
+          "text": "Isao Takahata"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-017",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 18,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual gênero musical brasileiro é fortemente associado a João Gilberto e Tom Jobim?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sertanejo"
+        },
+        {
+          "id": "B",
+          "text": "Bossa nova"
+        },
+        {
+          "id": "C",
+          "text": "Frevo"
+        },
+        {
+          "id": "D",
+          "text": "Lambada"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-018",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 19,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual saga cinematográfica aparece o personagem Darth Vader?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Star Trek"
+        },
+        {
+          "id": "B",
+          "text": "Star Wars"
+        },
+        {
+          "id": "C",
+          "text": "Duna"
+        },
+        {
+          "id": "D",
+          "text": "Matrix"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ART-019",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 20,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual dramaturgo norueguês escreveu a peça Casa de Bonecas?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Henrik Ibsen"
+        },
+        {
+          "id": "B",
+          "text": "Molière"
+        },
+        {
+          "id": "C",
+          "text": "Anton Tchekhov"
+        },
+        {
+          "id": "D",
+          "text": "Bertolt Brecht"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ART-020",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 1,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Quantos lados tem um hexágono?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cinco"
+        },
+        {
+          "id": "B",
+          "text": "Seis"
+        },
+        {
+          "id": "C",
+          "text": "Sete"
+        },
+        {
+          "id": "D",
+          "text": "Oito"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-001",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 2,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o plural correto de cidadão?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cidadões"
+        },
+        {
+          "id": "B",
+          "text": "Cidadães"
+        },
+        {
+          "id": "C",
+          "text": "Cidadãos"
+        },
+        {
+          "id": "D",
+          "text": "Cidadans"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-002",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 3,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Quantos minutos há em duas horas e meia?",
+      "options": [
+        {
+          "id": "A",
+          "text": "120"
+        },
+        {
+          "id": "B",
+          "text": "130"
+        },
+        {
+          "id": "C",
+          "text": "150"
+        },
+        {
+          "id": "D",
+          "text": "180"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-003",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 4,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual instrumento é tradicionalmente usado para medir a temperatura?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Barômetro"
+        },
+        {
+          "id": "B",
+          "text": "Termômetro"
+        },
+        {
+          "id": "C",
+          "text": "Higrômetro"
+        },
+        {
+          "id": "D",
+          "text": "Anemômetro"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-004",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 5,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o ingrediente principal do guacamole tradicional?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Abacate"
+        },
+        {
+          "id": "B",
+          "text": "Pepino"
+        },
+        {
+          "id": "C",
+          "text": "Berinjela"
+        },
+        {
+          "id": "D",
+          "text": "Ervilha"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "VAR-005",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 6,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual unidade é usada para medir a intensidade da corrente elétrica?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Volt"
+        },
+        {
+          "id": "B",
+          "text": "Watt"
+        },
+        {
+          "id": "C",
+          "text": "Ampere"
+        },
+        {
+          "id": "D",
+          "text": "Ohm"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-006",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 7,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Como se chama o polígono que possui oito lados?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Heptágono"
+        },
+        {
+          "id": "B",
+          "text": "Octógono"
+        },
+        {
+          "id": "C",
+          "text": "Decágono"
+        },
+        {
+          "id": "D",
+          "text": "Pentágono"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-007",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 8,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a moeda oficial do Japão?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Won"
+        },
+        {
+          "id": "B",
+          "text": "Yuan"
+        },
+        {
+          "id": "C",
+          "text": "Iene"
+        },
+        {
+          "id": "D",
+          "text": "Baht"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-008",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 9,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual destes animais é um mamífero que põe ovos?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Morcego"
+        },
+        {
+          "id": "B",
+          "text": "Ornitorrinco"
+        },
+        {
+          "id": "C",
+          "text": "Golfinho"
+        },
+        {
+          "id": "D",
+          "text": "Canguru"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-009",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 10,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é o nome do medo intenso de espaços fechados?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Acrofobia"
+        },
+        {
+          "id": "B",
+          "text": "Aracnofobia"
+        },
+        {
+          "id": "C",
+          "text": "Claustrofobia"
+        },
+        {
+          "id": "D",
+          "text": "Agorafobia"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-010",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 11,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o resultado de 15% de 200?",
+      "options": [
+        {
+          "id": "A",
+          "text": "15"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "30"
+        },
+        {
+          "id": "D",
+          "text": "35"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-011",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 12,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual destes materiais é naturalmente magnético em condições comuns?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Madeira"
+        },
+        {
+          "id": "B",
+          "text": "Ferro"
+        },
+        {
+          "id": "C",
+          "text": "Vidro"
+        },
+        {
+          "id": "D",
+          "text": "Borracha"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-012",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 13,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o nome dado a uma palavra que tem sentido oposto ao de outra?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sinônimo"
+        },
+        {
+          "id": "B",
+          "text": "Antônimo"
+        },
+        {
+          "id": "C",
+          "text": "Homônimo"
+        },
+        {
+          "id": "D",
+          "text": "Parônimo"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-013",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 14,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual jogo de tabuleiro o objetivo tradicional é dar xeque-mate ao rei adversário?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Damas"
+        },
+        {
+          "id": "B",
+          "text": "Xadrez"
+        },
+        {
+          "id": "C",
+          "text": "Gamão"
+        },
+        {
+          "id": "D",
+          "text": "Ludo"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-014",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 15,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é o principal gás presente no ar da atmosfera terrestre?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oxigênio"
+        },
+        {
+          "id": "B",
+          "text": "Dióxido de carbono"
+        },
+        {
+          "id": "C",
+          "text": "Nitrogênio"
+        },
+        {
+          "id": "D",
+          "text": "Hidrogênio"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-015",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 16,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Quantas teclas brancas existem em uma oitava de um piano tradicional?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cinco"
+        },
+        {
+          "id": "B",
+          "text": "Sete"
+        },
+        {
+          "id": "C",
+          "text": "Oito"
+        },
+        {
+          "id": "D",
+          "text": "Doze"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-016",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 17,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é o nome do processo de transformar vapor em líquido?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Fusão"
+        },
+        {
+          "id": "B",
+          "text": "Condensação"
+        },
+        {
+          "id": "C",
+          "text": "Sublimação"
+        },
+        {
+          "id": "D",
+          "text": "Solidificação"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "VAR-017",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 18,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o menor número primo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "0"
+        },
+        {
+          "id": "B",
+          "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "2"
+        },
+        {
+          "id": "D",
+          "text": "3"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "VAR-018",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 19,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual desses animais é conhecido por mudar de cor e mover os olhos de forma independente?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Camaleão"
+        },
+        {
+          "id": "B",
+          "text": "Iguana-marinha"
+        },
+        {
+          "id": "C",
+          "text": "Tartaruga-verde"
+        },
+        {
+          "id": "D",
+          "text": "Salamandra"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "VAR-019",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 20,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Na tipografia, o que significa a sigla RGB?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Red, Green, Blue"
+        },
+        {
+          "id": "B",
+          "text": "Rapid Graphic Base"
+        },
+        {
+          "id": "C",
+          "text": "Raster Grid Balance"
+        },
+        {
+          "id": "D",
+          "text": "Red, Gray, Black"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "VAR-020",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 1,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual planeta é conhecido como planeta vermelho?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vênus"
+        },
+        {
+          "id": "B",
+          "text": "Marte"
+        },
+        {
+          "id": "C",
+          "text": "Júpiter"
+        },
+        {
+          "id": "D",
+          "text": "Mercúrio"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-001",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 2,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a unidade básica de informação digital que pode assumir os valores 0 ou 1?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Byte"
+        },
+        {
+          "id": "B",
+          "text": "Bit"
+        },
+        {
+          "id": "C",
+          "text": "Pixel"
+        },
+        {
+          "id": "D",
+          "text": "Hertz"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-002",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 3,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual órgão humano bombeia o sangue pelo corpo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Fígado"
+        },
+        {
+          "id": "B",
+          "text": "Pulmão"
+        },
+        {
+          "id": "C",
+          "text": "Coração"
+        },
+        {
+          "id": "D",
+          "text": "Rim"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "CIE-003",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 4,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a fórmula química da água?",
+      "options": [
+        {
+          "id": "A",
+          "text": "CO₂"
+        },
+        {
+          "id": "B",
+          "text": "H₂O"
+        },
+        {
+          "id": "C",
+          "text": "O₂"
+        },
+        {
+          "id": "D",
+          "text": "NaCl"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-004",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 5,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual cientista formulou as leis clássicas do movimento e a lei da gravitação universal?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Albert Einstein"
+        },
+        {
+          "id": "B",
+          "text": "Isaac Newton"
+        },
+        {
+          "id": "C",
+          "text": "Galileu Galilei"
+        },
+        {
+          "id": "D",
+          "text": "Niels Bohr"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-005",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 6,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual estrutura celular contém grande parte do material genético das células eucarióticas?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ribossomo"
+        },
+        {
+          "id": "B",
+          "text": "Núcleo"
+        },
+        {
+          "id": "C",
+          "text": "Membrana plasmática"
+        },
+        {
+          "id": "D",
+          "text": "Complexo de Golgi"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-006",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 7,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual gás as plantas absorvem da atmosfera durante a fotossíntese?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oxigênio"
+        },
+        {
+          "id": "B",
+          "text": "Hélio"
+        },
+        {
+          "id": "C",
+          "text": "Dióxido de carbono"
+        },
+        {
+          "id": "D",
+          "text": "Hidrogênio"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "CIE-007",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 8,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a estrela mais próxima da Terra?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sirius"
+        },
+        {
+          "id": "B",
+          "text": "Sol"
+        },
+        {
+          "id": "C",
+          "text": "Próxima Centauri"
+        },
+        {
+          "id": "D",
+          "text": "Betelgeuse"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-008",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 9,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual escala é usada para medir a acidez ou alcalinidade de uma solução?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Richter"
+        },
+        {
+          "id": "B",
+          "text": "pH"
+        },
+        {
+          "id": "C",
+          "text": "Beaufort"
+        },
+        {
+          "id": "D",
+          "text": "Kelvin"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-009",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 10,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual componente de um computador executa instruções e realiza cálculos gerais?",
+      "options": [
+        {
+          "id": "A",
+          "text": "CPU"
+        },
+        {
+          "id": "B",
+          "text": "Monitor"
+        },
+        {
+          "id": "C",
+          "text": "Teclado"
+        },
+        {
+          "id": "D",
+          "text": "Fonte de alimentação"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "CIE-010",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 11,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual cientista é associado à teoria da relatividade?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Charles Darwin"
+        },
+        {
+          "id": "B",
+          "text": "Albert Einstein"
+        },
+        {
+          "id": "C",
+          "text": "Louis Pasteur"
+        },
+        {
+          "id": "D",
+          "text": "Michael Faraday"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-011",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 12,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é o nome do processo pelo qual uma célula se divide em duas células-filhas geneticamente semelhantes?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Meiose"
+        },
+        {
+          "id": "B",
+          "text": "Mitose"
+        },
+        {
+          "id": "C",
+          "text": "Osmose"
+        },
+        {
+          "id": "D",
+          "text": "Fermentação"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-012",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 13,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é o símbolo químico do ouro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ag"
+        },
+        {
+          "id": "B",
+          "text": "Au"
+        },
+        {
+          "id": "C",
+          "text": "Fe"
+        },
+        {
+          "id": "D",
+          "text": "Gd"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-013",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 14,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual partícula subatômica possui carga elétrica negativa?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Próton"
+        },
+        {
+          "id": "B",
+          "text": "Nêutron"
+        },
+        {
+          "id": "C",
+          "text": "Elétron"
+        },
+        {
+          "id": "D",
+          "text": "Pósitron"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "CIE-014",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 15,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual missão levou os primeiros seres humanos à superfície da Lua?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Apollo 8"
+        },
+        {
+          "id": "B",
+          "text": "Apollo 11"
+        },
+        {
+          "id": "C",
+          "text": "Gemini 7"
+        },
+        {
+          "id": "D",
+          "text": "Apollo 13"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-015",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 16,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual tecnologia permite que dispositivos troquem dados sem fio em curtas distâncias usando ondas de rádio, em redes locais?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ethernet"
+        },
+        {
+          "id": "B",
+          "text": "Wi-Fi"
+        },
+        {
+          "id": "C",
+          "text": "HDMI"
+        },
+        {
+          "id": "D",
+          "text": "SATA"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-016",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 17,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é a unidade de medida da resistência elétrica?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ohm"
+        },
+        {
+          "id": "B",
+          "text": "Ampere"
+        },
+        {
+          "id": "C",
+          "text": "Tesla"
+        },
+        {
+          "id": "D",
+          "text": "Joule"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "CIE-017",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 18,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual cientista propôs a seleção natural como mecanismo central da evolução das espécies?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gregor Mendel"
+        },
+        {
+          "id": "B",
+          "text": "Charles Darwin"
+        },
+        {
+          "id": "C",
+          "text": "Dmitri Mendeleev"
+        },
+        {
+          "id": "D",
+          "text": "Robert Hooke"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-018",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 19,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual camada da atmosfera contém a maior parte do ozônio atmosférico que absorve radiação ultravioleta?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Troposfera"
+        },
+        {
+          "id": "B",
+          "text": "Estratosfera"
+        },
+        {
+          "id": "C",
+          "text": "Mesosfera"
+        },
+        {
+          "id": "D",
+          "text": "Exosfera"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-019",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 20,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual fenômeno explica a mudança de direção da luz ao passar de um meio para outro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Reflexão"
+        },
+        {
+          "id": "B",
+          "text": "Refração"
+        },
+        {
+          "id": "C",
+          "text": "Difração"
+        },
+        {
+          "id": "D",
+          "text": "Polarização"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "CIE-020",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 1,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a capital da Argentina?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Santiago"
+        },
+        {
+          "id": "B",
+          "text": "Buenos Aires"
+        },
+        {
+          "id": "C",
+          "text": "Montevidéu"
+        },
+        {
+          "id": "D",
+          "text": "Lima"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-001",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 2,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o maior oceano da Terra?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Atlântico"
+        },
+        {
+          "id": "B",
+          "text": "Índico"
+        },
+        {
+          "id": "C",
+          "text": "Pacífico"
+        },
+        {
+          "id": "D",
+          "text": "Ártico"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "MUN-002",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 3,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual continente fica o Egito?",
+      "options": [
+        {
+          "id": "A",
+          "text": "África"
+        },
+        {
+          "id": "B",
+          "text": "Europa"
+        },
+        {
+          "id": "C",
+          "text": "América do Sul"
+        },
+        {
+          "id": "D",
+          "text": "Oceania"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "MUN-003",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 4,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a capital do Japão?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Kyoto"
+        },
+        {
+          "id": "B",
+          "text": "Osaka"
+        },
+        {
+          "id": "C",
+          "text": "Tóquio"
+        },
+        {
+          "id": "D",
+          "text": "Hiroshima"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "MUN-004",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 5,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual cordilheira se estende ao longo da costa oeste da América do Sul?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alpes"
+        },
+        {
+          "id": "B",
+          "text": "Andes"
+        },
+        {
+          "id": "C",
+          "text": "Himalaia"
+        },
+        {
+          "id": "D",
+          "text": "Montes Urais"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-005",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 6,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual país tem formato frequentemente comparado ao de uma bota?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Grécia"
+        },
+        {
+          "id": "B",
+          "text": "Itália"
+        },
+        {
+          "id": "C",
+          "text": "Portugal"
+        },
+        {
+          "id": "D",
+          "text": "Croácia"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-006",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 7,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a capital do Canadá?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Toronto"
+        },
+        {
+          "id": "B",
+          "text": "Vancouver"
+        },
+        {
+          "id": "C",
+          "text": "Ottawa"
+        },
+        {
+          "id": "D",
+          "text": "Montreal"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "MUN-007",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 8,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual país fica a cidade de Marrakech?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Marrocos"
+        },
+        {
+          "id": "B",
+          "text": "Egito"
+        },
+        {
+          "id": "C",
+          "text": "Tunísia"
+        },
+        {
+          "id": "D",
+          "text": "Jordânia"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "MUN-008",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 9,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual rio atravessa a cidade de Paris?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tâmisa"
+        },
+        {
+          "id": "B",
+          "text": "Sena"
+        },
+        {
+          "id": "C",
+          "text": "Danúbio"
+        },
+        {
+          "id": "D",
+          "text": "Reno"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-009",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 10,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o maior país do mundo em área territorial?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Canadá"
+        },
+        {
+          "id": "B",
+          "text": "China"
+        },
+        {
+          "id": "C",
+          "text": "Estados Unidos"
+        },
+        {
+          "id": "D",
+          "text": "Rússia"
+        }
+      ],
+      "correctOption": "D",
+      "sourceBatch": "base-120",
+      "id": "MUN-010",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 11,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual país abriga a região histórica da Capadócia?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Turquia"
+        },
+        {
+          "id": "B",
+          "text": "Irã"
+        },
+        {
+          "id": "C",
+          "text": "Grécia"
+        },
+        {
+          "id": "D",
+          "text": "Armênia"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "MUN-011",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 12,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é a capital da Nova Zelândia?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Auckland"
+        },
+        {
+          "id": "B",
+          "text": "Wellington"
+        },
+        {
+          "id": "C",
+          "text": "Christchurch"
+        },
+        {
+          "id": "D",
+          "text": "Hamilton"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-012",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 13,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual deserto ocupa grande parte do norte da África?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gobi"
+        },
+        {
+          "id": "B",
+          "text": "Atacama"
+        },
+        {
+          "id": "C",
+          "text": "Saara"
+        },
+        {
+          "id": "D",
+          "text": "Kalahari"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "MUN-013",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 14,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual país é conhecido por suas cidades históricas de Petra e Amã?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Líbano"
+        },
+        {
+          "id": "B",
+          "text": "Jordânia"
+        },
+        {
+          "id": "C",
+          "text": "Iraque"
+        },
+        {
+          "id": "D",
+          "text": "Omã"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-014",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 15,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual estreito separa a Espanha do Marrocos?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Estreito de Bering"
+        },
+        {
+          "id": "B",
+          "text": "Estreito de Gibraltar"
+        },
+        {
+          "id": "C",
+          "text": "Estreito de Malaca"
+        },
+        {
+          "id": "D",
+          "text": "Estreito de Magalhães"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-015",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 16,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a capital da Coreia do Sul?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Busan"
+        },
+        {
+          "id": "B",
+          "text": "Seul"
+        },
+        {
+          "id": "C",
+          "text": "Pyongyang"
+        },
+        {
+          "id": "D",
+          "text": "Incheon"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-016",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 17,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual país africano tem Adis Abeba como capital?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Quênia"
+        },
+        {
+          "id": "B",
+          "text": "Etiópia"
+        },
+        {
+          "id": "C",
+          "text": "Uganda"
+        },
+        {
+          "id": "D",
+          "text": "Ruanda"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-017",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 18,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Em qual país fica o sítio arqueológico de Angkor Wat?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tailândia"
+        },
+        {
+          "id": "B",
+          "text": "Vietnã"
+        },
+        {
+          "id": "C",
+          "text": "Camboja"
+        },
+        {
+          "id": "D",
+          "text": "Laos"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "MUN-018",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 19,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é o menor país do mundo em área territorial?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mônaco"
+        },
+        {
+          "id": "B",
+          "text": "San Marino"
+        },
+        {
+          "id": "C",
+          "text": "Vaticano"
+        },
+        {
+          "id": "D",
+          "text": "Liechtenstein"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "MUN-019",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 20,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual mar fica entre a Europa e o norte da África?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mar do Norte"
+        },
+        {
+          "id": "B",
+          "text": "Mar Mediterrâneo"
+        },
+        {
+          "id": "C",
+          "text": "Mar Báltico"
+        },
+        {
+          "id": "D",
+          "text": "Mar de Bering"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "MUN-020",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 1,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Quantos jogadores de cada equipe ficam em campo no início de uma partida de futebol?",
+      "options": [
+        {
+          "id": "A",
+          "text": "9"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "11"
+        },
+        {
+          "id": "D",
+          "text": "12"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "ESP-001",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 2,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual esporte é disputado o torneio de Wimbledon?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Golfe"
+        },
+        {
+          "id": "B",
+          "text": "Tênis"
+        },
+        {
+          "id": "C",
+          "text": "Críquete"
+        },
+        {
+          "id": "D",
+          "text": "Rúgbi"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-002",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 3,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Quantos anéis aparecem no símbolo olímpico tradicional?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Quatro"
+        },
+        {
+          "id": "B",
+          "text": "Cinco"
+        },
+        {
+          "id": "C",
+          "text": "Seis"
+        },
+        {
+          "id": "D",
+          "text": "Sete"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-003",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 4,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual peça do xadrez se movimenta em formato de L?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bispo"
+        },
+        {
+          "id": "B",
+          "text": "Cavalo"
+        },
+        {
+          "id": "C",
+          "text": "Torre"
+        },
+        {
+          "id": "D",
+          "text": "Rainha"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-004",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 5,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual esporte se utiliza um volante, também chamado de peteca, sobre uma rede?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Badminton"
+        },
+        {
+          "id": "B",
+          "text": "Squash"
+        },
+        {
+          "id": "C",
+          "text": "Tênis de mesa"
+        },
+        {
+          "id": "D",
+          "text": "Voleibol"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ESP-005",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 6,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é a distância oficial de uma maratona?",
+      "options": [
+        {
+          "id": "A",
+          "text": "21,097 km"
+        },
+        {
+          "id": "B",
+          "text": "40 km"
+        },
+        {
+          "id": "C",
+          "text": "42,195 km"
+        },
+        {
+          "id": "D",
+          "text": "50 km"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "ESP-006",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 7,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual esporte uma equipe tenta marcar pontos arremessando uma bola em uma cesta elevada?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Handebol"
+        },
+        {
+          "id": "B",
+          "text": "Basquete"
+        },
+        {
+          "id": "C",
+          "text": "Polo aquático"
+        },
+        {
+          "id": "D",
+          "text": "Beisebol"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-007",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 8,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual país sediou a Copa do Mundo masculina de futebol de 2014?",
+      "options": [
+        {
+          "id": "A",
+          "text": "África do Sul"
+        },
+        {
+          "id": "B",
+          "text": "Brasil"
+        },
+        {
+          "id": "C",
+          "text": "Alemanha"
+        },
+        {
+          "id": "D",
+          "text": "Rússia"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-008",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 9,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Quantos sets uma dupla ou um jogador precisa vencer normalmente para ganhar uma partida masculina de simples em um Grand Slam de tênis?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dois"
+        },
+        {
+          "id": "B",
+          "text": "Três"
+        },
+        {
+          "id": "C",
+          "text": "Quatro"
+        },
+        {
+          "id": "D",
+          "text": "Cinco"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-009",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 10,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual bandeira indica o fim de uma corrida automobilística?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vermelha"
+        },
+        {
+          "id": "B",
+          "text": "Amarela"
+        },
+        {
+          "id": "C",
+          "text": "Quadriculada"
+        },
+        {
+          "id": "D",
+          "text": "Verde"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "base-120",
+      "id": "ESP-010",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 11,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Em qual modalidade olímpica é executado o movimento chamado ippon?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Judô"
+        },
+        {
+          "id": "B",
+          "text": "Esgrima"
+        },
+        {
+          "id": "C",
+          "text": "Taekwondo"
+        },
+        {
+          "id": "D",
+          "text": "Luta greco-romana"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ESP-011",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 12,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual é o nome da principal competição anual de clubes de futebol organizada pela UEFA?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Copa Libertadores"
+        },
+        {
+          "id": "B",
+          "text": "Liga dos Campeões"
+        },
+        {
+          "id": "C",
+          "text": "Copa da Ásia"
+        },
+        {
+          "id": "D",
+          "text": "Copa Africana de Nações"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-012",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 13,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual país é tradicionalmente associado à origem do sumô?",
+      "options": [
+        {
+          "id": "A",
+          "text": "China"
+        },
+        {
+          "id": "B",
+          "text": "Japão"
+        },
+        {
+          "id": "C",
+          "text": "Coreia do Sul"
+        },
+        {
+          "id": "D",
+          "text": "Mongólia"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-013",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 14,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "No vôlei de quadra, quantos toques uma equipe pode dar antes de devolver a bola, desconsiderando o toque de bloqueio?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dois"
+        },
+        {
+          "id": "B",
+          "text": "Três"
+        },
+        {
+          "id": "C",
+          "text": "Quatro"
+        },
+        {
+          "id": "D",
+          "text": "Cinco"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-014",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 15,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Qual peça do jogo de damas se move diagonalmente sobre as casas do tabuleiro?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Peão"
+        },
+        {
+          "id": "B",
+          "text": "Dama"
+        },
+        {
+          "id": "C",
+          "text": "Cavalo"
+        },
+        {
+          "id": "D",
+          "text": "Torre"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ESP-015",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 16,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é a prova de natação que combina borboleta, costas, peito e livre na mesma prova individual?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Revezamento livre"
+        },
+        {
+          "id": "B",
+          "text": "Medley individual"
+        },
+        {
+          "id": "C",
+          "text": "Maratona aquática"
+        },
+        {
+          "id": "D",
+          "text": "Nado sincronizado"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-016",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 17,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual bandeira da Fórmula 1 normalmente indica perigo e proíbe ultrapassagens na área sinalizada?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Azul"
+        },
+        {
+          "id": "B",
+          "text": "Amarela"
+        },
+        {
+          "id": "C",
+          "text": "Branca"
+        },
+        {
+          "id": "D",
+          "text": "Verde"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-017",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 18,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "question": "Em qual esporte se disputa a competição conhecida como Tour de France?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Motociclismo"
+        },
+        {
+          "id": "B",
+          "text": "Ciclismo"
+        },
+        {
+          "id": "C",
+          "text": "Triatlo"
+        },
+        {
+          "id": "D",
+          "text": "Patinação"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-018",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 19,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é a pontuação de um touchdown no futebol americano antes de qualquer tentativa extra?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3 pontos"
+        },
+        {
+          "id": "B",
+          "text": "6 pontos"
+        },
+        {
+          "id": "C",
+          "text": "7 pontos"
+        },
+        {
+          "id": "D",
+          "text": "8 pontos"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "base-120",
+      "id": "ESP-019",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 20,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual modalidade utiliza florete, espada e sabre?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Esgrima"
+        },
+        {
+          "id": "B",
+          "text": "Tiro com arco"
+        },
+        {
+          "id": "C",
+          "text": "Pentatlo moderno"
+        },
+        {
+          "id": "D",
+          "text": "Hóquei sobre grama"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "base-120",
+      "id": "ESP-020",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 151,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual documento inglês de 1215 limitou certos poderes do rei?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bill of Rights"
+        },
+        {
+          "id": "B",
+          "text": "Magna Carta"
+        },
+        {
+          "id": "C",
+          "text": "Tratado de Versalhes"
+        },
+        {
+          "id": "D",
+          "text": "Código Napoleônico"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "SOC-021",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 152,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Os Julgamentos de Nuremberg, após a Segunda Guerra Mundial, tiveram como foco principal:",
+      "options": [
+        {
+          "id": "A",
+          "text": "A divisão territorial da Alemanha"
+        },
+        {
+          "id": "B",
+          "text": "A criação da ONU"
+        },
+        {
+          "id": "C",
+          "text": "Julgar líderes nazistas por crimes de guerra e outros crimes"
+        },
+        {
+          "id": "D",
+          "text": "A reconstrução econômica do Japão"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "SOC-022",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 153,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual revolta ocorreu em Salvador em 1835, envolvendo africanos muçulmanos escravizados e libertos?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Revolta dos Malês"
+        },
+        {
+          "id": "B",
+          "text": "Revolta da Chibata"
+        },
+        {
+          "id": "C",
+          "text": "Sabinada"
+        },
+        {
+          "id": "D",
+          "text": "Cabanagem"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "SOC-023",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 154,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Em que ano ocorreu a primeira eleição nacional multirracial da África do Sul, que levou Nelson Mandela à presidência?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1989"
+        },
+        {
+          "id": "B",
+          "text": "1991"
+        },
+        {
+          "id": "C",
+          "text": "1994"
+        },
+        {
+          "id": "D",
+          "text": "1999"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "SOC-024",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 155,
+      "category": "sociedade",
+      "categoryLabel": "Sociedade",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual organização internacional criada em 1919 promove a justiça social e os direitos trabalhistas?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Organização Mundial do Comércio"
+        },
+        {
+          "id": "B",
+          "text": "Organização Internacional do Trabalho"
+        },
+        {
+          "id": "C",
+          "text": "Organização Mundial da Saúde"
+        },
+        {
+          "id": "D",
+          "text": "Fundo Monetário Internacional"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "SOC-025",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 156,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Quem pintou a obra O Grito?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vincent van Gogh"
+        },
+        {
+          "id": "B",
+          "text": "Edvard Munch"
+        },
+        {
+          "id": "C",
+          "text": "Claude Monet"
+        },
+        {
+          "id": "D",
+          "text": "Salvador Dalí"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "ART-021",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 157,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Quem escreveu o romance Grande Sertão: Veredas?",
+      "options": [
+        {
+          "id": "A",
+          "text": "João Guimarães Rosa"
+        },
+        {
+          "id": "B",
+          "text": "Graciliano Ramos"
+        },
+        {
+          "id": "C",
+          "text": "Jorge Amado"
+        },
+        {
+          "id": "D",
+          "text": "José de Alencar"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "ART-022",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 158,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Quem compôs a cantata Carmina Burana, estreada em 1937?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Richard Wagner"
+        },
+        {
+          "id": "B",
+          "text": "Gustav Mahler"
+        },
+        {
+          "id": "C",
+          "text": "Carl Orff"
+        },
+        {
+          "id": "D",
+          "text": "Johann Strauss II"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "ART-023",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 159,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual cineasta japonês dirigiu o filme Rashomon, de 1950?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Yasujirō Ozu"
+        },
+        {
+          "id": "B",
+          "text": "Akira Kurosawa"
+        },
+        {
+          "id": "C",
+          "text": "Hayao Miyazaki"
+        },
+        {
+          "id": "D",
+          "text": "Kenji Mizoguchi"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "ART-024",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 160,
+      "category": "artes_entretenimento",
+      "categoryLabel": "Artes e Entretenimento",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Quem criou a escultura O Pensador?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Auguste Rodin"
+        },
+        {
+          "id": "B",
+          "text": "Michelangelo"
+        },
+        {
+          "id": "C",
+          "text": "Donatello"
+        },
+        {
+          "id": "D",
+          "text": "Gian Lorenzo Bernini"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "ART-025",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 161,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual é a unidade básica do Sistema Internacional para intensidade luminosa?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lux"
+        },
+        {
+          "id": "B",
+          "text": "Candela"
+        },
+        {
+          "id": "C",
+          "text": "Lúmen"
+        },
+        {
+          "id": "D",
+          "text": "Watt"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "VAR-021",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 162,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Na sequência de Fibonacci 1, 1, 2, 3, 5..., qual é o décimo termo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "34"
+        },
+        {
+          "id": "B",
+          "text": "45"
+        },
+        {
+          "id": "C",
+          "text": "55"
+        },
+        {
+          "id": "D",
+          "text": "89"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "VAR-022",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 163,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "No código Morse, qual sequência representa o sinal de socorro SOS?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Três traços, três pontos, três traços"
+        },
+        {
+          "id": "B",
+          "text": "Três pontos, três traços, três pontos"
+        },
+        {
+          "id": "C",
+          "text": "Dois pontos, dois traços, dois pontos"
+        },
+        {
+          "id": "D",
+          "text": "Um traço, três pontos, um traço"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "VAR-023",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 164,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Como se chama um polígono de 12 lados?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dodecágono"
+        },
+        {
+          "id": "B",
+          "text": "Decágono"
+        },
+        {
+          "id": "C",
+          "text": "Hexadecágono"
+        },
+        {
+          "id": "D",
+          "text": "Eneágono"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "VAR-024",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 165,
+      "category": "variedades",
+      "categoryLabel": "Variedades",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Quantos semitons há em uma oitava na afinação ocidental temperada usual?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        },
+        {
+          "id": "D",
+          "text": "14"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "VAR-025",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 166,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual cientista propôs a teoria da deriva continental?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alfred Wegener"
+        },
+        {
+          "id": "B",
+          "text": "Charles Darwin"
+        },
+        {
+          "id": "C",
+          "text": "Gregor Mendel"
+        },
+        {
+          "id": "D",
+          "text": "James Hutton"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "CIE-021",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 167,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "A técnica CRISPR-Cas9 é conhecida principalmente por permitir:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Produzir energia por fusão nuclear comercial"
+        },
+        {
+          "id": "B",
+          "text": "Editar sequências específicas de DNA"
+        },
+        {
+          "id": "C",
+          "text": "Medir a idade de fósseis com ultrassom"
+        },
+        {
+          "id": "D",
+          "text": "Criar vacinas sem material genético"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "CIE-022",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 168,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Em que ano foi lançado o Telescópio Espacial James Webb?",
+      "options": [
+        {
+          "id": "A",
+          "text": "2015"
+        },
+        {
+          "id": "B",
+          "text": "2019"
+        },
+        {
+          "id": "C",
+          "text": "2021"
+        },
+        {
+          "id": "D",
+          "text": "2024"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "CIE-023",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 169,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual elemento químico tem o símbolo W?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vanádio"
+        },
+        {
+          "id": "B",
+          "text": "Tungstênio"
+        },
+        {
+          "id": "C",
+          "text": "Titânio"
+        },
+        {
+          "id": "D",
+          "text": "Zinco"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "CIE-024",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 170,
+      "category": "ciencia_tecnologia",
+      "categoryLabel": "Ciência e Tecnologia",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual foi o nome do exoplaneta anunciado em 1995 como o primeiro descoberto orbitando uma estrela semelhante ao Sol?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Kepler-186f"
+        },
+        {
+          "id": "B",
+          "text": "Proxima Centauri b"
+        },
+        {
+          "id": "C",
+          "text": "51 Pegasi b"
+        },
+        {
+          "id": "D",
+          "text": "TRAPPIST-1e"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "CIE-025",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 171,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "O Canal do Panamá conecta quais dois oceanos?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Atlântico e Pacífico"
+        },
+        {
+          "id": "B",
+          "text": "Índico e Pacífico"
+        },
+        {
+          "id": "C",
+          "text": "Ártico e Atlântico"
+        },
+        {
+          "id": "D",
+          "text": "Índico e Atlântico"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "MUN-021",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 172,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual estreito é uma passagem estratégica entre o Golfo Pérsico e o Golfo de Omã?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Estreito de Bering"
+        },
+        {
+          "id": "B",
+          "text": "Estreito de Ormuz"
+        },
+        {
+          "id": "C",
+          "text": "Estreito de Gibraltar"
+        },
+        {
+          "id": "D",
+          "text": "Estreito de Magalhães"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "MUN-022",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 173,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Qual país é completamente cercado pelo território da África do Sul?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Botsuana"
+        },
+        {
+          "id": "B",
+          "text": "Lesoto"
+        },
+        {
+          "id": "C",
+          "text": "Eswatini"
+        },
+        {
+          "id": "D",
+          "text": "Namíbia"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "MUN-023",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 174,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual é o lago mais profundo do mundo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lago Vitória"
+        },
+        {
+          "id": "B",
+          "text": "Lago Superior"
+        },
+        {
+          "id": "C",
+          "text": "Lago Baikal"
+        },
+        {
+          "id": "D",
+          "text": "Lago Tanganica"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "MUN-024",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 175,
+      "category": "mundo",
+      "categoryLabel": "Mundo",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Em qual mar deságua o rio Danúbio?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mar Negro"
+        },
+        {
+          "id": "B",
+          "text": "Mar Báltico"
+        },
+        {
+          "id": "C",
+          "text": "Mar Mediterrâneo"
+        },
+        {
+          "id": "D",
+          "text": "Mar Cáspio"
+        }
+      ],
+      "correctOption": "A",
+      "sourceBatch": "lote-151-180",
+      "id": "MUN-025",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 176,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "No golfe, como se chama uma jogada concluída com uma tacada abaixo do par do buraco?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Eagle"
+        },
+        {
+          "id": "B",
+          "text": "Bogey"
+        },
+        {
+          "id": "C",
+          "text": "Birdie"
+        },
+        {
+          "id": "D",
+          "text": "Albatross"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "ESP-021",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 177,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Qual é a duração padrão do relógio de arremesso na NBA?",
+      "options": [
+        {
+          "id": "A",
+          "text": "14 segundos"
+        },
+        {
+          "id": "B",
+          "text": "20 segundos"
+        },
+        {
+          "id": "C",
+          "text": "24 segundos"
+        },
+        {
+          "id": "D",
+          "text": "30 segundos"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "ESP-022",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 178,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "medio",
+      "difficultyLabel": "Médio",
+      "question": "Quantas provas compõem o decatlo do atletismo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "9"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        },
+        {
+          "id": "D",
+          "text": "12"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "ESP-023",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 179,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "Em que edição dos Jogos Olímpicos modernos o basquete masculino entrou oficialmente no programa?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Paris 1924"
+        },
+        {
+          "id": "B",
+          "text": "Berlim 1936"
+        },
+        {
+          "id": "C",
+          "text": "Londres 1948"
+        },
+        {
+          "id": "D",
+          "text": "Helsinque 1952"
+        }
+      ],
+      "correctOption": "B",
+      "sourceBatch": "lote-151-180",
+      "id": "ESP-024",
+      "status": "pendente_revisao"
+    },
+    {
+      "sourceNumber": 180,
+      "category": "esportes_lazer",
+      "categoryLabel": "Esportes e Lazer",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "question": "No snooker, qual é a pontuação máxima tradicional em uma tacada de entrada, sem bola livre?",
+      "options": [
+        {
+          "id": "A",
+          "text": "125"
+        },
+        {
+          "id": "B",
+          "text": "139"
+        },
+        {
+          "id": "C",
+          "text": "147"
+        },
+        {
+          "id": "D",
+          "text": "155"
+        }
+      ],
+      "correctOption": "C",
+      "sourceBatch": "lote-151-180",
+      "id": "ESP-025",
+      "status": "pendente_revisao"
+    }
+  ]
+}
